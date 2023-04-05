@@ -6,8 +6,8 @@ pub struct Cli {
     command: Command,
 }
 
-#[derive(Debug, Subcommand)]
-pub enum Command {
-    Ec2,
-    Eks,
+impl Cli {
+    pub async fn execute(self) -> miette::Result<()> {
+        self.command.dispatch().await
+    }
 }
