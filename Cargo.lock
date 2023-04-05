@@ -608,7 +608,7 @@ dependencies = [
  "aws-sdk-dynamodb",
  "clap",
  "config",
- "miette",
+ "error",
 ]
 
 [[package]]
@@ -636,6 +636,15 @@ checksum = "aa68f1b12764fab894d2755d2518754e71b4fd80ecfb822714a1206c2aab39bf"
 dependencies = [
  "cc",
  "libc",
+]
+
+[[package]]
+name = "error"
+version = "0.0.0"
+dependencies = [
+ "aws-sdk-dynamodb",
+ "miette",
+ "thiserror",
 ]
 
 [[package]]

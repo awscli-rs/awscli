@@ -15,9 +15,10 @@ pub enum Command {
 impl Command {
     pub async fn dispatch(self, config: Config) -> miette::Result<()> {
         match self {
-            Self::Dynamodb(dynamo) => dynamo.dispatch(config).await,
-            Self::Ec2 => Ok(()),
-            Self::Eks => Ok(()),
+            Self::Dynamodb(dynamo) => dynamo.dispatch(config).await?,
+            Self::Ec2 => todo!(),
+            Self::Eks => todo!(),
         }
+        Ok(())
     }
 }

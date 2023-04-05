@@ -1,0 +1,15 @@
+[package]
+name = "error"
+description = "RAWS common error type"
+
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+
+[dependencies]
+thiserror = "1.0"
+miette.workspace = true
+
+aws-sdk-dynamodb.workspace = true

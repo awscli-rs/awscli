@@ -1,5 +1,5 @@
 [workspace]
-members = ["config", "dynamodb", "raws"]
+members = ["config", "error", "dynamodb", "raws"]
 
 [workspace.package]
 version = "0.0.0"
@@ -14,6 +14,7 @@ aws-config = "0.55"
 aws-types = "0.55"
 aws-sdk-dynamodb = "0.25"
 clap = { version = "4.2", features = ["derive", "env"] }
-miette = { version = "5.5", features = ["fancy"] }
+miette = { version = "5.7", features = ["fancy"] }
 
 config = { version = "0.0", path = "./config" }
+error = { version = "0.0", path = "./error" }
