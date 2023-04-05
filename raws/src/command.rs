@@ -1,16 +1,21 @@
+use config::Config;
+use dynamodb::DynamoDb;
+
 use super::*;
 
 #[derive(Debug, Subcommand)]
 pub enum Command {
-    Dynamodb,
+    /// DynamoDB operations
+    #[command(subcommand)]
+    Dynamodb(DynamoDb),
     Ec2,
     Eks,
 }
 
 impl Command {
-    pub async fn dispatch(self) -> miette::Result<()> {
+    pub async fn dispatch(self, config: Config) -> miette::Result<()> {
         match self {
-            Self::Dynamodb => Ok(()),
+            Self::Dynamodb(dynamo) => dynamo.dispatch(config).await,
             Self::Ec2 => Ok(()),
             Self::Eks => Ok(()),
         }

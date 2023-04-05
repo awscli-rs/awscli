@@ -161,6 +161,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "aws-sdk-dynamodb"
+version = "0.25.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "214d3f09a6e4ac5b0a871fca80795ba362be274a8686e09d8e741f923e606dca"
+dependencies = [
+ "aws-credential-types",
+ "aws-endpoint",
+ "aws-http",
+ "aws-sig-auth",
+ "aws-smithy-async",
+ "aws-smithy-client",
+ "aws-smithy-http",
+ "aws-smithy-http-tower",
+ "aws-smithy-json",
+ "aws-smithy-types",
+ "aws-types",
+ "bytes",
+ "fastrand",
+ "http",
+ "regex",
+ "tokio-stream",
+ "tower",
+ "tracing",
+]
+
+[[package]]
 name = "aws-sdk-sso"
 version = "0.25.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -297,6 +323,8 @@ dependencies = [
  "percent-encoding",
  "pin-project-lite",
  "pin-utils",
+ "tokio",
+ "tokio-util",
  "tracing",
 ]
 
@@ -571,6 +599,16 @@ dependencies = [
  "block-buffer",
  "crypto-common",
  "subtle",
+]
+
+[[package]]
+name = "dynamodb"
+version = "0.0.0"
+dependencies = [
+ "aws-sdk-dynamodb",
+ "clap",
+ "config",
+ "miette",
 ]
 
 [[package]]
@@ -1158,6 +1196,8 @@ version = "0.0.0"
 dependencies = [
  "bytes",
  "clap",
+ "config",
+ "dynamodb",
  "miette",
  "serde",
  "serde_json",

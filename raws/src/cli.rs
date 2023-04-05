@@ -8,6 +8,7 @@ pub struct Cli {
 
 impl Cli {
     pub async fn execute(self) -> miette::Result<()> {
-        self.command.dispatch().await
+        let config = config::Config::load().await;
+        self.command.dispatch(config).await
     }
 }

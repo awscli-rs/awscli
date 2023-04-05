@@ -11,3 +11,6 @@ license.workspace = true
 [dependencies]
 clap.workspace = true
 miette.workspace = true
+aws-sdk-dynamodb.workspace = true
+
+config.workspace = true

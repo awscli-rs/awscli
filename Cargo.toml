@@ -1,3 +1,6 @@
+[workspace]
+members = ["config", "dynamodb", "raws"]
+
 [workspace.package]
 version = "0.0.0"
 authors = ["Cyril Plisko <cyril.plisko@mountall.com>"]
@@ -6,5 +9,11 @@ license = "Apache-2.0"
 repository = "https://github.com/awscli-rs/awscli"
 
 
-[workspace]
-members = ["config", "raws"]
+[workspace.dependencies]
+aws-config = "0.55"
+aws-types = "0.55"
+aws-sdk-dynamodb = "0.25"
+clap = { version = "4.2", features = ["derive", "env"] }
+miette = { version = "5.5", features = ["fancy"] }
+
+config = { version = "0.0", path = "./config" }
