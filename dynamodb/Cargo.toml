@@ -1,0 +1,13 @@
+[package]
+name = "dynamodb"
+description = "RAWS DynamoDB component"
+
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+
+[dependencies]
+clap.workspace = true
+miette.workspace = true
