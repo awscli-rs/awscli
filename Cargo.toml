@@ -1,2 +1,10 @@
+[workspace.package]
+version = "0.0.0"
+authors = ["Cyril Plisko <cyril.plisko@mountall.com>"]
+edition = "2021"
+license = "Apache-2.0"
+repository = "https://github.com/awscli-rs/awscli"
+
+
 [workspace]
 members = ["config", "raws"]
