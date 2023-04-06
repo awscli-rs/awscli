@@ -19,3 +19,4 @@ tokio-stream = "0.1"
 
 config = { version = "0.0", path = "./config" }
 error = { version = "0.0", path = "./error" }
+dynamodb = { version = "0.0", path = "./dynamodb" }

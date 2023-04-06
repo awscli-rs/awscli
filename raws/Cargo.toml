@@ -21,4 +21,4 @@ clap.workspace = true
 miette.workspace = true
 
 config.workspace = true
-dynamodb = { version = "0.0", path = "../dynamodb" }
+dynamodb.workspace = true
