@@ -11,8 +11,9 @@ mod table;
 #[derive(Debug, Subcommand)]
 pub enum DynamoDb {
     CreateTable(table::CreateTable),
-    DeleteTable,
-    DescribeTable,
+    DeleteTable(table::DeleteTable),
+    DescribeTable(table::DescribeTable),
+    ListTables(table::ListTables),
 }
 
 impl DynamoDb {
@@ -20,8 +21,9 @@ impl DynamoDb {
         let client = dynamo::Client::new(config.config());
         match self {
             Self::CreateTable(create_table) => create_table.execute(client).await?,
-            Self::DeleteTable => todo!(),
-            Self::DescribeTable => todo!(),
+            Self::DeleteTable(delete_table) => delete_table.execute(client).await?,
+            Self::DescribeTable(describe_table) => describe_table.execute(client).await?,
+            Self::ListTables(list_tables) => list_tables.execute(client).await?,
         }
         Ok(())
     }
