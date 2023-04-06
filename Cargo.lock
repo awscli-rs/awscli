@@ -162,9 +162,9 @@ dependencies = [
 
 [[package]]
 name = "aws-sdk-dynamodb"
-version = "0.25.0"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "214d3f09a6e4ac5b0a871fca80795ba362be274a8686e09d8e741f923e606dca"
+checksum = "7dfff6b9b8a92fa1f78862efcfdf0ffb31a2f880091e6b6d289fa904dad95715"
 dependencies = [
  "aws-credential-types",
  "aws-endpoint",
@@ -188,9 +188,9 @@ dependencies = [
 
 [[package]]
 name = "aws-sdk-sso"
-version = "0.25.0"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f4c10657158e12163d6b3fb1e0c9154e43656843794a3071d9ee63ec82a4de2d"
+checksum = "aad0ad03c4ba802906340847aaea796d4158317864276864acbb281155bdcf4d"
 dependencies = [
  "aws-credential-types",
  "aws-endpoint",
@@ -213,9 +213,9 @@ dependencies = [
 
 [[package]]
 name = "aws-sdk-sts"
-version = "0.25.0"
+version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "706a308b7277ac9aac78ab37933509659c6f978a8473e95d8e7a8103093133c3"
+checksum = "2493efc64aa1c6469a252c221c335ccdcebfcc556c81b1efaee051c6ddc3dd99"
 dependencies = [
  "aws-credential-types",
  "aws-endpoint",
