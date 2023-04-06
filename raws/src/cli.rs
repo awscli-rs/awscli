@@ -1,7 +1,7 @@
 use super::*;
 
 #[derive(Debug, Parser)]
-pub struct Cli {
+pub(crate) struct Cli {
     /// Use a specific profile from your credential file.
     #[arg(long, global = true)]
     profile: Option<String>,
@@ -19,7 +19,7 @@ pub struct Cli {
 }
 
 impl Cli {
-    pub async fn execute(self) -> miette::Result<()> {
+    pub(crate) async fn execute(self) -> miette::Result<()> {
         let config = config::Config::new(self.profile, self.region, self.output).await;
         self.command.dispatch(config).await
     }

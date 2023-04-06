@@ -2,10 +2,10 @@ use dynamo::types::TableDescription;
 
 use super::*;
 
-pub use create::CreateTable;
-pub use delete::DeleteTable;
-pub use describe::DescribeTable;
-pub use list::ListTables;
+pub(crate) use create::CreateTable;
+pub(crate) use delete::DeleteTable;
+pub(crate) use describe::DescribeTable;
+pub(crate) use list::ListTables;
 
 mod create;
 mod delete;
