@@ -2,7 +2,7 @@
 members = ["config", "error", "dynamodb", "raws"]
 
 [workspace.package]
-version = "0.0.0"
+version = "0.0.0-alpha.0"
 authors = ["Cyril Plisko <cyril.plisko@mountall.com>"]
 edition = "2021"
 license = "Apache-2.0"
@@ -17,6 +17,6 @@ clap = { version = "4.2", features = ["derive", "env"] }
 miette = { version = "5.7", features = ["fancy"] }
 tokio-stream = "0.1"
 
-config = { version = "0.0", path = "./config" }
-error = { version = "0.0", path = "./error" }
-dynamodb = { version = "0.0", path = "./dynamodb" }
+config = { version = "0.0.0-alpha.0", path = "./config" }
+error = { version = "0.0.0-alpha.0", path = "./error" }
+dynamodb = { version = "0.0.0-alpha.0", path = "./dynamodb" }

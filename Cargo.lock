@@ -549,7 +549,7 @@ dependencies = [
 
 [[package]]
 name = "config"
-version = "0.0.0"
+version = "0.0.0-alpha.0"
 dependencies = [
  "aws-config",
  "aws-types",
@@ -604,7 +604,7 @@ dependencies = [
 
 [[package]]
 name = "dynamodb"
-version = "0.0.0"
+version = "0.0.0-alpha.0"
 dependencies = [
  "aws-sdk-dynamodb",
  "clap",
@@ -642,7 +642,7 @@ dependencies = [
 
 [[package]]
 name = "error"
-version = "0.0.0"
+version = "0.0.0-alpha.0"
 dependencies = [
  "aws-sdk-dynamodb",
  "miette",
@@ -1203,7 +1203,7 @@ dependencies = [
 
 [[package]]
 name = "raws"
-version = "0.0.0"
+version = "0.0.0-alpha.0"
 dependencies = [
  "clap",
  "config",
