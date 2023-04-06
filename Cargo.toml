@@ -15,6 +15,7 @@ aws-types = "0.55"
 aws-sdk-dynamodb = "0.25"
 clap = { version = "4.2", features = ["derive", "env"] }
 miette = { version = "5.7", features = ["fancy"] }
+tokio-stream = "0.1"
 
 config = { version = "0.0", path = "./config" }
 error = { version = "0.0", path = "./error" }

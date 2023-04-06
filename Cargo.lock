@@ -553,6 +553,7 @@ version = "0.0.0"
 dependencies = [
  "aws-config",
  "aws-types",
+ "clap",
 ]
 
 [[package]]
@@ -609,6 +610,7 @@ dependencies = [
  "clap",
  "config",
  "error",
+ "tokio-stream",
 ]
 
 [[package]]

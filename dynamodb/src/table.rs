@@ -1,3 +1,5 @@
+use dynamo::types::TableDescription;
+
 use super::*;
 
 pub use create::CreateTable;
