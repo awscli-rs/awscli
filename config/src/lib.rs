@@ -5,6 +5,7 @@ pub use output::Output;
 
 mod output;
 
+#[derive(Debug)]
 pub struct Config {
     output: Output,
     shared_config: SdkConfig,
