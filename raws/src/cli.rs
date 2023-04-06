@@ -1,6 +1,7 @@
 use super::*;
 
 #[derive(Debug, Parser)]
+#[command(version, about, long_about = None)]
 pub(crate) struct Cli {
     /// Use a specific profile from your credential file.
     #[arg(long, global = true)]
