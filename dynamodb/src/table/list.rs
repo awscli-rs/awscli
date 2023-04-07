@@ -6,7 +6,7 @@ use super::*;
 pub struct ListTables {}
 
 impl ListTables {
-    pub async fn execute(self, client: dynamo::Client) -> DynamoResult<Vec<String>> {
+    pub async fn execute(self, client: dynamodb::Client) -> DynamoResult<Vec<String>> {
         let tables = client
             .list_tables()
             .into_paginator()

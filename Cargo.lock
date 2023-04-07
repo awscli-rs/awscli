@@ -610,6 +610,7 @@ dependencies = [
  "clap",
  "config",
  "error",
+ "thiserror",
  "tokio-stream",
 ]
 

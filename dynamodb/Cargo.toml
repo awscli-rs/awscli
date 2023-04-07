@@ -12,6 +12,7 @@ license.workspace = true
 clap.workspace = true
 aws-sdk-dynamodb.workspace = true
 tokio-stream.workspace = true
+thiserror.workspace = true
 
 config.workspace = true
 error.workspace = true

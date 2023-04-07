@@ -9,7 +9,7 @@ license.workspace = true
 
 
 [dependencies]
-thiserror = "1.0"
+thiserror.workspace = true
 miette.workspace = true
 
 aws-sdk-dynamodb.workspace = true
