@@ -1,9 +1,9 @@
-use aws_sdk_dynamodb as dynamodb;
+use aws_sdk_dynamodb as dynamo;
 use clap::{Args, Subcommand};
 
 use config::Config;
 
-type DynamoResult<T> = std::result::Result<T, dynamodb::Error>;
+type DynamoResult<T> = std::result::Result<T, dynamo::Error>;
 
 mod table;
 
@@ -16,8 +16,8 @@ pub enum DynamoDb {
 }
 
 impl DynamoDb {
-    pub async fn dispatch(self, config: Config) -> Result<(), error::Error<dynamodb::Error>> {
-        let client = dynamodb::Client::new(config.config());
+    pub async fn dispatch(self, config: Config) -> Result<(), error::Error<dynamo::Error>> {
+        let client = dynamo::Client::new(config.config());
         match self {
             Self::CreateTable(create_table) => create_table
                 .execute(client)

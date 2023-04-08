@@ -1,5 +1,7 @@
-use dynamodb::types::AttributeDefinition;
-use dynamodb::types::ScalarAttributeType;
+use dynamo::types::AttributeDefinition;
+use dynamo::types::KeySchemaElement;
+use dynamo::types::KeyType;
+use dynamo::types::ScalarAttributeType;
 
 use super::*;
 
@@ -10,10 +12,12 @@ pub struct CreateTable {
     table_name: String,
     #[arg(long, required = true, visible_alias = "attrs", value_parser = attribute_definition_parser)]
     attribute_definitions: Vec<AttributeDefinition>,
+    #[arg(long, required = true, visible_alias = "keys", value_parser = key_schema_parser)]
+    key_schema: Vec<KeySchemaElement>,
 }
 
 impl CreateTable {
-    pub async fn execute(self, client: dynamodb::Client) -> DynamoResult<Option<TableDescription>> {
+    pub async fn execute(self, client: dynamo::Client) -> DynamoResult<Option<TableDescription>> {
         let table = client
             .create_table()
             .table_name(self.table_name)
@@ -27,7 +31,7 @@ impl CreateTable {
 fn attribute_definition_parser(
     text: &str,
 ) -> Result<AttributeDefinition, InvalidAttributeDefinition> {
-    let (name, r#type) = attribute_definition(text)?;
+    let (name, r#type) = split_pair(text, ',')?;
     let attr_name = attr_name(name)?;
     let attr_type = attr_type(r#type)?;
     let attr = AttributeDefinition::builder()
@@ -37,8 +41,19 @@ fn attribute_definition_parser(
     Ok(attr)
 }
 
+fn key_schema_parser(text: &str) -> Result<KeySchemaElement, InvalidAttributeDefinition> {
+    let (name, keytype) = split_pair(text, ',')?;
+    let attr_name = attr_name(name)?;
+    let key_type = key_type(keytype)?;
+    let element = KeySchemaElement::builder()
+        .attribute_name(attr_name)
+        .key_type(key_type)
+        .build();
+    Ok(element)
+}
+
 fn attr_name(text: &str) -> Result<&str, InvalidAttributeDefinition> {
-    let (name, value) = key_value(text)?;
+    let (name, value) = split_pair(text, '=')?;
     if name.to_lowercase() != "attributename" {
         Err(InvalidAttributeDefinition::malformed(text))?;
     }
@@ -51,7 +66,7 @@ fn attr_name(text: &str) -> Result<&str, InvalidAttributeDefinition> {
 }
 
 fn attr_type(text: &str) -> Result<ScalarAttributeType, InvalidAttributeDefinition> {
-    let (attr, r#type) = key_value(text)?;
+    let (attr, r#type) = split_pair(text, '=')?;
     if attr.to_lowercase() != "attributetype" {
         Err(InvalidAttributeDefinition::malformed(text))?;
     }
@@ -62,13 +77,20 @@ fn attr_type(text: &str) -> Result<ScalarAttributeType, InvalidAttributeDefiniti
     }
 }
 
-fn key_value(text: &str) -> Result<(&str, &str), InvalidAttributeDefinition> {
-    text.split_once('=')
-        .ok_or_else(|| InvalidAttributeDefinition::malformed(text))
+fn key_type(text: &str) -> Result<KeyType, InvalidAttributeDefinition> {
+    let (key, r#type) = split_pair(text, '=')?;
+    if key.to_lowercase() != "keytype" {
+        Err(InvalidAttributeDefinition::malformed(text))?;
+    }
+
+    match r#type.into() {
+        KeyType::Unknown(_) => Err(InvalidAttributeDefinition::attr_type(r#type)),
+        other => Ok(other),
+    }
 }
 
-fn attribute_definition(text: &str) -> Result<(&str, &str), InvalidAttributeDefinition> {
-    text.split_once(',')
+fn split_pair(text: &str, delimiter: char) -> Result<(&str, &str), InvalidAttributeDefinition> {
+    text.split_once(delimiter)
         .ok_or_else(|| InvalidAttributeDefinition::malformed(text))
 }
 

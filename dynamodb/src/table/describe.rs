@@ -8,7 +8,7 @@ pub struct DescribeTable {
 }
 
 impl DescribeTable {
-    pub async fn execute(self, client: dynamodb::Client) -> DynamoResult<Option<TableDescription>> {
+    pub async fn execute(self, client: dynamo::Client) -> DynamoResult<Option<TableDescription>> {
         let table = client
             .describe_table()
             .table_name(self.table_name)

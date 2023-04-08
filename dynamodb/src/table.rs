@@ -1,4 +1,4 @@
-use dynamodb::types::TableDescription;
+use dynamo::types::TableDescription;
 
 use super::*;
 
