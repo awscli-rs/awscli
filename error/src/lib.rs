@@ -3,11 +3,9 @@ use thiserror::Error;
 
 mod dynamodb;
 
-pub type Result<T, E> = ::std::result::Result<T, Error<E>>;
-
 #[derive(Debug, Error)]
 #[error("RAWS CLI Error")]
-pub struct Error<E: AwsError> {
+pub struct RawsError<E: AwsError> {
     #[from]
     source: E,
 }
@@ -19,7 +17,7 @@ pub trait AwsError: ::std::error::Error + 'static {
     fn message(&self) -> Option<&str>;
 }
 
-impl<E: AwsError> Diagnostic for Error<E> {
+impl<E: AwsError> Diagnostic for RawsError<E> {
     fn code<'a>(&'a self) -> Option<Box<dyn std::fmt::Display + 'a>> {
         match self.source.code() {
             Some(code) => Some(Box::new(code)),
