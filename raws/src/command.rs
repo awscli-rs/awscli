@@ -1,5 +1,6 @@
 use config::Config;
 use dynamodb::DynamoDb;
+use iam::Iam;
 
 use super::*;
 
@@ -10,6 +11,8 @@ pub(crate) enum Command {
     Dynamodb(DynamoDb),
     Ec2,
     Eks,
+    #[command(subcommand)]
+    Iam(Iam),
 }
 
 impl Command {
@@ -18,6 +21,7 @@ impl Command {
             Self::Dynamodb(dynamo) => dynamo.dispatch(config).await?,
             Self::Ec2 => todo!(),
             Self::Eks => todo!(),
+            Self::Iam(iam) => iam.dispatch(config).await?,
         }
         Ok(())
     }

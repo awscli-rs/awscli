@@ -23,3 +23,4 @@ thiserror = "1.0"
 config = { version = "0.0.0-alpha.1", path = "./config" }
 error = { version = "0.0.0-alpha.1", path = "./error" }
 dynamodb = { version = "0.0.0-alpha.1", path = "./dynamodb" }
+iam = { version = "0.0.0-alpha.1", path = "./iam" }

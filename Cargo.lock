@@ -1250,6 +1250,7 @@ dependencies = [
  "clap",
  "config",
  "dynamodb",
+ "iam",
  "miette",
  "tokio",
  "tracing",

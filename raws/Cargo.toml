@@ -22,3 +22,4 @@ miette.workspace = true
 
 config.workspace = true
 dynamodb.workspace = true
+iam.workspace = true

@@ -1,0 +1,18 @@
+[package]
+name = "iam"
+description = "RAWS IAM component"
+
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+
+[dependencies]
+clap.workspace = true
+aws-sdk-iam.workspace = true
+tokio-stream.workspace = true
+thiserror.workspace = true
+
+config.workspace = true
+error.workspace = true
