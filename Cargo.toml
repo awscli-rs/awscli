@@ -1,5 +1,5 @@
 [workspace]
-members = ["config", "error", "dynamodb", "raws"]
+members = ["config", "error", "dynamodb", "raws", "iam"]
 
 [workspace.package]
 version = "0.0.0-alpha.1"
@@ -10,9 +10,11 @@ repository = "https://github.com/awscli-rs/awscli"
 
 
 [workspace.dependencies]
+aws-smithy-types = "0.55"
 aws-config = "0.55"
 aws-types = "0.55"
 aws-sdk-dynamodb = "0.25"
+aws-sdk-iam = "0.25"
 clap = { version = "4.2", features = ["derive", "env"] }
 miette = { version = "5.7", features = ["fancy"] }
 tokio-stream = "0.1"

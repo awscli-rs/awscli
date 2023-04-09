@@ -187,6 +187,33 @@ dependencies = [
 ]
 
 [[package]]
+name = "aws-sdk-iam"
+version = "0.25.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3ee493b35ee88acb8fa65971754754db2944c5c51c4a33501d6d38bc11924b80"
+dependencies = [
+ "aws-credential-types",
+ "aws-endpoint",
+ "aws-http",
+ "aws-sig-auth",
+ "aws-smithy-async",
+ "aws-smithy-client",
+ "aws-smithy-http",
+ "aws-smithy-http-tower",
+ "aws-smithy-json",
+ "aws-smithy-query",
+ "aws-smithy-types",
+ "aws-smithy-xml",
+ "aws-types",
+ "bytes",
+ "http",
+ "regex",
+ "tokio-stream",
+ "tower",
+ "tracing",
+]
+
+[[package]]
 name = "aws-sdk-sso"
 version = "0.25.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -622,13 +649,13 @@ checksum = "7fcaabb2fef8c910e7f4c7ce9f67a1283a1715879a7c230ca9d6d1ae31f16d91"
 
 [[package]]
 name = "errno"
-version = "0.3.0"
+version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "50d6a0976c999d473fe89ad888d5a284e55366d9dc9038b1ba2aa15128c4afa0"
+checksum = "4bcfec3a70f97c962c307b2d2c56e358cf1d00b558d74262b5f929ee8cc7e73a"
 dependencies = [
  "errno-dragonfly",
  "libc",
- "windows-sys 0.45.0",
+ "windows-sys 0.48.0",
 ]
 
 [[package]]
@@ -646,6 +673,8 @@ name = "error"
 version = "0.0.0-alpha.1"
 dependencies = [
  "aws-sdk-dynamodb",
+ "aws-sdk-iam",
+ "aws-smithy-types",
  "miette",
  "thiserror",
 ]
@@ -875,6 +904,18 @@ dependencies = [
  "rustls-native-certs",
  "tokio",
  "tokio-rustls",
+]
+
+[[package]]
+name = "iam"
+version = "0.0.0-alpha.1"
+dependencies = [
+ "aws-sdk-iam",
+ "clap",
+ "config",
+ "error",
+ "thiserror",
+ "tokio-stream",
 ]
 
 [[package]]
@@ -1282,9 +1323,9 @@ dependencies = [
 
 [[package]]
 name = "rustix"
-version = "0.37.10"
+version = "0.37.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "11c63d26a2a123c50a1630342a7f394e863c02ea57d36accdd8bf10484c78811"
+checksum = "85597d61f83914ddeba6a47b3b8ffe7365107221c2e557ed94426489fefb5f77"
 dependencies = [
  "bitflags",
  "errno",
