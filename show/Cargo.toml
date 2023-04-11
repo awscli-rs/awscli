@@ -1,0 +1,15 @@
+[package]
+name = "show"
+description = "RAWS show component"
+
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+
+[dependencies]
+fmtools = "0.1"
+
+aws-sdk-iam.workspace = true
+aws-sdk-dynamodb.workspace = true

@@ -43,6 +43,10 @@ impl Config {
             Output::YamlStream => println!("{output:?}"),
         }
     }
+
+    pub fn show(&self, object: Box<dyn show::Show>) {
+        println!("{}", object.show())
+    }
 }
 
 trait Optionally {
