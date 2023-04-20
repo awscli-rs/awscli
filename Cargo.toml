@@ -1,5 +1,12 @@
 [workspace]
-members = ["config", "error", "dynamodb", "raws", "show", "services/iam"]
+members = [
+    "config",
+    "error",
+    "raws",
+    "show",
+    "services/dynamodb",
+    "services/iam",
+]
 
 [workspace.package]
 version = "0.0.0-alpha.1"
@@ -23,7 +30,7 @@ thiserror = "1.0"
 
 config = { version = "0.0.0-alpha.1", path = "./config" }
 error = { version = "0.0.0-alpha.1", path = "./error" }
-dynamodb = { version = "0.0.0-alpha.1", path = "./dynamodb" }
 show = { version = "0.0.0-alpha.1", path = "./show" }
 
+dynamodb = { version = "0.0.0-alpha.1", path = "./services/dynamodb" }
 iam = { version = "0.0.0-alpha.1", path = "./services/iam" }
