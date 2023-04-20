@@ -1,5 +1,3 @@
-use crate::iam::types::User;
-
 use super::*;
 
 pub(crate) use create::CreateUser;

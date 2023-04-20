@@ -9,8 +9,9 @@ license.workspace = true
 
 
 [dependencies]
-clap.workspace = true
+async-trait.workspace = true
 aws-sdk-iam.workspace = true
+clap.workspace = true
 tokio-stream.workspace = true
 thiserror.workspace = true
 

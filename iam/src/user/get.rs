@@ -7,14 +7,15 @@ pub struct GetUser {
     user_name: String,
 }
 
-impl GetUser {
-    pub async fn execute(self, client: iam::Client) -> IamResult<Option<User>> {
+#[async_trait]
+impl Execute for GetUser {
+    async fn execute(self: Box<Self>, client: iam::Client) -> IamResult {
         let user = client
             .get_user()
             .user_name(self.user_name)
             .send()
             .await?
             .user;
-        Ok(user)
+        Ok(Box::new(user))
     }
 }
