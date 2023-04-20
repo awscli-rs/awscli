@@ -10,7 +10,7 @@ impl AwsError for dynamodb::Error {
         dynamodb::error::DisplayErrorContext(self)
     }
 
-    fn meta(&self) -> &ErrorMetadata {
+    fn error_meta(&self) -> &ErrorMetadata {
         match self {
             Self::BackupInUseException(e) => e.meta(),
             Self::BackupNotFoundException(e) => e.meta(),
@@ -46,6 +46,13 @@ impl AwsError for dynamodb::Error {
             Self::TransactionInProgressException(e) => e.meta(),
             Self::Unhandled(e) => e.meta(),
             _ => &EMPTY_ERROR_METADATA,
+        }
+    }
+
+    fn try_into_unhandled(self) -> Result<Unhandled, Self> {
+        match self {
+            Self::Unhandled(unhandled) => Ok(unhandled),
+            other => Err(other),
         }
     }
 }

@@ -12,12 +12,12 @@ pub struct DeleteUser {
 }
 
 impl DeleteUser {
-    pub async fn execute(self, client: iam::Client) -> IamResult<()> {
+    pub async fn execute(self, client: iam::Client) -> IamResult {
         client
             .delete_user()
             .user_name(self.user_name)
             .send()
             .await?;
-        Ok(())
+        Ok(Box::new(()))
     }
 }

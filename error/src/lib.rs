@@ -1,10 +1,12 @@
 use aws_smithy_types::error::metadata::EMPTY_ERROR_METADATA;
 use aws_smithy_types::error::ErrorMetadata;
+use aws_smithy_types::error::Unhandled;
 use miette::Diagnostic;
 use thiserror::Error;
 
 mod dynamodb;
 mod iam;
+mod unhandled;
 
 #[derive(Debug, Error)]
 #[error("RAWS CLI Error")]
@@ -13,20 +15,31 @@ pub struct RawsError<E: AwsError> {
     source: E,
 }
 
-pub trait AwsError: ::std::error::Error + 'static {
+pub trait AwsError: ::std::error::Error + 'static + Sized {
     type DisplayErrorContext<'a>;
     fn error_context(&self) -> Self::DisplayErrorContext<'_>;
 
-    fn meta(&self) -> &ErrorMetadata;
+    fn error_meta(&self) -> &ErrorMetadata;
 
     fn code(&self) -> Option<&str> {
-        self.meta().code()
+        self.error_meta().code()
     }
 
     fn message(&self) -> Option<&str> {
-        self.meta().message()
+        self.error_meta().message()
     }
+
+    fn try_into_unhandled(self) -> Result<Unhandled, Self>;
 }
+
+// impl<E: AwsError> From<E> for RawsError<E> {
+//     fn from(e: E) -> Self {
+//         match e.try_into_unhandled() {
+//             Ok(unhandled) => Self { source: unhandled },
+//             Err(other) => Self { source: other },
+//         }
+//     }
+// }
 
 impl<E: AwsError> Diagnostic for RawsError<E> {
     fn code<'a>(&'a self) -> Option<Box<dyn std::fmt::Display + 'a>> {
