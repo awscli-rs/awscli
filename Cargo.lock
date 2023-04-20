@@ -645,10 +645,12 @@ dependencies = [
 name = "dynamodb"
 version = "0.0.0-alpha.1"
 dependencies = [
+ "async-trait",
  "aws-sdk-dynamodb",
  "clap",
  "config",
  "error",
+ "show",
  "thiserror",
  "tokio-stream",
 ]

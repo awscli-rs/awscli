@@ -5,8 +5,9 @@ use super::*;
 #[derive(Debug, Args)]
 pub struct ListTables {}
 
-impl ListTables {
-    pub async fn execute(self, client: dynamo::Client) -> DynamoResult<Vec<String>> {
+#[async_trait]
+impl Execute for ListTables {
+    async fn execute(self: Box<Self>, client: dynamo::Client) -> DynamoResult {
         let tables = client
             .list_tables()
             .into_paginator()
@@ -16,7 +17,7 @@ impl ListTables {
             .into_iter()
             .filter_map(|output| output.table_names)
             .flatten()
-            .collect();
-        Ok(tables)
+            .collect::<Vec<_>>();
+        Ok(Box::new(tables))
     }
 }

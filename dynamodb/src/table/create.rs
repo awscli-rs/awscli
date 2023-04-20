@@ -16,15 +16,16 @@ pub struct CreateTable {
     key_schema: Vec<KeySchemaElement>,
 }
 
-impl CreateTable {
-    pub async fn execute(self, client: dynamo::Client) -> DynamoResult<Option<TableDescription>> {
+#[async_trait]
+impl Execute for CreateTable {
+    async fn execute(self: Box<Self>, client: dynamo::Client) -> DynamoResult {
         let table = client
             .create_table()
             .table_name(self.table_name)
             .send()
             .await?
             .table_description;
-        Ok(table)
+        Ok(Box::new(table))
     }
 }
 

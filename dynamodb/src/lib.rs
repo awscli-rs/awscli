@@ -1,12 +1,18 @@
+use async_trait::async_trait;
 use aws_sdk_dynamodb as dynamo;
 use clap::{Args, Subcommand};
 
 use config::Config;
 use error::RawsError;
 
-type DynamoResult<T> = std::result::Result<T, dynamo::Error>;
-
 mod table;
+
+type DynamoResult<T = Box<dyn show::Show>> = std::result::Result<T, dynamo::Error>;
+
+#[async_trait]
+pub trait Execute {
+    async fn execute(self: Box<Self>, client: dynamo::Client) -> DynamoResult;
+}
 
 #[derive(Debug, Subcommand)]
 pub enum DynamoDb {
@@ -17,26 +23,21 @@ pub enum DynamoDb {
 }
 
 impl DynamoDb {
+    fn boxed(self) -> Box<dyn Execute> {
+        match self {
+            Self::CreateTable(create_table) => Box::new(create_table),
+            Self::DeleteTable(delete_table) => Box::new(delete_table),
+            Self::DescribeTable(describe_table) => Box::new(describe_table),
+            Self::ListTables(list_tables) => Box::new(list_tables),
+        }
+    }
+
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<dynamo::Error>> {
         let client = dynamo::Client::new(config.config());
-        match self {
-            Self::CreateTable(create_table) => create_table
-                .execute(client)
-                .await
-                .map(|output| config.output(output))?,
-            Self::DeleteTable(delete_table) => delete_table
-                .execute(client)
-                .await
-                .map(|output| config.output(output))?,
-            Self::DescribeTable(describe_table) => describe_table
-                .execute(client)
-                .await
-                .map(|output| config.output(output))?,
-            Self::ListTables(list_tables) => list_tables
-                .execute(client)
-                .await
-                .map(|output| config.output(output))?,
-        }
+        self.boxed()
+            .execute(client)
+            .await
+            .map(|output| config.show(output))?;
         Ok(())
     }
 }

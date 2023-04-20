@@ -9,10 +9,12 @@ license.workspace = true
 
 
 [dependencies]
-clap.workspace = true
+async-trait.workspace = true
 aws-sdk-dynamodb.workspace = true
+clap.workspace = true
 tokio-stream.workspace = true
 thiserror.workspace = true
 
 config.workspace = true
 error.workspace = true
+show.workspace = true

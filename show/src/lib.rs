@@ -1,3 +1,4 @@
+mod dynamo;
 mod iam;
 
 pub trait Show {
@@ -33,5 +34,15 @@ impl Show for () {
 
     fn detailed_show(&self) -> String {
         String::new()
+    }
+}
+
+impl Show for String {
+    fn show(&self) -> String {
+        self.clone()
+    }
+
+    fn detailed_show(&self) -> String {
+        self.clone()
     }
 }

@@ -7,14 +7,15 @@ pub struct DescribeTable {
     table_name: String,
 }
 
-impl DescribeTable {
-    pub async fn execute(self, client: dynamo::Client) -> DynamoResult<Option<TableDescription>> {
+#[async_trait]
+impl Execute for DescribeTable {
+    async fn execute(self: Box<Self>, client: dynamo::Client) -> DynamoResult {
         let table = client
             .describe_table()
             .table_name(self.table_name)
             .send()
             .await?
             .table;
-        Ok(table)
+        Ok(Box::new(table))
     }
 }
