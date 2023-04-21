@@ -3,7 +3,24 @@ mod iam;
 
 pub trait Show {
     fn show(&self) -> String;
+
     fn detailed_show(&self) -> String;
+
+    fn json(&self) -> String {
+        "JSON view is not implemented yet".to_string()
+    }
+
+    fn table(&self) -> String {
+        "Table view is not implemented yet".to_string()
+    }
+
+    fn yaml(&self) -> String {
+        "YAML view is not implemented yet".to_string()
+    }
+
+    fn yaml_stream(&self) -> String {
+        "YAML stream view is not implemented yet".to_string()
+    }
 }
 
 impl<T: Show> Show for Vec<T> {

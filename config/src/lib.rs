@@ -34,18 +34,15 @@ impl Config {
         &self.shared_config
     }
 
-    pub fn output<T: std::fmt::Debug>(&self, output: T) {
-        match self.output {
-            Output::Json => println!("{output:?}"),
-            Output::Text => println!("{output:?}"),
-            Output::Table => println!("{output:?}"),
-            Output::Yaml => println!("{output:?}"),
-            Output::YamlStream => println!("{output:?}"),
-        }
-    }
-
     pub fn show(&self, object: Box<dyn show::Show>) {
-        println!("{}", object.show())
+        let text = match self.output {
+            Output::Json => object.json(),
+            Output::Text => object.show(),
+            Output::Table => object.table(),
+            Output::Yaml => object.yaml(),
+            Output::YamlStream => object.yaml_stream(),
+        };
+        println!("{text}");
     }
 }
 
