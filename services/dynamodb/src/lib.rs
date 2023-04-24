@@ -5,6 +5,7 @@ use clap::{Args, Subcommand};
 use config::Config;
 use error::RawsError;
 
+mod item;
 mod table;
 
 type DynamoResult<T = Box<dyn show::Show>> = std::result::Result<T, dynamodb::Error>;
@@ -20,6 +21,8 @@ pub enum DynamoDb {
     DeleteTable(table::DeleteTable),
     DescribeTable(table::DescribeTable),
     ListTables(table::ListTables),
+    Scan(table::Scan),
+    GetItem(item::GetItem),
 }
 
 impl DynamoDb {
@@ -29,6 +32,8 @@ impl DynamoDb {
             Self::DeleteTable(delete_table) => Box::new(delete_table),
             Self::DescribeTable(describe_table) => Box::new(describe_table),
             Self::ListTables(list_tables) => Box::new(list_tables),
+            Self::Scan(scan) => Box::new(scan),
+            Self::GetItem(get_item) => Box::new(get_item),
         }
     }
 
