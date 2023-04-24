@@ -9,7 +9,7 @@ pub struct DeleteTable {
 
 #[async_trait]
 impl Execute for DeleteTable {
-    async fn execute(self: Box<Self>, client: dynamo::Client) -> DynamoResult {
+    async fn execute(self: Box<Self>, client: dynamodb::Client) -> DynamoResult {
         let table = client
             .delete_table()
             .table_name(self.table_name)
