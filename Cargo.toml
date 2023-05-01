@@ -21,8 +21,8 @@ async-trait = "0.1"
 aws-smithy-types = "0.55"
 aws-config = "0.55"
 aws-types = "0.55"
-aws-sdk-dynamodb = "0.26"
-aws-sdk-iam = "0.26"
+aws-sdk-dynamodb = "0.27"
+aws-sdk-iam = "0.27"
 clap = { version = "4.2", features = ["derive", "env"] }
 miette = { version = "5.7", features = ["fancy"] }
 tokio-stream = "0.1"
