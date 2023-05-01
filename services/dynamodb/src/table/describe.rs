@@ -9,7 +9,7 @@ pub struct DescribeTable {
 
 #[async_trait]
 impl Execute for DescribeTable {
-    async fn execute(self: Box<Self>, client: dynamodb::Client) -> DynamoResult {
+    async fn execute(self: Box<Self>, client: Client) -> DynamoResult {
         let table = client
             .describe_table()
             .table_name(self.table_name)

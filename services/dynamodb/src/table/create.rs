@@ -1,7 +1,7 @@
-use dynamodb::types::AttributeDefinition;
-use dynamodb::types::KeySchemaElement;
-use dynamodb::types::KeyType;
-use dynamodb::types::ScalarAttributeType;
+use types::AttributeDefinition;
+use types::KeySchemaElement;
+use types::KeyType;
+use types::ScalarAttributeType;
 
 use super::*;
 
@@ -18,7 +18,7 @@ pub struct CreateTable {
 
 #[async_trait]
 impl Execute for CreateTable {
-    async fn execute(self: Box<Self>, client: dynamodb::Client) -> DynamoResult {
+    async fn execute(self: Box<Self>, client: Client) -> DynamoResult {
         let table = client
             .create_table()
             .table_name(self.table_name)

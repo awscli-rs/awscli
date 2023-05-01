@@ -1,5 +1,6 @@
 use async_trait::async_trait;
-use aws_sdk_dynamodb as dynamodb;
+use aws_sdk_dynamodb::types;
+use aws_sdk_dynamodb::Client;
 use clap::{Args, Subcommand};
 
 use config::Config;
@@ -7,11 +8,11 @@ use error::RawsError;
 
 mod table;
 
-type DynamoResult<T = Box<dyn show::Show>> = std::result::Result<T, dynamodb::Error>;
+type DynamoResult<T = Box<dyn show::Show>> = std::result::Result<T, aws_sdk_dynamodb::Error>;
 
 #[async_trait]
 pub trait Execute {
-    async fn execute(self: Box<Self>, client: dynamodb::Client) -> DynamoResult;
+    async fn execute(self: Box<Self>, client: Client) -> DynamoResult;
 }
 
 #[derive(Debug, Subcommand)]
@@ -32,8 +33,8 @@ impl DynamoDb {
         }
     }
 
-    pub async fn dispatch(self, config: Config) -> Result<(), RawsError<dynamodb::Error>> {
-        let client = dynamodb::Client::new(config.config());
+    pub async fn dispatch(self, config: Config) -> Result<(), RawsError<aws_sdk_dynamodb::Error>> {
+        let client = Client::new(config.config());
         self.boxed()
             .execute(client)
             .await
