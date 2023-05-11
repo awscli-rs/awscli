@@ -1,5 +1,7 @@
 use super::*;
 
+mod identity;
+
 impl Show for aws_sdk_sts::operation::assume_role::AssumeRoleOutput {
     fn text(&self) -> String {
         if let Some(credentials) = self.credentials() {
@@ -21,19 +23,6 @@ impl Show for aws_sdk_sts::types::Credentials {
         let session_token = self.session_token().unwrap_or_default();
         let expiration = self.expiration();
         format!("{access_key_id} {secret_access_key} {session_token} {expiration:?}")
-    }
-
-    fn detailed_show(&self) -> String {
-        format!("{self:?}")
-    }
-}
-
-impl Show for aws_sdk_sts::operation::get_caller_identity::GetCallerIdentityOutput {
-    fn text(&self) -> String {
-        let user_id = self.user_id().unwrap_or_default();
-        let account = self.account().unwrap_or_default();
-        let arn = self.arn().unwrap_or_default();
-        format!("{user_id} {account} {arn}")
     }
 
     fn detailed_show(&self) -> String {

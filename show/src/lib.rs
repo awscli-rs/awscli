@@ -1,3 +1,6 @@
+use serde::Serialize;
+use serde_json as json;
+
 mod dynamo;
 mod iam;
 mod sts;

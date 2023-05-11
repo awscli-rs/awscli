@@ -14,3 +14,5 @@ fmtools = "0.1"
 aws-sdk-dynamodb.workspace = true
 aws-sdk-iam.workspace = true
 aws-sdk-sts.workspace = true
+serde.workspace = true
+serde_json.workspace = true
