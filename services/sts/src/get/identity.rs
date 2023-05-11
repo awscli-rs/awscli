@@ -1,7 +1,7 @@
 use super::*;
 
-/// Returns a set of temporary security credentials that you can use to
-/// access AWS resources
+/// Returns details about the IAM user or role whose credentials are used
+/// to call the operation.
 #[derive(Debug, Args)]
 pub struct GetCallerIdentity;
 

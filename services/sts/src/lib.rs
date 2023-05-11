@@ -19,6 +19,7 @@ pub trait Execute {
 pub enum Sts {
     AssumeRole(role::AssumeRole),
     GetCallerIdentity(get::GetCallerIdentity),
+    GetAccessKeyInfo(get::GetAccessKeyInfo),
 }
 
 impl Sts {
@@ -26,6 +27,7 @@ impl Sts {
         match self {
             Self::AssumeRole(assume_role) => Box::new(assume_role),
             Self::GetCallerIdentity(get_caller_identity) => Box::new(get_caller_identity),
+            Self::GetAccessKeyInfo(get_access_key_info) => Box::new(get_access_key_info),
         }
     }
 

@@ -1,5 +1,6 @@
 use super::*;
 
+mod accesskey;
 mod identity;
 
 impl Show for aws_sdk_sts::operation::assume_role::AssumeRoleOutput {
