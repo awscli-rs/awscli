@@ -3,7 +3,7 @@ mod iam;
 mod sts;
 
 pub trait Show {
-    fn show(&self) -> String;
+    fn text(&self) -> String;
 
     fn detailed_show(&self) -> String;
 
@@ -25,8 +25,8 @@ pub trait Show {
 }
 
 impl<T: Show> Show for Vec<T> {
-    fn show(&self) -> String {
-        let items = self.iter().map(|item| item.show());
+    fn text(&self) -> String {
+        let items = self.iter().map(|item| item.text());
         fmtools::join("\n", items).to_string()
     }
 
@@ -36,8 +36,8 @@ impl<T: Show> Show for Vec<T> {
 }
 
 impl<T: Show> Show for Option<T> {
-    fn show(&self) -> String {
-        self.as_ref().map(|item| item.show()).unwrap_or_default()
+    fn text(&self) -> String {
+        self.as_ref().map(|item| item.text()).unwrap_or_default()
     }
 
     fn detailed_show(&self) -> String {
@@ -46,7 +46,7 @@ impl<T: Show> Show for Option<T> {
 }
 
 impl Show for () {
-    fn show(&self) -> String {
+    fn text(&self) -> String {
         String::new()
     }
 
@@ -56,7 +56,7 @@ impl Show for () {
 }
 
 impl Show for String {
-    fn show(&self) -> String {
+    fn text(&self) -> String {
         self.clone()
     }
 

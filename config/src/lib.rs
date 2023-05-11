@@ -37,7 +37,7 @@ impl Config {
     pub fn show(&self, object: Box<dyn show::Show>) {
         let text = match self.output {
             Output::Json => object.json(),
-            Output::Text => object.show(),
+            Output::Text => object.text(),
             Output::Table => object.table(),
             Output::Yaml => object.yaml(),
             Output::YamlStream => object.yaml_stream(),

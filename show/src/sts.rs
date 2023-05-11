@@ -1,9 +1,9 @@
 use super::*;
 
 impl Show for aws_sdk_sts::operation::assume_role::AssumeRoleOutput {
-    fn show(&self) -> String {
+    fn text(&self) -> String {
         if let Some(credentials) = self.credentials() {
-            credentials.show()
+            credentials.text()
         } else {
             String::new()
         }
@@ -15,7 +15,7 @@ impl Show for aws_sdk_sts::operation::assume_role::AssumeRoleOutput {
 }
 
 impl Show for aws_sdk_sts::types::Credentials {
-    fn show(&self) -> String {
+    fn text(&self) -> String {
         let access_key_id = self.access_key_id().unwrap_or_default();
         let secret_access_key = self.secret_access_key().unwrap_or_default();
         let session_token = self.session_token().unwrap_or_default();
@@ -29,7 +29,7 @@ impl Show for aws_sdk_sts::types::Credentials {
 }
 
 impl Show for aws_sdk_sts::operation::get_caller_identity::GetCallerIdentityOutput {
-    fn show(&self) -> String {
+    fn text(&self) -> String {
         let user_id = self.user_id().unwrap_or_default();
         let account = self.account().unwrap_or_default();
         let arn = self.arn().unwrap_or_default();
