@@ -1,5 +1,6 @@
 mod dynamo;
 mod iam;
+mod sts;
 
 pub trait Show {
     fn show(&self) -> String;

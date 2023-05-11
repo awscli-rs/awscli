@@ -1,6 +1,7 @@
 use config::Config;
 use dynamodb::DynamoDb;
 use iam::Iam;
+use sts::Sts;
 
 use super::*;
 
@@ -9,10 +10,17 @@ pub(crate) enum Command {
     /// DynamoDB operations
     #[command(subcommand)]
     Dynamodb(DynamoDb),
+
     Ec2,
+
     Eks,
+
     #[command(subcommand)]
     Iam(Iam),
+
+    /// Security Token Service (STS) operations
+    #[command(subcommand)]
+    Sts(Sts),
 }
 
 impl Command {
@@ -22,6 +30,7 @@ impl Command {
             Self::Ec2 => todo!(),
             Self::Eks => todo!(),
             Self::Iam(iam) => iam.dispatch(config).await?,
+            Self::Sts(sts) => sts.dispatch(config).await?,
         }
         Ok(())
     }

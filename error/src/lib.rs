@@ -5,6 +5,7 @@ use thiserror::Error;
 
 mod dynamodb;
 mod iam;
+mod sts;
 
 #[derive(Debug, Error)]
 #[error("RAWS CLI Error")]
