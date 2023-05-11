@@ -31,14 +31,14 @@ pub trait AwsError: ::std::error::Error + 'static {
 impl<E: AwsError> Diagnostic for RawsError<E> {
     fn code<'a>(&'a self) -> Option<Box<dyn std::fmt::Display + 'a>> {
         match self.source.code() {
-            Some(code) => Some(Box::new(code)),
+            Some(text) => Some(Box::new(text)),
             None => None,
         }
     }
 
     fn help<'a>(&'a self) -> Option<Box<dyn std::fmt::Display + 'a>> {
         match self.source.message() {
-            Some(code) => Some(Box::new(code)),
+            Some(text) => Some(Box::new(text)),
             None => None,
         }
     }
