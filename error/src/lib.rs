@@ -5,6 +5,7 @@ use thiserror::Error;
 
 mod dynamodb;
 mod iam;
+mod sso;
 mod sts;
 
 #[derive(Debug, Error)]

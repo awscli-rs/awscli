@@ -3,6 +3,7 @@ use serde_json as json;
 
 mod dynamo;
 mod iam;
+mod sso;
 mod sts;
 
 pub trait Show {

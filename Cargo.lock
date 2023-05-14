@@ -688,6 +688,7 @@ version = "0.0.0-alpha.3"
 dependencies = [
  "aws-sdk-dynamodb",
  "aws-sdk-iam",
+ "aws-sdk-sso",
  "aws-sdk-sts",
  "aws-smithy-types",
  "miette",
@@ -1275,6 +1276,7 @@ dependencies = [
  "dynamodb",
  "iam",
  "miette",
+ "sso",
  "sts",
  "tokio",
  "tracing",
@@ -1516,6 +1518,7 @@ version = "0.0.0-alpha.3"
 dependencies = [
  "aws-sdk-dynamodb",
  "aws-sdk-iam",
+ "aws-sdk-sso",
  "aws-sdk-sts",
  "fmtools",
  "serde",
@@ -1567,6 +1570,20 @@ name = "spin"
 version = "0.5.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6e63cff320ae2c57904679ba7cb63280a3dc4613885beafb148ee7bf9aa9042d"
+
+[[package]]
+name = "sso"
+version = "0.0.0-alpha.3"
+dependencies = [
+ "async-trait",
+ "aws-sdk-sso",
+ "clap",
+ "config",
+ "error",
+ "show",
+ "thiserror",
+ "tokio-stream",
+]
 
 [[package]]
 name = "strsim"

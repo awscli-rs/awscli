@@ -6,6 +6,7 @@ members = [
     "show",
     "services/dynamodb",
     "services/iam",
+    "services/sso",
     "services/sts",
 ]
 
@@ -24,6 +25,7 @@ aws-config = "0.55"
 aws-types = "0.55"
 aws-sdk-dynamodb = "0.27"
 aws-sdk-iam = "0.27"
+aws-sdk-sso = "0.27"
 aws-sdk-sts = "0.27"
 clap = { version = "4.2", features = ["derive", "env"] }
 miette = { version = "5.7", features = ["fancy"] }
@@ -38,4 +40,5 @@ show = { version = "0.0.0-alpha.3", path = "./show" }
 
 dynamodb = { version = "0.0.0-alpha.3", path = "./services/dynamodb" }
 iam = { version = "0.0.0-alpha.3", path = "./services/iam" }
+sso = { version = "0.0.0-alpha.3", path = "./services/sso" }
 sts = { version = "0.0.0-alpha.3", path = "./services/sts" }

@@ -1,0 +1,20 @@
+[package]
+name = "sso"
+description = "RAWS SSO component"
+
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+
+[dependencies]
+async-trait.workspace = true
+aws-sdk-sso.workspace = true
+clap.workspace = true
+tokio-stream.workspace = true
+thiserror.workspace = true
+
+config.workspace = true
+error.workspace = true
+show.workspace = true
