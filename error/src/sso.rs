@@ -12,22 +12,22 @@ impl AwsError for sso::Error {
 
     fn meta(&self) -> &ErrorMetadata {
         match self {
-            sso::Error::InvalidRequestException(e) => e.meta(),
-            sso::Error::ResourceNotFoundException(e) => e.meta(),
-            sso::Error::TooManyRequestsException(e) => e.meta(),
-            sso::Error::UnauthorizedException(e) => e.meta(),
-            sso::Error::Unhandled(e) => e.meta(),
+            Self::InvalidRequestException(e) => e.meta(),
+            Self::ResourceNotFoundException(e) => e.meta(),
+            Self::TooManyRequestsException(e) => e.meta(),
+            Self::UnauthorizedException(e) => e.meta(),
+            Self::Unhandled(e) => e.meta(),
             _ => &EMPTY_ERROR_METADATA,
         }
     }
 
     fn message(&self) -> Option<&str> {
         match self {
-            sso::Error::InvalidRequestException(e) => e.message(),
-            sso::Error::ResourceNotFoundException(e) => e.message(),
-            sso::Error::TooManyRequestsException(e) => e.message(),
-            sso::Error::UnauthorizedException(e) => e.message(),
-            sso::Error::Unhandled(e) => e.message(),
+            Self::InvalidRequestException(e) => e.message(),
+            Self::ResourceNotFoundException(e) => e.message(),
+            Self::TooManyRequestsException(e) => e.message(),
+            Self::UnauthorizedException(e) => e.message(),
+            Self::Unhandled(e) => e.message(),
             _ => None,
         }
     }

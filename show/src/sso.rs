@@ -13,3 +13,16 @@ impl Show for aws_sdk_sso::types::AccountInfo {
         format!("{self:?}")
     }
 }
+
+impl Show for aws_sdk_sso::types::RoleInfo {
+    fn text(&self) -> String {
+        let account_id = self.account_id().unwrap_or_default();
+        let role_name = self.role_name().unwrap_or_default();
+
+        fmtools::format!({account_id} " " {role_name})
+    }
+
+    fn detailed_show(&self) -> String {
+        format!("{self:?}")
+    }
+}

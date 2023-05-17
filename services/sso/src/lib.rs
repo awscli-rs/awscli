@@ -18,12 +18,14 @@ pub trait Execute {
 #[derive(Debug, Subcommand)]
 pub enum Sso {
     ListAccounts(account::ListAccounts),
+    ListAccountRoles(account::ListAccountRoles),
 }
 
 impl Sso {
     fn boxed(self) -> Box<dyn Execute> {
         match self {
             Self::ListAccounts(list_accounts) => Box::new(list_accounts),
+            Self::ListAccountRoles(list_account_roles) => Box::new(list_account_roles),
         }
     }
 
