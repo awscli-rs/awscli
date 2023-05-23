@@ -45,7 +45,9 @@ impl<T: Show> Show for Option<T> {
     }
 
     fn detailed_show(&self) -> String {
-        todo!()
+        self.as_ref()
+            .map(|item| item.detailed_show())
+            .unwrap_or_default()
     }
 }
 

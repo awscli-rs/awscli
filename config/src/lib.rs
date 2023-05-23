@@ -7,12 +7,14 @@ mod output;
 
 #[derive(Debug)]
 pub struct Config {
+    debug: bool,
     output: Output,
     shared_config: SdkConfig,
 }
 
 impl Config {
     pub async fn new(
+        debug: bool,
         profile: Option<String>,
         region: Option<String>,
         output: Option<Output>,
@@ -25,6 +27,7 @@ impl Config {
             .await;
 
         Self {
+            debug,
             output,
             shared_config,
         }
@@ -35,12 +38,16 @@ impl Config {
     }
 
     pub fn show(&self, object: Box<dyn show::Show>) {
-        let text = match self.output {
-            Output::Json => object.json(),
-            Output::Text => object.text(),
-            Output::Table => object.table(),
-            Output::Yaml => object.yaml(),
-            Output::YamlStream => object.yaml_stream(),
+        let text = if self.debug {
+            object.detailed_show()
+        } else {
+            match self.output {
+                Output::Json => object.json(),
+                Output::Text => object.text(),
+                Output::Table => object.table(),
+                Output::Yaml => object.yaml(),
+                Output::YamlStream => object.yaml_stream(),
+            }
         };
         println!("{text}");
     }

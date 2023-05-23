@@ -3,6 +3,10 @@ use super::*;
 #[derive(Debug, Parser)]
 #[command(version, about, long_about = None)]
 pub(crate) struct Cli {
+    /// Debug data representation
+    #[arg(long, global = true)]
+    debug: bool,
+
     /// Use a specific profile from your credential file.
     #[arg(long, global = true)]
     profile: Option<String>,
@@ -21,7 +25,7 @@ pub(crate) struct Cli {
 
 impl Cli {
     pub(crate) async fn execute(self) -> miette::Result<()> {
-        let config = config::Config::new(self.profile, self.region, self.output).await;
+        let config = config::Config::new(self.debug, self.profile, self.region, self.output).await;
         self.command.dispatch(config).await
     }
 }
