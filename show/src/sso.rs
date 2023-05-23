@@ -26,3 +26,23 @@ impl Show for aws_sdk_sso::types::RoleInfo {
         format!("{self:?}")
     }
 }
+
+impl Show for aws_sdk_sso::types::RoleCredentials {
+    fn text(&self) -> String {
+        let access_key_id = self.access_key_id().unwrap_or_default();
+        let secret_access_key = self.secret_access_key().unwrap_or_default();
+        let session_token = self.session_token().unwrap_or_default();
+        let expiration = self.expiration();
+
+        fmtools::format!(
+            "ACCESS_KEY_ID " {access_key_id} "\n"
+            "SECRET_ACCESS_KEY " {secret_access_key} "\n"
+            "SESSION_TOKEN "{session_token} "\n"
+            "EXPIRATION " {expiration}
+        )
+    }
+
+    fn detailed_show(&self) -> String {
+        format!("{self:#?}")
+    }
+}

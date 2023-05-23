@@ -6,6 +6,7 @@ use config::Config;
 use error::RawsError;
 
 mod account;
+mod role;
 
 type SsoResult<T = Box<dyn show::Show>> = std::result::Result<T, sso::Error>;
 
@@ -19,6 +20,7 @@ pub trait Execute {
 pub enum Sso {
     ListAccounts(account::ListAccounts),
     ListAccountRoles(account::ListAccountRoles),
+    GetRoleCredentials(role::GetRoleCredentials),
 }
 
 impl Sso {
@@ -26,6 +28,7 @@ impl Sso {
         match self {
             Self::ListAccounts(list_accounts) => Box::new(list_accounts),
             Self::ListAccountRoles(list_account_roles) => Box::new(list_account_roles),
+            Self::GetRoleCredentials(get_role_credentials) => Box::new(get_role_credentials),
         }
     }
 
