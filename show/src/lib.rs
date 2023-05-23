@@ -35,7 +35,8 @@ impl<T: Show> Show for Vec<T> {
     }
 
     fn debug(&self) -> String {
-        todo!()
+        let items = self.iter().map(|item| item.debug());
+        fmtools::join("\n", items).to_string()
     }
 }
 
