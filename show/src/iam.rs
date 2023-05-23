@@ -7,7 +7,7 @@ impl Show for aws_sdk_iam::types::User {
         format!("{username} {userid}")
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         format!("{self:?}")
     }
 }

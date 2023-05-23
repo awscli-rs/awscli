@@ -12,7 +12,7 @@ impl Show for aws_sdk_sts::operation::get_access_key_info::GetAccessKeyInfoOutpu
         fmtools::format!({ account.account })
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         todo!()
     }
 

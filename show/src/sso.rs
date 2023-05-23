@@ -9,7 +9,7 @@ impl Show for aws_sdk_sso::types::AccountInfo {
         fmtools::format!({account_id} " " {account_name} " " {email_address})
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         format!("{self:?}")
     }
 }
@@ -22,7 +22,7 @@ impl Show for aws_sdk_sso::types::RoleInfo {
         fmtools::format!({account_id} " " {role_name})
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         format!("{self:?}")
     }
 }
@@ -42,7 +42,7 @@ impl Show for aws_sdk_sso::types::RoleCredentials {
         )
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         format!("{self:#?}")
     }
 }

@@ -19,7 +19,7 @@ impl Show for aws_sdk_sts::operation::get_caller_identity::GetCallerIdentityOutp
         json::to_string_pretty(&identity).unwrap_or_default()
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         format!("{self:?}")
     }
 }

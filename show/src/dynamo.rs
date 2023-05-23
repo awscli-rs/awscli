@@ -7,7 +7,7 @@ impl Show for aws_sdk_dynamodb::types::TableDescription {
         format!("{tablename} {tableid}")
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         format!("{self:?}")
     }
 }

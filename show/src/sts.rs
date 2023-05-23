@@ -12,7 +12,7 @@ impl Show for aws_sdk_sts::operation::assume_role::AssumeRoleOutput {
         }
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         format!("{self:?}")
     }
 }
@@ -26,7 +26,7 @@ impl Show for aws_sdk_sts::types::Credentials {
         format!("{access_key_id} {secret_access_key} {session_token} {expiration:?}")
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         format!("{self:?}")
     }
 }

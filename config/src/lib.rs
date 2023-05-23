@@ -39,7 +39,7 @@ impl Config {
 
     pub fn show(&self, object: Box<dyn show::Show>) {
         let text = if self.debug {
-            object.detailed_show()
+            object.debug()
         } else {
             match self.output {
                 Output::Json => object.json(),

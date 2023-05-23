@@ -9,7 +9,7 @@ mod sts;
 pub trait Show {
     fn text(&self) -> String;
 
-    fn detailed_show(&self) -> String;
+    fn debug(&self) -> String;
 
     fn json(&self) -> String {
         "JSON view is not implemented yet".to_string()
@@ -34,7 +34,7 @@ impl<T: Show> Show for Vec<T> {
         fmtools::join("\n", items).to_string()
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         todo!()
     }
 }
@@ -44,10 +44,8 @@ impl<T: Show> Show for Option<T> {
         self.as_ref().map(|item| item.text()).unwrap_or_default()
     }
 
-    fn detailed_show(&self) -> String {
-        self.as_ref()
-            .map(|item| item.detailed_show())
-            .unwrap_or_default()
+    fn debug(&self) -> String {
+        self.as_ref().map(|item| item.debug()).unwrap_or_default()
     }
 }
 
@@ -56,7 +54,7 @@ impl Show for () {
         String::new()
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         String::new()
     }
 }
@@ -66,7 +64,7 @@ impl Show for String {
         self.clone()
     }
 
-    fn detailed_show(&self) -> String {
+    fn debug(&self) -> String {
         self.clone()
     }
 }
