@@ -21,13 +21,10 @@ impl Execute for ListAccountRoles {
             .access_token(self.access_token)
             .account_id(self.account_id)
             .into_paginator()
+            .items()
             .send()
             .collect::<Result<Vec<_>, _>>()
-            .await?
-            .into_iter()
-            .filter_map(|output| output.role_list)
-            .flatten()
-            .collect::<Vec<_>>();
+            .await?;
 
         Ok(Box::new(account_roles))
     }
