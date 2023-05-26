@@ -587,7 +587,7 @@ checksum = "acbf1af155f9b9ef647e42cdc158db4b64a1b61f743629225fde6f3e0be2a7c7"
 
 [[package]]
 name = "config"
-version = "0.0.0-alpha.3"
+version = "0.0.0-alpha.4"
 dependencies = [
  "aws-config",
  "aws-types",
@@ -643,7 +643,7 @@ dependencies = [
 
 [[package]]
 name = "dynamodb"
-version = "0.0.0-alpha.3"
+version = "0.0.0-alpha.4"
 dependencies = [
  "async-trait",
  "aws-sdk-dynamodb",
@@ -684,7 +684,7 @@ dependencies = [
 
 [[package]]
 name = "error"
-version = "0.0.0-alpha.3"
+version = "0.0.0-alpha.4"
 dependencies = [
  "aws-sdk-dynamodb",
  "aws-sdk-iam",
@@ -930,7 +930,7 @@ dependencies = [
 
 [[package]]
 name = "iam"
-version = "0.0.0-alpha.3"
+version = "0.0.0-alpha.4"
 dependencies = [
  "async-trait",
  "aws-sdk-iam",
@@ -1269,7 +1269,7 @@ dependencies = [
 
 [[package]]
 name = "raws"
-version = "0.0.0-alpha.3"
+version = "0.0.0-alpha.4"
 dependencies = [
  "clap",
  "config",
@@ -1514,7 +1514,7 @@ dependencies = [
 
 [[package]]
 name = "show"
-version = "0.0.0-alpha.3"
+version = "0.0.0-alpha.4"
 dependencies = [
  "aws-sdk-dynamodb",
  "aws-sdk-iam",
@@ -1573,7 +1573,7 @@ checksum = "6e63cff320ae2c57904679ba7cb63280a3dc4613885beafb148ee7bf9aa9042d"
 
 [[package]]
 name = "sso"
-version = "0.0.0-alpha.3"
+version = "0.0.0-alpha.4"
 dependencies = [
  "async-trait",
  "aws-sdk-sso",
@@ -1593,7 +1593,7 @@ checksum = "73473c0e59e6d5812c5dfe2a064a6444949f089e20eec9a2e5506596494e4623"
 
 [[package]]
 name = "sts"
-version = "0.0.0-alpha.3"
+version = "0.0.0-alpha.4"
 dependencies = [
  "async-trait",
  "aws-sdk-sts",
