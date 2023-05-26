@@ -6,7 +6,7 @@ test:
     cargo test --workspace -Zlints
 alias c:=clippy
 clippy:
-    cargo clippy --workspace --all-targets  -Zlints
+    cargo clippy --workspace --all-targets -Zlints
 clean:
     cargo clean
 update:
