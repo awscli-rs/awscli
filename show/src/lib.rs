@@ -1,3 +1,5 @@
+use std::fmt;
+
 use serde::Serialize;
 use serde_json as json;
 

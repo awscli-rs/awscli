@@ -10,8 +10,7 @@ struct CallerIdentity {
 
 impl Show for aws_sdk_sts::operation::get_caller_identity::GetCallerIdentityOutput {
     fn text(&self) -> String {
-        let identity = CallerIdentity::from(self);
-        fmtools::format!({identity.account} " " {identity.user_id} " " {identity.arn})
+        fmtools::format!({ CallerIdentity::from(self) })
     }
 
     fn json(&self) -> String {
@@ -21,6 +20,12 @@ impl Show for aws_sdk_sts::operation::get_caller_identity::GetCallerIdentityOutp
 
     fn debug(&self) -> String {
         format!("{self:?}")
+    }
+}
+
+impl fmt::Display for CallerIdentity {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        format_args!("{} {} {}", self.account, self.user_id, self.arn).fmt(f)
     }
 }
 

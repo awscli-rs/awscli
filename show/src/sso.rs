@@ -6,7 +6,11 @@ impl Show for aws_sdk_sso::types::AccountInfo {
         let account_name = self.account_name().unwrap_or_default();
         let email_address = self.email_address().unwrap_or_default();
 
-        fmtools::format!({account_id} " " {account_name} " " {email_address})
+        fmtools::format!(
+            "ACCOUNT_ID " {account_id} "\n"
+            "ACCOUNT_NAME " {account_name} "\n"
+            "EMAIL " {email_address}
+        )
     }
 
     fn debug(&self) -> String {
@@ -19,7 +23,10 @@ impl Show for aws_sdk_sso::types::RoleInfo {
         let account_id = self.account_id().unwrap_or_default();
         let role_name = self.role_name().unwrap_or_default();
 
-        fmtools::format!({account_id} " " {role_name})
+        fmtools::format!(
+            "ACCOUNT_ID " {account_id} "\n"
+            "ROLE_NAME " {role_name}
+        )
     }
 
     fn debug(&self) -> String {
