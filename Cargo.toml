@@ -42,3 +42,23 @@ dynamodb = { version = "0.0.0-alpha.3", path = "./services/dynamodb" }
 iam = { version = "0.0.0-alpha.3", path = "./services/iam" }
 sso = { version = "0.0.0-alpha.3", path = "./services/sso" }
 sts = { version = "0.0.0-alpha.3", path = "./services/sts" }
+
+
+[workspace.lints.clippy]
+use_self = "warn"
+map_flatten = "warn"
+map_unwrap_or = "warn"
+
+
+[workspace.lints.rust]
+deprecated_in_future = "warn"
+future_incompatible = "warn"
+noop_method_call = "warn"
+unreachable_pub = "warn"
+missing_debug_implementations = "warn"
+rust_2018_compatibility = "warn"
+rust_2021_compatibility = "warn"
+rust_2018_idioms = "warn"
+trivial_casts = "warn"
+unused = "warn"
+warnings = "deny"

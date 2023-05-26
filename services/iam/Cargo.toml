@@ -18,3 +18,7 @@ thiserror.workspace = true
 config.workspace = true
 error.workspace = true
 show.workspace = true
+
+
+[lints]
+workspace = true

@@ -23,3 +23,7 @@ dynamodb.workspace = true
 iam.workspace = true
 sso.workspace = true
 sts.workspace = true
+
+
+[lints]
+workspace = true
