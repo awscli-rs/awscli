@@ -1,5 +1,6 @@
 use config::Config;
 use dynamodb::DynamoDb;
+use eks::Eks;
 use iam::Iam;
 use sso::Sso;
 use sts::Sts;
@@ -14,7 +15,8 @@ pub(crate) enum Command {
 
     Ec2,
 
-    Eks,
+    #[command(subcommand)]
+    Eks(Eks),
 
     #[command(subcommand)]
     Iam(Iam),
@@ -32,7 +34,7 @@ impl Command {
         match self {
             Self::Dynamodb(dynamo) => dynamo.dispatch(config).await?,
             Self::Ec2 => todo!(),
-            Self::Eks => todo!(),
+            Self::Eks(eks) => eks.dispatch(config).await?,
             Self::Iam(iam) => iam.dispatch(config).await?,
             Self::Sso(sso) => sso.dispatch(config).await?,
             Self::Sts(sts) => sts.dispatch(config).await?,

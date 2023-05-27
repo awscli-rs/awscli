@@ -4,6 +4,7 @@ use miette::Diagnostic;
 use thiserror::Error;
 
 mod dynamodb;
+mod eks;
 mod iam;
 mod sso;
 mod sts;

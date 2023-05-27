@@ -1,0 +1,26 @@
+[package]
+name = "eks"
+description = "RAWS EKS component"
+
+authors.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+
+[dependencies]
+async-trait.workspace = true
+aws-sdk-eks.workspace = true
+clap.workspace = true
+tokio-stream.workspace = true
+thiserror.workspace = true
+
+config.workspace = true
+error.workspace = true
+parsers.workspace = true
+show.workspace = true
+
+
+[lints]
+workspace = true

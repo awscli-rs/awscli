@@ -207,6 +207,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "aws-sdk-eks"
+version = "0.28.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "11d42a83686679e8ce87f4b154ec4fa184c0b28ef24551a58a9c88fd88758e80"
+dependencies = [
+ "aws-credential-types",
+ "aws-endpoint",
+ "aws-http",
+ "aws-sig-auth",
+ "aws-smithy-async",
+ "aws-smithy-client",
+ "aws-smithy-http",
+ "aws-smithy-http-tower",
+ "aws-smithy-json",
+ "aws-smithy-types",
+ "aws-types",
+ "bytes",
+ "fastrand",
+ "http",
+ "regex",
+ "tokio-stream",
+ "tower",
+ "tracing",
+]
+
+[[package]]
 name = "aws-sdk-iam"
 version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -662,6 +688,21 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "7fcaabb2fef8c910e7f4c7ce9f67a1283a1715879a7c230ca9d6d1ae31f16d91"
 
 [[package]]
+name = "eks"
+version = "0.0.0-alpha.4"
+dependencies = [
+ "async-trait",
+ "aws-sdk-eks",
+ "clap",
+ "config",
+ "error",
+ "parsers",
+ "show",
+ "thiserror",
+ "tokio-stream",
+]
+
+[[package]]
 name = "errno"
 version = "0.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -687,6 +728,7 @@ name = "error"
 version = "0.0.0-alpha.4"
 dependencies = [
  "aws-sdk-dynamodb",
+ "aws-sdk-eks",
  "aws-sdk-iam",
  "aws-sdk-sso",
  "aws-sdk-sts",
@@ -991,6 +1033,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "616cde7c720bb2bb5824a224687d8f77bfd38922027f01d825cd7453be5099fb"
 
 [[package]]
+name = "itertools"
+version = "0.10.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b0fd2260e829bddf4cb6ea802289de2f86d6a7a690192fbe91b3f46e0f2c8473"
+dependencies = [
+ "either",
+]
+
+[[package]]
 name = "itoa"
 version = "1.0.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1212,6 +1263,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "parsers"
+version = "0.0.0-alpha.4"
+dependencies = [
+ "aws-sdk-eks",
+ "clap",
+ "itertools",
+ "thiserror",
+]
+
+[[package]]
 name = "percent-encoding"
 version = "2.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1274,6 +1335,7 @@ dependencies = [
  "clap",
  "config",
  "dynamodb",
+ "eks",
  "iam",
  "miette",
  "sso",
@@ -1517,6 +1579,7 @@ name = "show"
 version = "0.0.0-alpha.4"
 dependencies = [
  "aws-sdk-dynamodb",
+ "aws-sdk-eks",
  "aws-sdk-iam",
  "aws-sdk-sso",
  "aws-sdk-sts",
@@ -1641,9 +1704,9 @@ dependencies = [
 
 [[package]]
 name = "syn"
-version = "2.0.17"
+version = "2.0.18"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "45b6ddbb36c5b969c182aec3c4a0bce7df3fbad4b77114706a49aacc80567388"
+checksum = "32d41677bcbe24c20c52e7c70b0d8db04134c5d1066bf98662e2871ad200ea3e"
 dependencies = [
  "proc-macro2",
  "quote",

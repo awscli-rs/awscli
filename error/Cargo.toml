@@ -15,6 +15,7 @@ miette.workspace = true
 
 aws-smithy-types.workspace = true
 aws-sdk-dynamodb.workspace = true
+aws-sdk-eks.workspace = true
 aws-sdk-iam.workspace = true
 aws-sdk-sso.workspace = true
 aws-sdk-sts.workspace = true
