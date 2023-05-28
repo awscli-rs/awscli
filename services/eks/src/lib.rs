@@ -17,12 +17,14 @@ pub trait Execute {
 #[derive(Debug, Subcommand)]
 pub enum Eks {
     CreateCluster(cluster::CreateCluster),
+    DeleteCluster(cluster::DeleteCluster),
 }
 
 impl Eks {
     fn boxed(self) -> Box<dyn Execute> {
         match self {
             Self::CreateCluster(create_cluster) => Box::new(create_cluster),
+            Self::DeleteCluster(delete_cluster) => Box::new(delete_cluster),
         }
     }
 
