@@ -18,6 +18,7 @@ thiserror.workspace = true
 
 config.workspace = true
 error.workspace = true
+parsers.workspace = true
 show.workspace = true
 
 
