@@ -5,6 +5,7 @@ use clap::{Args, Subcommand};
 use config::Config;
 use error::RawsError;
 
+mod addon;
 mod cluster;
 mod update;
 
@@ -23,6 +24,8 @@ pub enum Eks {
     DescribeCluster(cluster::DescribeCluster),
     ListUpdates(update::ListUpdates),
     DescribeUpdate(update::DescribeUpdate),
+    ListAddons(addon::ListAddons),
+    DescribeAddon(addon::DescribeAddon),
 }
 
 impl Eks {
@@ -34,6 +37,8 @@ impl Eks {
             Self::DescribeCluster(describe_cluster) => Box::new(describe_cluster),
             Self::ListUpdates(list_updates) => Box::new(list_updates),
             Self::DescribeUpdate(describe_update) => Box::new(describe_update),
+            Self::ListAddons(list_addons) => Box::new(list_addons),
+            Self::DescribeAddon(describe_addon) => Box::new(describe_addon),
         }
     }
 
