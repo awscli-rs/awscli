@@ -11,13 +11,11 @@ impl Execute for ListTables {
         let tables = client
             .list_tables()
             .into_paginator()
+            .items()
             .send()
             .collect::<Result<Vec<_>, _>>()
-            .await?
-            .into_iter()
-            .filter_map(|output| output.table_names)
-            .flatten()
-            .collect::<Vec<_>>();
+            .await?;
+
         Ok(Box::new(tables))
     }
 }

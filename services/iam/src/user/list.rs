@@ -11,13 +11,10 @@ impl Execute for ListUsers {
         let users = client
             .list_users()
             .into_paginator()
+            .items()
             .send()
             .collect::<Result<Vec<_>, _>>()
-            .await?
-            .into_iter()
-            .filter_map(|output| output.users)
-            .flatten()
-            .collect::<Vec<_>>();
+            .await?;
         Ok(Box::new(users))
     }
 }
