@@ -6,6 +6,7 @@ use config::Config;
 use error::RawsError;
 
 mod cluster;
+mod update;
 
 type EksResult<T = Box<dyn show::Show>> = std::result::Result<T, eks::Error>;
 
@@ -20,6 +21,8 @@ pub enum Eks {
     DeleteCluster(cluster::DeleteCluster),
     ListClusters(cluster::ListClusters),
     DescribeCluster(cluster::DescribeCluster),
+    ListUpdates(update::ListUpdates),
+    DescribeUpdate(update::DescribeUpdate),
 }
 
 impl Eks {
@@ -29,6 +32,8 @@ impl Eks {
             Self::DeleteCluster(delete_cluster) => Box::new(delete_cluster),
             Self::ListClusters(list_cluster) => Box::new(list_cluster),
             Self::DescribeCluster(describe_cluster) => Box::new(describe_cluster),
+            Self::ListUpdates(list_updates) => Box::new(list_updates),
+            Self::DescribeUpdate(describe_update) => Box::new(describe_update),
         }
     }
 
