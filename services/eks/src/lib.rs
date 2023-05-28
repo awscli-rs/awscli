@@ -18,6 +18,7 @@ pub trait Execute {
 pub enum Eks {
     CreateCluster(cluster::CreateCluster),
     DeleteCluster(cluster::DeleteCluster),
+    ListClusters(cluster::ListClusters),
 }
 
 impl Eks {
@@ -25,6 +26,7 @@ impl Eks {
         match self {
             Self::CreateCluster(create_cluster) => Box::new(create_cluster),
             Self::DeleteCluster(delete_cluster) => Box::new(delete_cluster),
+            Self::ListClusters(list_cluster) => Box::new(list_cluster),
         }
     }
 
