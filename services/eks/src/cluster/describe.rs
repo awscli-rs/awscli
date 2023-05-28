@@ -1,18 +1,18 @@
 use super::*;
 
-/// Deletes the Amazon EKS cluster control plane.
+/// Returns descriptive information about an Amazon EKS cluster.
 #[derive(Debug, Args)]
-pub struct DeleteCluster {
-    /// The name of the cluster to delete.
+pub struct DescribeCluster {
+    /// The name of the cluster to describe.
     #[arg(long)]
     name: String,
 }
 
 #[async_trait]
-impl Execute for DeleteCluster {
+impl Execute for DescribeCluster {
     async fn execute(self: Box<Self>, client: eks::Client) -> EksResult {
         let cluster = client
-            .delete_cluster()
+            .describe_cluster()
             .name(self.name)
             .send()
             .await?
