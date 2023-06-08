@@ -17,10 +17,6 @@ impl Show for aws_sdk_sts::operation::get_caller_identity::GetCallerIdentityOutp
         let identity = CallerIdentity::from(self);
         json::to_string_pretty(&identity).unwrap_or_default()
     }
-
-    fn debug(&self) -> String {
-        format!("{self:?}")
-    }
 }
 
 impl fmt::Display for CallerIdentity {

@@ -14,3 +14,15 @@ pub enum Output {
     /// Multiple YAML documents (machine readable)
     YamlStream,
 }
+
+impl Output {
+    pub fn output(&self, object: Box<dyn show::Show>) -> String {
+        match self {
+            Self::Json => object.json(),
+            Self::Text => object.text(),
+            Self::Table => object.table(),
+            Self::Yaml => object.yaml(),
+            Self::YamlStream => object.yaml_stream(),
+        }
+    }
+}

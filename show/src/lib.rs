@@ -9,10 +9,12 @@ mod iam;
 mod sso;
 mod sts;
 
-pub trait Show {
+pub trait Show: fmt::Debug {
     fn text(&self) -> String;
 
-    fn debug(&self) -> String;
+    fn debug(&self) -> String {
+        fmtools::format!({self:?})
+    }
 
     fn json(&self) -> String {
         "JSON view is not implemented yet".to_string()
@@ -65,10 +67,6 @@ impl Show for () {
 
 impl Show for String {
     fn text(&self) -> String {
-        self.clone()
-    }
-
-    fn debug(&self) -> String {
         self.clone()
     }
 }

@@ -41,15 +41,9 @@ impl Config {
         let text = if self.debug {
             object.debug()
         } else {
-            match self.output {
-                Output::Json => object.json(),
-                Output::Text => object.text(),
-                Output::Table => object.table(),
-                Output::Yaml => object.yaml(),
-                Output::YamlStream => object.yaml_stream(),
-            }
+            self.output.output(object)
         };
-        println!("{text}");
+        fmtools::println!({ text });
     }
 }
 

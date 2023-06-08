@@ -7,10 +7,6 @@ impl Show for aws_sdk_sts::operation::assume_role::AssumeRoleOutput {
     fn text(&self) -> String {
         self.credentials().text()
     }
-
-    fn debug(&self) -> String {
-        format!("{self:?}")
-    }
 }
 
 impl Show for aws_sdk_sts::types::Credentials {
@@ -23,10 +19,6 @@ impl Show for aws_sdk_sts::types::Credentials {
             {access_key_id} " " {secret_access_key} " " {session_token} " " {expiration:?}
         )
     }
-
-    fn debug(&self) -> String {
-        format!("{self:?}")
-    }
 }
 
 impl Show for &aws_sdk_sts::types::Credentials {
@@ -38,9 +30,5 @@ impl Show for &aws_sdk_sts::types::Credentials {
         fmtools::format!(
             {access_key_id} " " {secret_access_key} " " {session_token} " " {expiration:?}
         )
-    }
-
-    fn debug(&self) -> String {
-        format!("{self:?}")
     }
 }

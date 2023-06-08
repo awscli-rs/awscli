@@ -618,6 +618,7 @@ dependencies = [
  "aws-config",
  "aws-types",
  "clap",
+ "fmtools",
  "show",
 ]
 

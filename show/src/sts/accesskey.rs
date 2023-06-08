@@ -12,10 +12,6 @@ impl Show for aws_sdk_sts::operation::get_access_key_info::GetAccessKeyInfoOutpu
         fmtools::format!({ account.account })
     }
 
-    fn debug(&self) -> String {
-        todo!()
-    }
-
     fn json(&self) -> String {
         let account = Account::from(self);
         json::to_string_pretty(&account).unwrap_or_default()

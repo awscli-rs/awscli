@@ -33,6 +33,7 @@ aws-sdk-iam = "0.28"
 aws-sdk-sso = "0.28"
 aws-sdk-sts = "0.28"
 clap = { version = "4.2", features = ["derive", "env"] }
+fmtools = "0.1"
 miette = { version = "5.7", features = ["fancy"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"

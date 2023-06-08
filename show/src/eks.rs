@@ -9,10 +9,6 @@ impl Show for aws_sdk_eks::types::Cluster {
             {name} " " {version}
         )
     }
-
-    fn debug(&self) -> String {
-        format!("{self:?}")
-    }
 }
 
 impl Show for aws_sdk_eks::types::Update {
@@ -35,10 +31,6 @@ impl Show for aws_sdk_eks::types::Update {
             "params " {params:?}
         )
     }
-
-    fn debug(&self) -> String {
-        format!("{self:?}")
-    }
 }
 
 impl Show for aws_sdk_eks::types::Addon {
@@ -57,9 +49,5 @@ impl Show for aws_sdk_eks::types::Addon {
             "version " {version} "\n"
             "arn " {arn}
         )
-    }
-
-    fn debug(&self) -> String {
-        format!("{self:#?}")
     }
 }

@@ -12,10 +12,6 @@ impl Show for aws_sdk_sso::types::AccountInfo {
             "EMAIL " {email_address}
         )
     }
-
-    fn debug(&self) -> String {
-        format!("{self:?}")
-    }
 }
 
 impl Show for aws_sdk_sso::types::RoleInfo {
@@ -27,10 +23,6 @@ impl Show for aws_sdk_sso::types::RoleInfo {
             "ACCOUNT_ID " {account_id} "\n"
             "ROLE_NAME " {role_name}
         )
-    }
-
-    fn debug(&self) -> String {
-        format!("{self:?}")
     }
 }
 
@@ -47,9 +39,5 @@ impl Show for aws_sdk_sso::types::RoleCredentials {
             "SESSION_TOKEN "{session_token} "\n"
             "EXPIRATION " {expiration}
         )
-    }
-
-    fn debug(&self) -> String {
-        format!("{self:#?}")
     }
 }

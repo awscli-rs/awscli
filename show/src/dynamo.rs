@@ -6,8 +6,4 @@ impl Show for aws_sdk_dynamodb::types::TableDescription {
         let tableid = self.table_id().unwrap_or_default();
         fmtools::format!({tablename} " " {tableid})
     }
-
-    fn debug(&self) -> String {
-        format!("{self:?}")
-    }
 }

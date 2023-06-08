@@ -8,8 +8,4 @@ impl Show for aws_sdk_iam::types::User {
             {username} " " {userid}
         )
     }
-
-    fn debug(&self) -> String {
-        format!("{self:?}")
-    }
 }
