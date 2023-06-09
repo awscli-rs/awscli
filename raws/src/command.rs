@@ -1,3 +1,4 @@
+use account::Account;
 use config::Config;
 use dynamodb::DynamoDb;
 use eks::Eks;
@@ -9,6 +10,9 @@ use super::*;
 
 #[derive(Debug, Subcommand)]
 pub(crate) enum Command {
+    #[command(subcommand)]
+    Account(Account),
+
     /// DynamoDB operations
     #[command(subcommand)]
     Dynamodb(DynamoDb),
@@ -32,6 +36,7 @@ pub(crate) enum Command {
 impl Command {
     pub(crate) async fn dispatch(self, config: Config) -> miette::Result<()> {
         match self {
+            Self::Account(account) => account.dispatch(config).await?,
             Self::Dynamodb(dynamo) => dynamo.dispatch(config).await?,
             Self::Ec2 => todo!(),
             Self::Eks(eks) => eks.dispatch(config).await?,

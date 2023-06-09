@@ -3,6 +3,7 @@ use aws_smithy_types::error::ErrorMetadata;
 use miette::Diagnostic;
 use thiserror::Error;
 
+mod account;
 mod dynamodb;
 mod eks;
 mod iam;

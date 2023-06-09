@@ -3,6 +3,21 @@
 version = 3
 
 [[package]]
+name = "account"
+version = "0.0.0-alpha.4"
+dependencies = [
+ "async-trait",
+ "aws-sdk-account",
+ "clap",
+ "config",
+ "error",
+ "parsers",
+ "show",
+ "thiserror",
+ "tokio-stream",
+]
+
+[[package]]
 name = "addr2line"
 version = "0.19.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -177,6 +192,31 @@ dependencies = [
  "lazy_static",
  "percent-encoding",
  "pin-project-lite",
+ "tracing",
+]
+
+[[package]]
+name = "aws-sdk-account"
+version = "0.28.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ee36647ebeb0fca306ec9368bbae3ddd2ea2d518e331f08249ab9e4dc5980b6e"
+dependencies = [
+ "aws-credential-types",
+ "aws-endpoint",
+ "aws-http",
+ "aws-sig-auth",
+ "aws-smithy-async",
+ "aws-smithy-client",
+ "aws-smithy-http",
+ "aws-smithy-http-tower",
+ "aws-smithy-json",
+ "aws-smithy-types",
+ "aws-types",
+ "bytes",
+ "http",
+ "regex",
+ "tokio-stream",
+ "tower",
  "tracing",
 ]
 
@@ -729,6 +769,7 @@ dependencies = [
 name = "error"
 version = "0.0.0-alpha.4"
 dependencies = [
+ "aws-sdk-account",
  "aws-sdk-dynamodb",
  "aws-sdk-eks",
  "aws-sdk-iam",
@@ -1332,6 +1373,7 @@ dependencies = [
 name = "raws"
 version = "0.0.0-alpha.4"
 dependencies = [
+ "account",
  "clap",
  "config",
  "dynamodb",
@@ -1578,6 +1620,7 @@ dependencies = [
 name = "show"
 version = "0.0.0-alpha.4"
 dependencies = [
+ "aws-sdk-account",
  "aws-sdk-dynamodb",
  "aws-sdk-eks",
  "aws-sdk-iam",

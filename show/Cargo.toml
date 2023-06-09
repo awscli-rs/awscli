@@ -10,6 +10,7 @@ repository.workspace = true
 
 
 [dependencies]
+aws-sdk-account.workspace = true
 aws-sdk-dynamodb.workspace = true
 aws-sdk-eks.workspace = true
 aws-sdk-iam.workspace = true

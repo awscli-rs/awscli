@@ -3,6 +3,7 @@ use std::fmt;
 use serde::Serialize;
 use serde_json as json;
 
+mod account;
 mod dynamo;
 mod eks;
 mod iam;
