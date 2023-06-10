@@ -13,7 +13,6 @@ pub(crate) enum Command {
     #[command(subcommand)]
     Account(Account),
 
-    /// DynamoDB operations
     #[command(subcommand)]
     Dynamodb(DynamoDb),
 
