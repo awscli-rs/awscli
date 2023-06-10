@@ -6,6 +6,7 @@ use clap::{Args, Subcommand};
 use config::Config;
 use error::RawsError;
 
+mod contact;
 mod region;
 
 type AccountResult<T = Box<dyn show::Show>> = std::result::Result<T, aws_sdk_account::Error>;
@@ -22,6 +23,11 @@ pub enum Account {
     DisableRegion(region::DisableRegion),
     ListRegions(region::ListRegions),
     GetRegionOptStatus(region::GetRegionOptStatus),
+    GetAlternateContact(contact::GetAlternateContact),
+    DeleteAlternateContact(contact::DeleteAlternateContact),
+    PutAlternateContact(contact::PutAlternateContact),
+    GetContactInformation(contact::GetContactInformation),
+    PutContactInformation(contact::PutContactInformation),
 }
 
 impl Account {
@@ -31,6 +37,17 @@ impl Account {
             Self::DisableRegion(disable_region) => Box::new(disable_region),
             Self::ListRegions(list_regions) => Box::new(list_regions),
             Self::GetRegionOptStatus(status) => Box::new(status),
+            Self::GetAlternateContact(get_alternate_contact) => Box::new(get_alternate_contact),
+            Self::DeleteAlternateContact(delete_alternate_contact) => {
+                Box::new(delete_alternate_contact)
+            }
+            Self::PutAlternateContact(put_alternate_contact) => Box::new(put_alternate_contact),
+            Self::GetContactInformation(get_contact_information) => {
+                Box::new(get_contact_information)
+            }
+            Self::PutContactInformation(put_contact_information) => {
+                Box::new(put_contact_information)
+            }
         }
     }
 

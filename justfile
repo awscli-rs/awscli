@@ -4,7 +4,7 @@ build:
 alias t := test
 test:
     cargo test --workspace -Zlints
-run *ARGS:
+raws *ARGS:
     cargo run -Zlints {{ARGS}}
 alias c:=clippy
 clippy:

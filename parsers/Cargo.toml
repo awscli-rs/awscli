@@ -12,6 +12,7 @@ repository.workspace = true
 [dependencies]
 itertools = "0.10"
 
+aws-sdk-account.workspace = true
 aws-sdk-dynamodb.workspace = true
 aws-sdk-eks.workspace = true
 clap.workspace = true
