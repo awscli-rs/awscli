@@ -1,3 +1,4 @@
+use aws_sdk_account::types::builders::ContactInformationBuilder;
 use aws_sdk_account::types::ContactInformation;
 
 use super::*;
@@ -19,11 +20,11 @@ const WEBSITE_URL: &str = "WebsiteUrl";
 // CompanyName=string,CountryCode=string,DistrictOrCounty=string,FullName=string,
 // PhoneNumber=string,PostalCode=string,StateOrRegion=string,WebsiteUrl=string
 
-pub fn contact_information(text: &str) -> Result<ContactInformation, InvalidConfigInformation> {
+pub fn contact_information(text: &str) -> Result<ContactInformation, InvalidContactInformation> {
     json::from_str::<json::Value>(text).map_or_else(|_| from_text(text), from_json)
 }
 
-fn from_json(value: json::Value) -> Result<ContactInformation, InvalidConfigInformation> {
+fn from_json(value: json::Value) -> Result<ContactInformation, InvalidContactInformation> {
     let address_line1 = get_string_item(&value, ADDRESS_LINE1);
     let address_line2 = get_string_item(&value, ADDRESS_LINE2);
     let address_line3 = get_string_item(&value, ADDRESS_LINE3);
@@ -59,22 +60,42 @@ fn get_string_item(value: &json::Value, item: &str) -> Option<String> {
     value[item].as_str().map(ToString::to_string)
 }
 
-fn from_text(text: &str) -> Result<ContactInformation, InvalidConfigInformation> {
-    let value = text
-        .split(',')
+fn from_text(text: &str) -> Result<ContactInformation, InvalidContactInformation> {
+    text.split(',')
         .filter_map(|item| item.split_once('='))
-        .collect::<json::Value>();
-    from_json(value)
+        .try_fold(ContactInformation::builder(), builder_item)
+        .map(|builder| builder.build())
+}
+
+fn builder_item(
+    builder: ContactInformationBuilder,
+    (key, value): (&str, &str),
+) -> Result<ContactInformationBuilder, InvalidContactInformation> {
+    match key {
+        ADDRESS_LINE1 => Ok(builder.address_line1(value)),
+        ADDRESS_LINE2 => Ok(builder.address_line2(value)),
+        ADDRESS_LINE3 => Ok(builder.address_line3(value)),
+        CITY => Ok(builder.city(value)),
+        COMPANY_NAME => Ok(builder.company_name(value)),
+        COUNTRY_CODE => Ok(builder.country_code(value)),
+        DISTRICT_OR_COUNTY => Ok(builder.district_or_county(value)),
+        FULL_NAME => Ok(builder.full_name(value)),
+        PHONE_NUMBER => Ok(builder.phone_number(value)),
+        POSTAL_CODE => Ok(builder.postal_code(value)),
+        STATE_OR_REGION => Ok(builder.state_or_region(value)),
+        WEBSITE_URL => Ok(builder.website_url(value)),
+        other => Err(InvalidContactInformation::unknown(other)),
+    }
 }
 
 #[derive(Clone, Debug, PartialEq, thiserror::Error)]
-pub enum InvalidConfigInformation {
-    #[error("Unknown Attribute: '{0}'")]
+pub enum InvalidContactInformation {
+    #[error("Must be one of {ADDRESS_LINE1}, {ADDRESS_LINE2}, {ADDRESS_LINE3}, {CITY}, {COMPANY_NAME}, {COUNTRY_CODE}, {DISTRICT_OR_COUNTY}, {FULL_NAME}, {PHONE_NUMBER}, {POSTAL_CODE}, {STATE_OR_REGION}, {WEBSITE_URL}")]
     UnknownAttribute(String),
 }
 
-impl InvalidConfigInformation {
-    fn _unknown(text: &str) -> Self {
-        Self::UnknownAttribute(text.to_string())
+impl InvalidContactInformation {
+    fn unknown(other: &str) -> Self {
+        Self::UnknownAttribute(other.to_string())
     }
 }
