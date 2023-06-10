@@ -1,7 +1,7 @@
 AWS Services support
 
-[X] account
 [ ] accessanalyzer
+[X] account
 [-] dynamodb
 [-] eks
 [-] iam
