@@ -27,7 +27,6 @@ pub(crate) enum Command {
     #[command(subcommand)]
     Sso(Sso),
 
-    /// Security Token Service (STS) operations
     #[command(subcommand)]
     Sts(Sts),
 }

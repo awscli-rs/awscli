@@ -15,6 +15,7 @@ pub trait Execute {
     async fn execute(self: Box<Self>, client: sts::Client) -> StsResult;
 }
 
+/// Security Token Service (STS) operations
 #[derive(Debug, Subcommand)]
 pub enum Sts {
     AssumeRole(role::AssumeRole),
