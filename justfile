@@ -17,4 +17,4 @@ deprecated:
     cargo clippy --features clap/deprecated
 fresh: clean update clippy test build
 deps:
-    cargo update && git add Cargo.lock && git ci -m "Update deps"
+    cargo update && git commit -m "Update deps" Cargo.lock
