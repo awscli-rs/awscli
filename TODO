@@ -5,6 +5,6 @@ AWS Services support
 [-] dynamodb
 [-] eks
 [-] iam
-[ ] pricing
+[X] pricing
 [-] sso
 [-] sts
