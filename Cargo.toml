@@ -10,6 +10,7 @@ members = [
     "services/dynamodb",
     "services/eks",
     "services/iam",
+    "services/pricing",
     "services/sso",
     "services/sts",
 ]
@@ -26,12 +27,14 @@ repository = "https://github.com/awscli-rs/awscli"
 [workspace.dependencies]
 async-trait = "0.1"
 aws-smithy-types = "0.55"
+aws-smithy-types-convert = { version = "0.55", features = ["convert-time"] }
 aws-config = "0.55"
 aws-types = "0.55"
 aws-sdk-account = "0.28"
 aws-sdk-dynamodb = "0.28"
 aws-sdk-eks = "0.28"
 aws-sdk-iam = "0.28"
+aws-sdk-pricing = "0.28"
 aws-sdk-sso = "0.28"
 aws-sdk-sts = "0.28"
 clap = { version = "4.2", features = ["derive", "env"] }
@@ -39,6 +42,7 @@ fmtools = "0.1"
 miette = { version = "5.7", features = ["fancy"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+time = { version = "0.3", features = ["serde-well-known"] }
 tokio-stream = "0.1"
 thiserror = "1.0"
 
@@ -51,6 +55,7 @@ account = { version = "0.0.0-alpha.5", path = "./services/account" }
 dynamodb = { version = "0.0.0-alpha.5", path = "./services/dynamodb" }
 eks = { version = "0.0.0-alpha.5", path = "./services/eks" }
 iam = { version = "0.0.0-alpha.5", path = "./services/iam" }
+pricing = { version = "0.0.0-alpha.5", path = "./services/pricing" }
 sso = { version = "0.0.0-alpha.5", path = "./services/sso" }
 sts = { version = "0.0.0-alpha.5", path = "./services/sts" }
 

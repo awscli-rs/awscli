@@ -24,6 +24,7 @@ account.workspace = true
 dynamodb.workspace = true
 eks.workspace = true
 iam.workspace = true
+pricing.workspace = true
 sso.workspace = true
 sts.workspace = true
 

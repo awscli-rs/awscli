@@ -300,6 +300,31 @@ dependencies = [
 ]
 
 [[package]]
+name = "aws-sdk-pricing"
+version = "0.28.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2201033ea01666d6fb61436aa736c402dcfa17f7fbf169d4e4601c25bc595485"
+dependencies = [
+ "aws-credential-types",
+ "aws-endpoint",
+ "aws-http",
+ "aws-sig-auth",
+ "aws-smithy-async",
+ "aws-smithy-client",
+ "aws-smithy-http",
+ "aws-smithy-http-tower",
+ "aws-smithy-json",
+ "aws-smithy-types",
+ "aws-types",
+ "bytes",
+ "http",
+ "regex",
+ "tokio-stream",
+ "tower",
+ "tracing",
+]
+
+[[package]]
 name = "aws-sdk-sso"
 version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -486,6 +511,16 @@ dependencies = [
  "itoa",
  "num-integer",
  "ryu",
+ "time",
+]
+
+[[package]]
+name = "aws-smithy-types-convert"
+version = "0.55.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "08d826bceaef81b3a8435f99b5da0e7e9ad3379bc91c8893e87cd3daa63c4423"
+dependencies = [
+ "aws-smithy-types",
  "time",
 ]
 
@@ -778,6 +813,7 @@ dependencies = [
  "aws-sdk-dynamodb",
  "aws-sdk-eks",
  "aws-sdk-iam",
+ "aws-sdk-pricing",
  "aws-sdk-sso",
  "aws-sdk-sts",
  "aws-smithy-types",
@@ -1292,10 +1328,13 @@ dependencies = [
  "aws-sdk-account",
  "aws-sdk-dynamodb",
  "aws-sdk-eks",
+ "aws-smithy-types",
+ "aws-smithy-types-convert",
  "clap",
  "itertools",
  "serde_json",
  "thiserror",
+ "time",
 ]
 
 [[package]]
@@ -1337,6 +1376,22 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
 
 [[package]]
+name = "pricing"
+version = "0.0.0-alpha.5"
+dependencies = [
+ "async-trait",
+ "aws-sdk-pricing",
+ "aws-smithy-types",
+ "clap",
+ "config",
+ "error",
+ "parsers",
+ "show",
+ "thiserror",
+ "tokio-stream",
+]
+
+[[package]]
 name = "proc-macro2"
 version = "1.0.66"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1365,6 +1420,7 @@ dependencies = [
  "eks",
  "iam",
  "miette",
+ "pricing",
  "sso",
  "sts",
  "tokio",
@@ -1620,6 +1676,7 @@ dependencies = [
  "aws-sdk-dynamodb",
  "aws-sdk-eks",
  "aws-sdk-iam",
+ "aws-sdk-pricing",
  "aws-sdk-sso",
  "aws-sdk-sts",
  "fmtools",

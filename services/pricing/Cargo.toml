@@ -1,6 +1,6 @@
 [package]
-name = "parsers"
-description = "RAWS parsers"
+name = "pricing"
+description = "RAWS pricing component"
 
 version.workspace = true
 authors.workspace = true
@@ -10,17 +10,17 @@ repository.workspace = true
 
 
 [dependencies]
-itertools = "0.10"
-
-aws-sdk-account.workspace = true
-aws-sdk-dynamodb.workspace = true
-aws-sdk-eks.workspace = true
+async-trait.workspace = true
+aws-sdk-pricing.workspace = true
 aws-smithy-types.workspace = true
-aws-smithy-types-convert.workspace = true
 clap.workspace = true
-serde_json.workspace = true
-time.workspace = true
+tokio-stream.workspace = true
 thiserror.workspace = true
+
+config.workspace = true
+error.workspace = true
+parsers.workspace = true
+show.workspace = true
 
 
 [lints]

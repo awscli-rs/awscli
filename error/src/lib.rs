@@ -7,6 +7,7 @@ mod account;
 mod dynamodb;
 mod eks;
 mod iam;
+mod pricing;
 mod sso;
 mod sts;
 

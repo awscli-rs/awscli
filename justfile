@@ -6,6 +6,8 @@ test:
     cargo test --workspace -Zlints
 raws *ARGS:
     cargo run -Zlints {{ARGS}}
+aws *ARGS:
+    aws {{ARGS}}
 alias c:=clippy
 clippy:
     cargo clippy --workspace --all-targets -Zlints

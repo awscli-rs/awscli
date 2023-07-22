@@ -3,6 +3,7 @@ use config::Config;
 use dynamodb::DynamoDb;
 use eks::Eks;
 use iam::Iam;
+use pricing::Pricing;
 use sso::Sso;
 use sts::Sts;
 
@@ -25,6 +26,9 @@ pub(crate) enum Command {
     Iam(Iam),
 
     #[command(subcommand)]
+    Pricing(Pricing),
+
+    #[command(subcommand)]
     Sso(Sso),
 
     #[command(subcommand)]
@@ -39,6 +43,7 @@ impl Command {
             Self::Ec2 => todo!(),
             Self::Eks(eks) => eks.dispatch(config).await?,
             Self::Iam(iam) => iam.dispatch(config).await?,
+            Self::Pricing(pricing) => pricing.dispatch(config).await?,
             Self::Sso(sso) => sso.dispatch(config).await?,
             Self::Sts(sts) => sts.dispatch(config).await?,
         }
