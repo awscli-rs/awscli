@@ -35,6 +35,32 @@ pub trait Show: fmt::Debug {
     }
 }
 
+impl<T: Show> Show for &T {
+    fn text(&self) -> String {
+        (*self).text()
+    }
+
+    fn debug(&self) -> String {
+        (*self).debug()
+    }
+
+    fn json(&self) -> String {
+        (*self).json()
+    }
+
+    fn table(&self) -> String {
+        (*self).table()
+    }
+
+    fn yaml(&self) -> String {
+        (*self).yaml()
+    }
+
+    fn yaml_stream(&self) -> String {
+        (*self).yaml_stream()
+    }
+}
+
 impl<T: Show> Show for Vec<T> {
     fn text(&self) -> String {
         let items = self.iter().map(|item| item.text());
