@@ -8,7 +8,7 @@ impl Show for aws_sdk_account::types::Region {
             .map(|status| status.as_str())
             .unwrap_or_default();
         fmtools::format!(
-            {name} "\t" {opt_status}
+            "REGIONS\t" {name} "\t" {opt_status}
         )
     }
 }
@@ -21,7 +21,7 @@ impl Show for aws_sdk_account::operation::get_region_opt_status::GetRegionOptSta
             .map(|status| status.as_str())
             .unwrap_or_default();
         fmtools::format!(
-            {name} " " {opt_status}
+            {name} "\t" {opt_status}
         )
     }
 }
