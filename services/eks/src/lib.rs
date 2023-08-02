@@ -16,6 +16,7 @@ pub trait Execute {
     async fn execute(self: Box<Self>, client: eks::Client) -> EksResult;
 }
 
+/// Amazon Elastic Kubernetes Service (Amazon EKS)
 #[derive(Debug, Subcommand)]
 pub enum Eks {
     CreateCluster(cluster::CreateCluster),
