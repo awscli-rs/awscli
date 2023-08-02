@@ -19,7 +19,7 @@ pub trait Execute {
 #[derive(Debug, Subcommand)]
 pub enum Ebs {
     CompleteSnapshot(snapshot::CompleteSnapshot),
-    // DeleteCluster(cluster::DeleteCluster),
+    StartSnapshot(snapshot::StartSnapshot),
     // ListClusters(cluster::ListClusters),
     // DescribeCluster(cluster::DescribeCluster),
     // ListUpdates(update::ListUpdates),
@@ -31,8 +31,8 @@ pub enum Ebs {
 impl Ebs {
     fn boxed(self) -> Box<dyn Execute> {
         match self {
-            Self::CompleteSnapshot(create_cluster) => Box::new(create_cluster),
-            // Self::DeleteCluster(delete_cluster) => Box::new(delete_cluster),
+            Self::CompleteSnapshot(complete_snapshot) => Box::new(complete_snapshot),
+            Self::StartSnapshot(start_snapshot) => Box::new(start_snapshot),
             // Self::ListClusters(list_cluster) => Box::new(list_cluster),
             // Self::DescribeCluster(describe_cluster) => Box::new(describe_cluster),
             // Self::ListUpdates(list_updates) => Box::new(list_updates),
