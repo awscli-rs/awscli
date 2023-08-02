@@ -3,6 +3,7 @@ AWS Services support
 [ ] accessanalyzer
 [X] account
 [-] dynamodb
+[ ] ebs
 [-] eks
 [-] iam
 [X] pricing

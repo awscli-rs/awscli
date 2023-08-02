@@ -5,6 +5,7 @@ use serde_json as json;
 
 mod account;
 mod dynamo;
+mod ebs;
 mod eks;
 mod iam;
 mod pricing;

@@ -236,6 +236,32 @@ dependencies = [
 ]
 
 [[package]]
+name = "aws-sdk-ebs"
+version = "0.28.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0c44666651c93b43b78bc3d0bc280efffa64ab6c23ecb3370ed0760d6e69d417"
+dependencies = [
+ "aws-credential-types",
+ "aws-endpoint",
+ "aws-http",
+ "aws-sig-auth",
+ "aws-smithy-async",
+ "aws-smithy-client",
+ "aws-smithy-http",
+ "aws-smithy-http-tower",
+ "aws-smithy-json",
+ "aws-smithy-types",
+ "aws-types",
+ "bytes",
+ "fastrand",
+ "http",
+ "regex",
+ "tokio-stream",
+ "tower",
+ "tracing",
+]
+
+[[package]]
 name = "aws-sdk-eks"
 version = "0.28.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -765,6 +791,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "ebs"
+version = "0.0.0-alpha.6"
+dependencies = [
+ "async-trait",
+ "aws-sdk-ebs",
+ "clap",
+ "config",
+ "error",
+ "parsers",
+ "show",
+]
+
+[[package]]
 name = "either"
 version = "1.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -812,6 +851,7 @@ version = "0.0.0-alpha.6"
 dependencies = [
  "aws-sdk-account",
  "aws-sdk-dynamodb",
+ "aws-sdk-ebs",
  "aws-sdk-eks",
  "aws-sdk-iam",
  "aws-sdk-pricing",
@@ -1661,6 +1701,7 @@ version = "0.0.0-alpha.6"
 dependencies = [
  "aws-sdk-account",
  "aws-sdk-dynamodb",
+ "aws-sdk-ebs",
  "aws-sdk-eks",
  "aws-sdk-iam",
  "aws-sdk-pricing",

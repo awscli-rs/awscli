@@ -1,0 +1,26 @@
+[package]
+name = "ebs"
+description = "RAWS EBS component"
+
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+
+[dependencies]
+async-trait.workspace = true
+aws-sdk-ebs.workspace = true
+clap.workspace = true
+# tokio-stream.workspace = true
+# thiserror.workspace = true
+
+config.workspace = true
+error.workspace = true
+parsers.workspace = true
+show.workspace = true
+
+
+[lints]
+workspace = true
