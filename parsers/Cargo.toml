@@ -14,6 +14,7 @@ itertools = "0.11"
 
 aws-sdk-account.workspace = true
 aws-sdk-dynamodb.workspace = true
+aws-sdk-ebs.workspace = true
 aws-sdk-eks.workspace = true
 aws-smithy-types.workspace = true
 aws-smithy-types-convert.workspace = true

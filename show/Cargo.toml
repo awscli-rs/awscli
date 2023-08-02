@@ -18,9 +18,12 @@ aws-sdk-iam.workspace = true
 aws-sdk-pricing.workspace = true
 aws-sdk-sso.workspace = true
 aws-sdk-sts.workspace = true
+aws-smithy-types.workspace = true
+aws-smithy-types-convert.workspace = true
 fmtools.workspace = true
 serde.workspace = true
 serde_json.workspace = true
+time.workspace = true
 
 
 [lints]

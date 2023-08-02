@@ -9,6 +9,7 @@ mod ebs;
 mod eks;
 mod iam;
 mod pricing;
+mod smithy;
 mod sso;
 mod sts;
 

@@ -12,7 +12,7 @@ impl Show for aws_sdk_ebs::operation::start_snapshot::StartSnapshotOutput {
         let snapshot_id = self.snapshot_id().unwrap_or_default();
         let owner_id = self.owner_id().unwrap_or_default();
         let status = self.status().text();
-        let start_time = self.start_time();
+        let start_time = self.start_time().text();
         let volume_size = self.volume_size().unwrap_or_default();
         let block_size = self.block_size().unwrap_or_default();
         let tags = self.tags().unwrap_or_default();
@@ -20,22 +20,34 @@ impl Show for aws_sdk_ebs::operation::start_snapshot::StartSnapshotOutput {
         let kms_key_arn = self.kms_key_arn();
 
         fmtools::format!(
-            "DESCRIPTION\t" {description}
-            "SNAPSHOT_ID\t" {snapshot_id}
-            "OWNER_ID\t"    {owner_id}
-            "STATUS\t"      {status}
-            if let Some(start_time) = start_time {
-                "START_TIME\t" {start_time:?}
+            "DESCRIPTION\t" {description} "\n"
+            "SNAPSHOT_ID\t" {snapshot_id} "\n"
+            "OWNER_ID\t"    {owner_id} "\n"
+            "STATUS\t\t"    {status} "\n"
+            "START_TIME\t"  {start_time} "\n"
+            "VOLUME_SIZE\t" {volume_size} "\n"
+            "BLOCK_SIZE\t"  {block_size} "\n"
+
+            for tag in tags {
+                {tag.text()} "\n"
             }
-            "VOLUME_SIZE\t" {volume_size}
-            "BLOCK_SIZE\t"  {block_size}
-            "TAGS\t"        {tags:?}
+
             if let Some(parent_snapshot_id) = parent_snapshot_id {
-                "PARENT_SNAPSHOT_ID\t" {parent_snapshot_id}
+                "PARENT_SNAPSHOT_ID\t" {parent_snapshot_id} "\n"
             }
             if let Some(kms_key_arn) = kms_key_arn {
-                "KSM_KEY_ARN\t" {kms_key_arn}
+                "KSM_KEY_ARN\t" {kms_key_arn} "\n"
             }
+        )
+    }
+}
+
+impl Show for aws_sdk_ebs::types::Tag {
+    fn text(&self) -> String {
+        let key = self.key().unwrap_or_default();
+        let value = self.value().unwrap_or_default();
+        fmtools::format!(
+            "TAGS\t\t" {key} "\t" {value}
         )
     }
 }
