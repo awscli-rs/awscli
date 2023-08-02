@@ -6,6 +6,7 @@ use tokio_stream::StreamExt;
 use config::Config;
 use error::RawsError;
 
+mod block;
 mod snapshot;
 
 type EbsResult<T = Box<dyn show::Show>> = std::result::Result<T, ebs::Error>;
@@ -23,7 +24,7 @@ pub enum Ebs {
     StartSnapshot(snapshot::StartSnapshot),
     ListSnapshotBlocks(snapshot::ListSnapshotBlocks),
     ListChangedBlocks(snapshot::ListChangedBlocks),
-    // DescribeCluster(cluster::DescribeCluster),
+    GetSnapshotBlock(block::GetSnapshotBlock),
     // DescribeUpdate(update::DescribeUpdate),
     // ListAddons(addon::ListAddons),
     // DescribeAddon(addon::DescribeAddon),
@@ -36,7 +37,7 @@ impl Ebs {
             Self::StartSnapshot(start_snapshot) => Box::new(start_snapshot),
             Self::ListSnapshotBlocks(list_snapshot_blocks) => Box::new(list_snapshot_blocks),
             Self::ListChangedBlocks(list_changed_blocks) => Box::new(list_changed_blocks),
-            // Self::DescribeCluster(describe_cluster) => Box::new(describe_cluster),
+            Self::GetSnapshotBlock(get_snapshot_block) => Box::new(get_snapshot_block),
             // Self::DescribeUpdate(describe_update) => Box::new(describe_update),
             // Self::ListAddons(list_addons) => Box::new(list_addons),
             // Self::DescribeAddon(describe_addon) => Box::new(describe_addon),

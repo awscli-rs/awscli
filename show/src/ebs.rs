@@ -31,6 +31,16 @@ impl Show for aws_sdk_ebs::types::Status {
     }
 }
 
+impl Show for aws_sdk_ebs::types::Tag {
+    fn text(&self) -> String {
+        let key = self.key().unwrap_or_default();
+        let value = self.value().unwrap_or_default();
+        fmtools::format!(
+            "TAGS\t\t" {key} "\t" {value}
+        )
+    }
+}
+
 impl Show for aws_sdk_ebs::operation::start_snapshot::StartSnapshotOutput {
     fn text(&self) -> String {
         let description = self.description().unwrap_or_default();
@@ -67,12 +77,14 @@ impl Show for aws_sdk_ebs::operation::start_snapshot::StartSnapshotOutput {
     }
 }
 
-impl Show for aws_sdk_ebs::types::Tag {
+impl Show
+    for (
+        Option<String>,
+        Option<aws_sdk_ebs::types::ChecksumAlgorithm>,
+        Option<i32>,
+    )
+{
     fn text(&self) -> String {
-        let key = self.key().unwrap_or_default();
-        let value = self.value().unwrap_or_default();
-        fmtools::format!(
-            "TAGS\t\t" {key} "\t" {value}
-        )
+        todo!()
     }
 }
