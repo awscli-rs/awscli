@@ -14,6 +14,7 @@ pub trait Execute {
     async fn execute(self: Box<Self>, client: iam::Client) -> IamResult;
 }
 
+/// Identity and Access Management (IAM)
 #[derive(Debug, Subcommand)]
 pub enum Iam {
     CreateUser(user::CreateUser),
