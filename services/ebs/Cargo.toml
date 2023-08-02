@@ -13,7 +13,7 @@ repository.workspace = true
 async-trait.workspace = true
 aws-sdk-ebs.workspace = true
 clap.workspace = true
-# tokio-stream.workspace = true
+tokio-stream.workspace = true
 # thiserror.workspace = true
 
 config.workspace = true

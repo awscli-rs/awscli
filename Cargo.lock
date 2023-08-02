@@ -801,6 +801,7 @@ dependencies = [
  "error",
  "parsers",
  "show",
+ "tokio-stream",
 ]
 
 [[package]]

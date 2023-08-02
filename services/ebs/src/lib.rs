@@ -1,6 +1,7 @@
 use async_trait::async_trait;
 use aws_sdk_ebs as ebs;
 use clap::{Args, Subcommand};
+use tokio_stream::StreamExt;
 
 use config::Config;
 use error::RawsError;
@@ -20,7 +21,7 @@ pub trait Execute {
 pub enum Ebs {
     CompleteSnapshot(snapshot::CompleteSnapshot),
     StartSnapshot(snapshot::StartSnapshot),
-    // ListClusters(cluster::ListClusters),
+    ListSnapshotBlocks(snapshot::ListSnapshotBlocks),
     // DescribeCluster(cluster::DescribeCluster),
     // ListUpdates(update::ListUpdates),
     // DescribeUpdate(update::DescribeUpdate),
@@ -33,7 +34,7 @@ impl Ebs {
         match self {
             Self::CompleteSnapshot(complete_snapshot) => Box::new(complete_snapshot),
             Self::StartSnapshot(start_snapshot) => Box::new(start_snapshot),
-            // Self::ListClusters(list_cluster) => Box::new(list_cluster),
+            Self::ListSnapshotBlocks(list_snapshot_blocks) => Box::new(list_snapshot_blocks),
             // Self::DescribeCluster(describe_cluster) => Box::new(describe_cluster),
             // Self::ListUpdates(list_updates) => Box::new(list_updates),
             // Self::DescribeUpdate(describe_update) => Box::new(describe_update),

@@ -1,5 +1,16 @@
 use super::*;
 
+impl Show for aws_sdk_ebs::types::Block {
+    fn text(&self) -> String {
+        let index = self.block_index().unwrap_or_default();
+        let token = self.block_token().unwrap_or_default();
+
+        fmtools::format!(
+            "INDEX\t" {index} "\tTOKEN\t" {token}
+        )
+    }
+}
+
 impl Show for aws_sdk_ebs::types::Status {
     fn text(&self) -> String {
         self.as_str().to_string()
