@@ -11,6 +11,20 @@ impl Show for aws_sdk_ebs::types::Block {
     }
 }
 
+impl Show for aws_sdk_ebs::types::ChangedBlock {
+    fn text(&self) -> String {
+        let index = self.block_index().unwrap_or_default();
+        let first_token = self.first_block_token().unwrap_or_default();
+        let second_token = self.second_block_token().unwrap_or_default();
+
+        fmtools::format!(
+            "INDEX\t" {index}
+            "\tFIRST_TOKEN\t" {first_token}
+            "\tSECOND_TOKEN\t" {second_token}
+        )
+    }
+}
+
 impl Show for aws_sdk_ebs::types::Status {
     fn text(&self) -> String {
         self.as_str().to_string()

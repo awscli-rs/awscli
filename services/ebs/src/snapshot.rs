@@ -1,6 +1,7 @@
 use super::*;
 
 pub(crate) use complete::CompleteSnapshot;
+pub(crate) use list::ListChangedBlocks;
 pub(crate) use list::ListSnapshotBlocks;
 pub(crate) use start::StartSnapshot;
 
