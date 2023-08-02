@@ -1,6 +1,7 @@
 use account::Account;
 use config::Config;
 use dynamodb::DynamoDb;
+use ebs::Ebs;
 use eks::Eks;
 use iam::Iam;
 use pricing::Pricing;
@@ -16,6 +17,9 @@ pub(crate) enum Command {
 
     #[command(subcommand)]
     Dynamodb(DynamoDb),
+
+    #[command(subcommand)]
+    Ebs(Ebs),
 
     Ec2,
 
@@ -41,6 +45,7 @@ impl Command {
             Self::Account(account) => account.dispatch(config).await?,
             Self::Dynamodb(dynamo) => dynamo.dispatch(config).await?,
             Self::Ec2 => todo!(),
+            Self::Ebs(ebs) => ebs.dispatch(config).await?,
             Self::Eks(eks) => eks.dispatch(config).await?,
             Self::Iam(iam) => iam.dispatch(config).await?,
             Self::Pricing(pricing) => pricing.dispatch(config).await?,

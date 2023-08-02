@@ -1444,6 +1444,7 @@ dependencies = [
  "clap",
  "config",
  "dynamodb",
+ "ebs",
  "eks",
  "iam",
  "miette",
