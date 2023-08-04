@@ -18,7 +18,7 @@ members = [
 
 
 [workspace.package]
-version = "0.0.0-alpha.6"
+version = "0.0.0-alpha.7"
 authors = ["Cyril Plisko <cyril.plisko@mountall.com>"]
 edition = "2021"
 license = "Apache-2.0"
@@ -49,19 +49,19 @@ tokio = { version = "1.29", features = ["full"] }
 tokio-stream = "0.1"
 thiserror = "1.0"
 
-config = { version = "0.0.0-alpha.6", path = "./config" }
-error = { version = "0.0.0-alpha.6", path = "./error" }
-parsers = { version = "0.0.0-alpha.6", path = "./parsers" }
-show = { version = "0.0.0-alpha.6", path = "./show" }
+config = { version = "0.0.0-alpha.7", path = "./config" }
+error = { version = "0.0.0-alpha.7", path = "./error" }
+parsers = { version = "0.0.0-alpha.7", path = "./parsers" }
+show = { version = "0.0.0-alpha.7", path = "./show" }
 
-account = { version = "0.0.0-alpha.6", path = "./services/account" }
-dynamodb = { version = "0.0.0-alpha.6", path = "./services/dynamodb" }
-ebs = { version = "0.0.0-alpha.6", path = "./services/ebs" }
-eks = { version = "0.0.0-alpha.6", path = "./services/eks" }
-iam = { version = "0.0.0-alpha.6", path = "./services/iam" }
-pricing = { version = "0.0.0-alpha.6", path = "./services/pricing" }
-sso = { version = "0.0.0-alpha.6", path = "./services/sso" }
-sts = { version = "0.0.0-alpha.6", path = "./services/sts" }
+account = { version = "0.0.0-alpha.7", path = "./services/account" }
+dynamodb = { version = "0.0.0-alpha.7", path = "./services/dynamodb" }
+ebs = { version = "0.0.0-alpha.7", path = "./services/ebs" }
+eks = { version = "0.0.0-alpha.7", path = "./services/eks" }
+iam = { version = "0.0.0-alpha.7", path = "./services/iam" }
+pricing = { version = "0.0.0-alpha.7", path = "./services/pricing" }
+sso = { version = "0.0.0-alpha.7", path = "./services/sso" }
+sts = { version = "0.0.0-alpha.7", path = "./services/sts" }
 
 
 [workspace.lints.clippy]
