@@ -25,9 +25,7 @@ pub enum Ebs {
     ListSnapshotBlocks(snapshot::ListSnapshotBlocks),
     ListChangedBlocks(snapshot::ListChangedBlocks),
     GetSnapshotBlock(block::GetSnapshotBlock),
-    // DescribeUpdate(update::DescribeUpdate),
-    // ListAddons(addon::ListAddons),
-    // DescribeAddon(addon::DescribeAddon),
+    PutSnapshotBlock(block::PutSnapshotBlock),
 }
 
 impl Ebs {
@@ -38,9 +36,7 @@ impl Ebs {
             Self::ListSnapshotBlocks(list_snapshot_blocks) => Box::new(list_snapshot_blocks),
             Self::ListChangedBlocks(list_changed_blocks) => Box::new(list_changed_blocks),
             Self::GetSnapshotBlock(get_snapshot_block) => Box::new(get_snapshot_block),
-            // Self::DescribeUpdate(describe_update) => Box::new(describe_update),
-            // Self::ListAddons(list_addons) => Box::new(list_addons),
-            // Self::DescribeAddon(describe_addon) => Box::new(describe_addon),
+            Self::PutSnapshotBlock(put_snapshot_block) => Box::new(put_snapshot_block),
         }
     }
 

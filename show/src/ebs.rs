@@ -77,6 +77,20 @@ impl Show for aws_sdk_ebs::operation::start_snapshot::StartSnapshotOutput {
     }
 }
 
+impl Show for aws_sdk_ebs::operation::put_snapshot_block::PutSnapshotBlockOutput {
+    fn text(&self) -> String {
+        let checksum = self.checksum().unwrap_or_default();
+        let checksum_algo = self
+            .checksum_algorithm()
+            .map(|algo| algo.as_str())
+            .unwrap_or_default();
+
+        fmtools::format!(
+            {checksum_algo} "\t" {checksum}
+        )
+    }
+}
+
 impl Show
     for (
         Option<String>,
