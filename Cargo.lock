@@ -4,7 +4,7 @@ version = 3
 
 [[package]]
 name = "account"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "async-trait",
  "aws-sdk-account",
@@ -733,7 +733,7 @@ checksum = "acbf1af155f9b9ef647e42cdc158db4b64a1b61f743629225fde6f3e0be2a7c7"
 
 [[package]]
 name = "config"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "aws-config",
  "aws-types",
@@ -799,7 +799,7 @@ dependencies = [
 
 [[package]]
 name = "dynamodb"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "async-trait",
  "aws-sdk-dynamodb",
@@ -814,7 +814,7 @@ dependencies = [
 
 [[package]]
 name = "ebs"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "async-trait",
  "aws-sdk-ebs",
@@ -836,7 +836,7 @@ checksum = "a26ae43d7bcc3b814de94796a5e736d4029efb0ee900c12e2d54c993ad1a1e07"
 
 [[package]]
 name = "eks"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "async-trait",
  "aws-sdk-eks",
@@ -872,7 +872,7 @@ dependencies = [
 
 [[package]]
 name = "error"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "aws-sdk-account",
  "aws-sdk-dynamodb",
@@ -1110,7 +1110,7 @@ dependencies = [
 
 [[package]]
 name = "iam"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "async-trait",
  "aws-sdk-iam",
@@ -1386,7 +1386,7 @@ dependencies = [
 
 [[package]]
 name = "parsers"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "aws-sdk-account",
  "aws-sdk-dynamodb",
@@ -1441,7 +1441,7 @@ checksum = "8b870d8c151b6f2fb93e84a13146138f05d02ed11c7e7c54f8826aaaf7c9f184"
 
 [[package]]
 name = "pricing"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "async-trait",
  "aws-sdk-pricing",
@@ -1475,7 +1475,7 @@ dependencies = [
 
 [[package]]
 name = "raws"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "account",
  "clap",
@@ -1745,7 +1745,7 @@ dependencies = [
 
 [[package]]
 name = "show"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "aws-sdk-account",
  "aws-sdk-dynamodb",
@@ -1821,7 +1821,7 @@ checksum = "6e63cff320ae2c57904679ba7cb63280a3dc4613885beafb148ee7bf9aa9042d"
 
 [[package]]
 name = "sso"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "async-trait",
  "aws-sdk-sso",
@@ -1841,7 +1841,7 @@ checksum = "73473c0e59e6d5812c5dfe2a064a6444949f089e20eec9a2e5506596494e4623"
 
 [[package]]
 name = "sts"
-version = "0.0.0-alpha.7"
+version = "0.0.0-alpha.8"
 dependencies = [
  "async-trait",
  "aws-sdk-sts",
