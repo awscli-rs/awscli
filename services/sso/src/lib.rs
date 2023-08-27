@@ -21,6 +21,8 @@ pub enum Sso {
     ListAccounts(account::ListAccounts),
     ListAccountRoles(account::ListAccountRoles),
     GetRoleCredentials(role::GetRoleCredentials),
+    Login(account::Login),
+    Logout(account::Logout),
 }
 
 impl Sso {
@@ -29,6 +31,8 @@ impl Sso {
             Self::ListAccounts(list_accounts) => Box::new(list_accounts),
             Self::ListAccountRoles(list_account_roles) => Box::new(list_account_roles),
             Self::GetRoleCredentials(get_role_credentials) => Box::new(get_role_credentials),
+            Self::Login(login) => Box::new(login),
+            Self::Logout(logout) => Box::new(logout),
         }
     }
 
