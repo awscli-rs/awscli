@@ -8,14 +8,23 @@ struct CallerIdentity {
     arn: String,
 }
 
-impl Show for aws_sdk_sts::operation::get_caller_identity::GetCallerIdentityOutput {
+impl Show for CallerIdentity {
     fn text(&self) -> String {
-        fmtools::format!({ CallerIdentity::from(self) })
+        fmtools::format!({ self })
     }
 
     fn json(&self) -> String {
-        let identity = CallerIdentity::from(self);
-        json::to_string_pretty(&identity).unwrap_or_default()
+        json::to_string_pretty(self).unwrap_or_default()
+    }
+}
+
+impl Show for aws_sdk_sts::operation::get_caller_identity::GetCallerIdentityOutput {
+    fn text(&self) -> String {
+        CallerIdentity::from(self).text()
+    }
+
+    fn json(&self) -> String {
+        CallerIdentity::from(self).json()
     }
 }
 

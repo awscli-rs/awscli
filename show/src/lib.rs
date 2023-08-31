@@ -65,6 +65,16 @@ impl<T: Show> Show for &T {
 
 impl<T: Show> Show for Vec<T> {
     fn text(&self) -> String {
+        self.as_slice().text()
+    }
+
+    fn debug(&self) -> String {
+        self.as_slice().debug()
+    }
+}
+
+impl<T: Show> Show for &[T] {
+    fn text(&self) -> String {
         let items = self.iter().map(|item| item.text());
         fmtools::join("\n", items).to_string()
     }
@@ -98,5 +108,11 @@ impl Show for () {
 impl Show for String {
     fn text(&self) -> String {
         self.clone()
+    }
+}
+
+impl Show for &str {
+    fn text(&self) -> String {
+        self.to_string()
     }
 }

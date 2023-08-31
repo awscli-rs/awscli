@@ -15,13 +15,14 @@ pub struct AssumeRole {
 #[async_trait]
 impl Execute for AssumeRole {
     async fn execute(self: Box<Self>, client: sts::Client) -> StsResult {
-        let assume_role = client
+        let credentials = client
             .assume_role()
             .role_arn(self.role_arn)
             .role_session_name(self.role_session_name)
             .send()
-            .await?;
+            .await?
+            .credentials;
 
-        Ok(Box::new(assume_role))
+        Ok(Box::new(credentials))
     }
 }

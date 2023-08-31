@@ -6,15 +6,23 @@ struct Account {
     account: String,
 }
 
-impl Show for aws_sdk_sts::operation::get_access_key_info::GetAccessKeyInfoOutput {
+impl Show for Account {
     fn text(&self) -> String {
-        let account = Account::from(self);
-        fmtools::format!({ account.account })
+        fmtools::format!("ACCOUNT\t" {self.account})
     }
 
     fn json(&self) -> String {
-        let account = Account::from(self);
-        json::to_string_pretty(&account).unwrap_or_default()
+        json::to_string_pretty(self).unwrap_or_default()
+    }
+}
+
+impl Show for aws_sdk_sts::operation::get_access_key_info::GetAccessKeyInfoOutput {
+    fn text(&self) -> String {
+        Account::from(self).text()
+    }
+
+    fn json(&self) -> String {
+        Account::from(self).json()
     }
 }
 

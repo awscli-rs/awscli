@@ -1,14 +1,15 @@
 use aws_smithy_types_convert::date_time::DateTimeExt;
 use time::format_description::well_known::Rfc3339;
+use time::OffsetDateTime;
+use time::UtcOffset;
 
 use super::*;
 
 impl Show for aws_smithy_types::DateTime {
     fn text(&self) -> String {
-        let offset = time::UtcOffset::current_local_offset().unwrap_or(time::UtcOffset::UTC);
+        let offset = UtcOffset::current_local_offset().unwrap_or(UtcOffset::UTC);
         self.to_time()
-            .map(|ts| ts.to_offset(offset))
-            .unwrap_or(time::OffsetDateTime::UNIX_EPOCH)
+            .map_or(OffsetDateTime::UNIX_EPOCH, |ts| ts.to_offset(offset))
             .format(&Rfc3339)
             .unwrap_or_default()
     }
