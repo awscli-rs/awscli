@@ -11,11 +11,11 @@ pub struct GetAccessKeyInfo {
 #[async_trait]
 impl Execute for GetAccessKeyInfo {
     async fn execute(self: Box<Self>, client: sts::Client) -> StsResult {
-        let info = client
+        let output = client
             .get_access_key_info()
             .access_key_id(self.access_key_id)
             .send()
             .await?;
-        Ok(Box::new(info))
+        Ok(Box::new(output))
     }
 }
