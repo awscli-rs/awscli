@@ -20,6 +20,10 @@ pub struct GetFederationToken {
     /// The duration, in seconds, that the credentials should remain valid.
     #[arg(long)]
     duration_seconds: Option<i32>,
+
+    /// A list of session tags.
+    #[arg(long, value_parser = parsers::tag::parse_tags::<sts::types::Tag>, num_args = 1..)]
+    tags: Option<Vec<sts::types::Tag>>,
 }
 
 #[async_trait]
@@ -31,6 +35,7 @@ impl Execute for GetFederationToken {
             .set_policy(self.policy)
             .set_policy_arns(self.policy_arns)
             .set_duration_seconds(self.duration_seconds)
+            .set_tags(self.tags)
             .send()
             .await?
             .credentials;
