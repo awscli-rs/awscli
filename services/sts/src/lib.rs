@@ -20,7 +20,7 @@ pub trait Execute {
 pub enum Sts {
     AssumeRole(assume::AssumeRole),
     AssumeRoleWithSaml(assume::AssumeRoleWithSaml),
-    AssumeRoleWithWebIdentity,
+    AssumeRoleWithWebIdentity(assume::AssumeRoleWithWebIdentity),
     GetAccessKeyInfo(get::GetAccessKeyInfo),
     GetCallerIdentity(get::GetCallerIdentity),
     GetFederationToken,
@@ -32,7 +32,9 @@ impl Sts {
         match self {
             Self::AssumeRole(assume_role) => Box::new(assume_role),
             Self::AssumeRoleWithSaml(assume_role_with_saml) => Box::new(assume_role_with_saml),
-            Self::AssumeRoleWithWebIdentity => todo!(),
+            Self::AssumeRoleWithWebIdentity(assume_role_with_web_identity) => {
+                Box::new(assume_role_with_web_identity)
+            }
             Self::GetAccessKeyInfo(get_access_key_info) => Box::new(get_access_key_info),
             Self::GetCallerIdentity(get_caller_identity) => Box::new(get_caller_identity),
             Self::GetFederationToken => todo!(),
