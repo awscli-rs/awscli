@@ -12,7 +12,7 @@ pub struct StartSnapshot {
     parent_snapshot_id: Option<String>,
 
     /// The tags to apply to the snapshot.
-    #[arg(long, value_parser = parsers::ebs::parse_tag, num_args = 1..)]
+    #[arg(long, value_parser = parsers::tag::parse_tags::<ebs::types::Tag>, num_args = 1..)]
     tags: Option<Vec<ebs::types::Tag>>,
 
     /// A description for the snapshot.
