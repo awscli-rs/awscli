@@ -5,8 +5,8 @@ use clap::{Args, Subcommand};
 use config::Config;
 use error::RawsError;
 
+mod assume;
 mod get;
-mod role;
 
 type StsResult<T = Box<dyn show::Show>> = std::result::Result<T, sts::Error>;
 
@@ -18,7 +18,7 @@ pub trait Execute {
 /// Security Token Service (STS) operations
 #[derive(Debug, Subcommand)]
 pub enum Sts {
-    AssumeRole(role::AssumeRole),
+    AssumeRole(assume::AssumeRole),
     AssumeRoleWithSaml,
     AssumeRoleWithWebIdentity,
     GetAccessKeyInfo(get::GetAccessKeyInfo),
