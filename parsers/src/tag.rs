@@ -43,7 +43,7 @@ fn parse_value(text: &str) -> Result<&str, InvalidTag> {
     text.strip_prefix("Value=").ok_or(InvalidTag::MissingValue)
 }
 
-#[derive(Debug, Error, PartialEq)]
+#[derive(Debug, PartialEq, Error)]
 pub enum InvalidTag {
     #[error("Tag should have comma separated key and value ('Key=k,Value=v')")]
     MissingComma,

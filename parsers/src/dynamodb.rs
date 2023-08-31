@@ -3,6 +3,8 @@ use aws_sdk_dynamodb::types::KeySchemaElement;
 use aws_sdk_dynamodb::types::KeyType;
 use aws_sdk_dynamodb::types::ScalarAttributeType;
 
+use super::*;
+
 pub fn attribute_definition_parser(
     text: &str,
 ) -> Result<AttributeDefinition, InvalidAttributeDefinition> {
@@ -69,7 +71,7 @@ fn split_pair(text: &str, delimiter: char) -> Result<(&str, &str), InvalidAttrib
         .ok_or_else(|| InvalidAttributeDefinition::malformed(text))
 }
 
-#[derive(Clone, Debug, thiserror::Error)]
+#[derive(Clone, Debug, Error)]
 pub enum InvalidAttributeDefinition {
     #[error("Malformed Attribute Definition: '{0}'")]
     Malformed(String),

@@ -88,7 +88,7 @@ fn builder_item(
     }
 }
 
-#[derive(Clone, Debug, PartialEq, thiserror::Error)]
+#[derive(Clone, Debug, PartialEq, Error)]
 pub enum InvalidContactInformation {
     #[error("Must be one of {ADDRESS_LINE1}, {ADDRESS_LINE2}, {ADDRESS_LINE3}, {CITY}, {COMPANY_NAME}, {COUNTRY_CODE}, {DISTRICT_OR_COUNTY}, {FULL_NAME}, {PHONE_NUMBER}, {POSTAL_CODE}, {STATE_OR_REGION}, {WEBSITE_URL}")]
     UnknownAttribute(String),

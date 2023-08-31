@@ -62,7 +62,7 @@ pub fn vpc_config_request(text: &str) -> Result<VpcConfigRequest, InvalidVpcConf
     Ok(vcr.build())
 }
 
-#[derive(Clone, Debug, PartialEq, thiserror::Error)]
+#[derive(Clone, Debug, PartialEq, Error)]
 pub enum InvalidVpcConfigRequest {
     #[error("Unknown Attribute: '{0}'")]
     UnknownAttribute(String),
