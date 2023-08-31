@@ -7,3 +7,4 @@ pub mod datetime;
 pub mod dynamodb;
 pub mod ebs;
 pub mod eks;
+pub mod sts;

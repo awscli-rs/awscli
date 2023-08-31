@@ -19,7 +19,7 @@ pub trait Execute {
 #[derive(Debug, Subcommand)]
 pub enum Sts {
     AssumeRole(assume::AssumeRole),
-    AssumeRoleWithSaml,
+    AssumeRoleWithSaml(assume::AssumeRoleWithSaml),
     AssumeRoleWithWebIdentity,
     GetAccessKeyInfo(get::GetAccessKeyInfo),
     GetCallerIdentity(get::GetCallerIdentity),
@@ -31,7 +31,7 @@ impl Sts {
     fn boxed(self) -> Box<dyn Execute> {
         match self {
             Self::AssumeRole(assume_role) => Box::new(assume_role),
-            Self::AssumeRoleWithSaml => todo!(),
+            Self::AssumeRoleWithSaml(assume_role_with_saml) => Box::new(assume_role_with_saml),
             Self::AssumeRoleWithWebIdentity => todo!(),
             Self::GetAccessKeyInfo(get_access_key_info) => Box::new(get_access_key_info),
             Self::GetCallerIdentity(get_caller_identity) => Box::new(get_caller_identity),
