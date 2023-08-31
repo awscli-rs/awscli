@@ -23,7 +23,7 @@ pub enum Sts {
     AssumeRoleWithWebIdentity(assume::AssumeRoleWithWebIdentity),
     GetAccessKeyInfo(get::GetAccessKeyInfo),
     GetCallerIdentity(get::GetCallerIdentity),
-    GetFederationToken,
+    GetFederationToken(get::GetFederationToken),
     GetSessionToken(get::GetSessionToken),
 }
 
@@ -37,7 +37,7 @@ impl Sts {
             }
             Self::GetAccessKeyInfo(get_access_key_info) => Box::new(get_access_key_info),
             Self::GetCallerIdentity(get_caller_identity) => Box::new(get_caller_identity),
-            Self::GetFederationToken => todo!(),
+            Self::GetFederationToken(get_federation_token) => Box::new(get_federation_token),
             Self::GetSessionToken(get_session_token) => Box::new(get_session_token),
         }
     }
