@@ -8,4 +8,4 @@ AWS Services support
 [-] iam
 [X] pricing
 [-] sso
-[-] sts
+[X] sts
