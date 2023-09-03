@@ -10,6 +10,12 @@ impl Tag for aws_sdk_ebs::types::Tag {
     }
 }
 
+impl Tag for aws_sdk_ec2::types::Tag {
+    fn from_key_and_value(key: &str, value: &str) -> Self {
+        Self::builder().key(key).value(value).build()
+    }
+}
+
 impl Tag for aws_sdk_sts::types::Tag {
     fn from_key_and_value(key: &str, value: &str) -> Self {
         Self::builder().key(key).value(value).build()
@@ -23,7 +29,7 @@ pub fn parse_tags<T: Tag>(text: &str) -> Result<Vec<T>, InvalidTag> {
         .collect()
 }
 
-fn parse_tag<T: Tag>(text: &str) -> Result<T, InvalidTag> {
+pub(crate) fn parse_tag<T: Tag>(text: &str) -> Result<T, InvalidTag> {
     text.split_once(',')
         .ok_or(InvalidTag::MissingComma)
         .and_then(tag)
@@ -36,11 +42,19 @@ fn tag<T: Tag>((key, value): (&str, &str)) -> Result<T, InvalidTag> {
 }
 
 fn parse_key(text: &str) -> Result<&str, InvalidTag> {
-    text.strip_prefix("Key=").ok_or(InvalidTag::MissingKey)
+    text.strip_prefix("Key=")
+        .ok_or(InvalidTag::MissingKey)
+        .map(trim_text)
 }
 
 fn parse_value(text: &str) -> Result<&str, InvalidTag> {
-    text.strip_prefix("Value=").ok_or(InvalidTag::MissingValue)
+    text.strip_prefix("Value=")
+        .ok_or(InvalidTag::MissingValue)
+        .map(trim_text)
+}
+
+fn trim_text(text: &str) -> &str {
+    text.trim_matches('"')
 }
 
 #[derive(Debug, PartialEq, Error)]

@@ -6,6 +6,7 @@ use serde_json as json;
 mod account;
 mod dynamo;
 mod ebs;
+mod ec2;
 mod eks;
 mod iam;
 mod pricing;

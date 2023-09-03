@@ -6,6 +6,7 @@ use thiserror::Error;
 mod account;
 mod dynamodb;
 mod ebs;
+mod ec2;
 mod eks;
 mod iam;
 mod pricing;

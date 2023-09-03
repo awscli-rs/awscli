@@ -4,6 +4,7 @@ AWS Services support
 [X] account
 [-] dynamodb
 [ ] ebs
+[-] ec2
 [-] eks
 [-] iam
 [X] pricing

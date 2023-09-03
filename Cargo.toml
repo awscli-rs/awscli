@@ -9,6 +9,7 @@ members = [
     "services/account",
     "services/dynamodb",
     "services/ebs",
+    "services/ec2",
     "services/eks",
     "services/iam",
     "services/pricing",
@@ -37,6 +38,7 @@ aws-types = "0.56"
 aws-sdk-account = "0.30"
 aws-sdk-dynamodb = "0.30"
 aws-sdk-ebs = "0.30"
+aws-sdk-ec2 = "0.30"
 aws-sdk-eks = "0.30"
 aws-sdk-iam = "0.30"
 aws-sdk-pricing = "0.30"
@@ -60,6 +62,7 @@ show = { version = "0.0.0-alpha.8", path = "./show" }
 account = { version = "0.0.0-alpha.8", path = "./services/account" }
 dynamodb = { version = "0.0.0-alpha.8", path = "./services/dynamodb" }
 ebs = { version = "0.0.0-alpha.8", path = "./services/ebs" }
+ec2 = { version = "0.0.0-alpha.8", path = "./services/ec2" }
 eks = { version = "0.0.0-alpha.8", path = "./services/eks" }
 iam = { version = "0.0.0-alpha.8", path = "./services/iam" }
 pricing = { version = "0.0.0-alpha.8", path = "./services/pricing" }

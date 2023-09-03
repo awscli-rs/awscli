@@ -5,6 +5,7 @@ use thiserror::Error;
 pub mod account;
 pub mod datetime;
 pub mod dynamodb;
+pub mod ec2;
 pub mod eks;
 pub mod sts;
 pub mod tag;

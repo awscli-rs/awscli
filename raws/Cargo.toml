@@ -23,6 +23,7 @@ config.workspace = true
 account.workspace = true
 dynamodb.workspace = true
 ebs.workspace = true
+ec2.workspace = true
 eks.workspace = true
 iam.workspace = true
 pricing.workspace = true
