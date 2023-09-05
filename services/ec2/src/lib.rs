@@ -21,12 +21,14 @@ pub trait Execute {
 #[derive(Debug, Subcommand)]
 pub enum Ec2 {
     CreateVpc(vpc::CreateVpc),
+    DeleteVpc(vpc::DeleteVpc),
 }
 
 impl Ec2 {
     fn boxed(self) -> Box<dyn Execute> {
         match self {
             Self::CreateVpc(create_vpc) => Box::new(create_vpc),
+            Self::DeleteVpc(delete_vpc) => Box::new(delete_vpc),
         }
     }
 
