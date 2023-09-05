@@ -117,3 +117,9 @@ impl Show for &str {
         self.to_string()
     }
 }
+
+impl Show for bool {
+    fn text(&self) -> String {
+        self.to_string()
+    }
+}

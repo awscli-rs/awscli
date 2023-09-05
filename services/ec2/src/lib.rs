@@ -19,9 +19,11 @@ pub trait Execute {
 /// Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable
 /// computing capacity in the Amazon Web Services Cloud.
 #[derive(Debug, Subcommand)]
+#[allow(clippy::large_enum_variant)]
 pub enum Ec2 {
     CreateVpc(vpc::CreateVpc),
     DeleteVpc(vpc::DeleteVpc),
+    DescribeVpcs(vpc::DescribeVpcs),
 }
 
 impl Ec2 {
@@ -29,6 +31,7 @@ impl Ec2 {
         match self {
             Self::CreateVpc(create_vpc) => Box::new(create_vpc),
             Self::DeleteVpc(delete_vpc) => Box::new(delete_vpc),
+            Self::DescribeVpcs(describe_vpcs) => Box::new(describe_vpcs),
         }
     }
 
