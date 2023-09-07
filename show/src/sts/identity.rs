@@ -13,10 +13,6 @@ impl Show for CallerIdentity {
         todo!()
     }
 
-    fn text(&self) -> String {
-        fmtools::format!({ self })
-    }
-
     fn json(&self) -> String {
         json::to_string_pretty(self).unwrap_or_default()
     }
@@ -29,10 +25,6 @@ impl Show for aws_sdk_sts::operation::get_caller_identity::GetCallerIdentityOutp
             { prefixed_item("USER_ID", self.user_id()) } " "
             { prefixed_item("ARN", self.arn()) }
         ))
-    }
-
-    fn text(&self) -> String {
-        CallerIdentity::from(self).text()
     }
 
     fn json(&self) -> String {

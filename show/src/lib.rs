@@ -17,9 +17,7 @@ mod sts;
 pub trait Show: fmt::Debug {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_>;
 
-    fn text(&self) -> String;
-
-    fn display(&self) -> String {
+    fn text(&self) -> String {
         self._fmt().to_string()
     }
 
@@ -49,10 +47,6 @@ impl<T: Show> Show for &T {
         (*self)._fmt()
     }
 
-    fn text(&self) -> String {
-        (*self).text()
-    }
-
     fn debug(&self) -> String {
         (*self).debug()
     }
@@ -79,10 +73,6 @@ impl<T: Show> Show for Vec<T> {
         Box::new(fmtools::join("\n", self.iter().map(|item| item._fmt())))
     }
 
-    fn text(&self) -> String {
-        self.as_slice().text()
-    }
-
     fn debug(&self) -> String {
         self.as_slice().debug()
     }
@@ -91,11 +81,6 @@ impl<T: Show> Show for Vec<T> {
 impl<T: Show> Show for &[T] {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         Box::new(fmtools::join("\n", self.iter().map(|item| item._fmt())))
-    }
-
-    fn text(&self) -> String {
-        let items = self.iter().map(|item| item.text());
-        fmtools::join("\n", items).to_string()
     }
 
     fn debug(&self) -> String {
@@ -109,10 +94,6 @@ impl<T: Show> Show for Option<T> {
         self.as_ref().map_or_else(|| ()._fmt(), |item| item._fmt())
     }
 
-    fn text(&self) -> String {
-        self.as_ref().map(|item| item.text()).unwrap_or_default()
-    }
-
     fn debug(&self) -> String {
         self.as_ref().map(|item| item.debug()).unwrap_or_default()
     }
@@ -121,10 +102,6 @@ impl<T: Show> Show for Option<T> {
 impl Show for () {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         Box::new("")
-    }
-
-    fn text(&self) -> String {
-        String::new()
     }
 
     fn debug(&self) -> String {
@@ -136,19 +113,11 @@ impl Show for String {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         Box::new(self)
     }
-
-    fn text(&self) -> String {
-        self.clone()
-    }
 }
 
 impl Show for &str {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         Box::new(self)
-    }
-
-    fn text(&self) -> String {
-        self.to_string()
     }
 }
 
@@ -156,19 +125,11 @@ impl Show for str {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         Box::new(self)
     }
-
-    fn text(&self) -> String {
-        self.to_string()
-    }
 }
 
 impl Show for bool {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         Box::new(self)
-    }
-
-    fn text(&self) -> String {
-        self.to_string()
     }
 }
 
@@ -176,19 +137,11 @@ impl Show for i32 {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         Box::new(self)
     }
-
-    fn text(&self) -> String {
-        self._fmt().to_string()
-    }
 }
 
 impl Show for i64 {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         Box::new(self)
-    }
-
-    fn text(&self) -> String {
-        self._fmt().to_string()
     }
 }
 
@@ -219,17 +172,4 @@ where
     T: Show + 'a,
 {
     Box::new(fmtools::fmt!(move {prefix} "\t" { item._fmt() }))
-}
-
-impl<F> Show for fmtools::fmt<F>
-where
-    F: Fn(&mut fmt::Formatter<'_>) -> fmt::Result,
-{
-    fn _fmt(&self) -> Box<dyn fmt::Display> {
-        todo!()
-    }
-
-    fn text(&self) -> String {
-        todo!()
-    }
 }

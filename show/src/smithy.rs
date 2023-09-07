@@ -15,12 +15,4 @@ impl Show for aws_smithy_types::DateTime {
             .unwrap_or_default();
         Box::new(text)
     }
-
-    fn text(&self) -> String {
-        let offset = UtcOffset::current_local_offset().unwrap_or(UtcOffset::UTC);
-        self.to_time()
-            .map_or(OffsetDateTime::UNIX_EPOCH, |ts| ts.to_offset(offset))
-            .format(&Rfc3339)
-            .unwrap_or_default()
-    }
 }

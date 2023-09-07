@@ -13,10 +13,6 @@ impl Show for Account {
         }))
     }
 
-    fn text(&self) -> String {
-        fmtools::format!("ACCOUNT\t" {self.account})
-    }
-
     fn json(&self) -> String {
         json::to_string_pretty(self).unwrap_or_default()
     }
@@ -25,10 +21,6 @@ impl Show for Account {
 impl Show for aws_sdk_sts::operation::get_access_key_info::GetAccessKeyInfoOutput {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         prefixed_item("ACCOUNT", self.account.as_deref())
-    }
-
-    fn text(&self) -> String {
-        Account::from(self).text()
     }
 
     fn json(&self) -> String {
