@@ -9,6 +9,10 @@ struct CallerIdentity {
 }
 
 impl Show for CallerIdentity {
+    fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
+        todo!()
+    }
+
     fn text(&self) -> String {
         fmtools::format!({ self })
     }
@@ -19,6 +23,14 @@ impl Show for CallerIdentity {
 }
 
 impl Show for aws_sdk_sts::operation::get_caller_identity::GetCallerIdentityOutput {
+    fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
+        Box::new(fmtools::fmt!(
+            { prefixed_item("ACCOUNT", self.account()) } " "
+            { prefixed_item("USER_ID", self.user_id()) } " "
+            { prefixed_item("ARN", self.arn()) }
+        ))
+    }
+
     fn text(&self) -> String {
         CallerIdentity::from(self).text()
     }

@@ -7,6 +7,12 @@ struct Account {
 }
 
 impl Show for Account {
+    fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
+        Box::new(fmtools::fmt!({
+            prefixed_item("ACCOUNT", Some(&self.account))
+        }))
+    }
+
     fn text(&self) -> String {
         fmtools::format!("ACCOUNT\t" {self.account})
     }
@@ -17,6 +23,10 @@ impl Show for Account {
 }
 
 impl Show for aws_sdk_sts::operation::get_access_key_info::GetAccessKeyInfoOutput {
+    fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
+        prefixed_item("ACCOUNT", self.account.as_deref())
+    }
+
     fn text(&self) -> String {
         Account::from(self).text()
     }
