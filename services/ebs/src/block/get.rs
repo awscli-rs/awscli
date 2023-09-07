@@ -1,4 +1,5 @@
 use std::error::Error as StdError;
+use std::mem;
 use std::path::PathBuf;
 
 use super::*;
@@ -24,7 +25,7 @@ pub struct GetSnapshotBlock {
 #[async_trait]
 impl Execute for GetSnapshotBlock {
     async fn execute(self: Box<Self>, client: ebs::Client) -> EbsResult {
-        let block = client
+        let mut block = client
             .get_snapshot_block()
             .snapshot_id(self.snapshot_id)
             .block_index(self.block_index)
@@ -32,8 +33,7 @@ impl Execute for GetSnapshotBlock {
             .send()
             .await?;
 
-        let contents = block
-            .block_data
+        let contents = mem::take(&mut block.block_data)
             .collect()
             .await
             .map(|bytes| bytes.into_bytes())
@@ -42,11 +42,8 @@ impl Execute for GetSnapshotBlock {
         tokio::fs::write(self.outfile, contents)
             .await
             .map_err(unhandled)?;
-        let checksum = block.checksum;
-        let checksum_algo = block.checksum_algorithm;
-        let data_length = block.data_length;
 
-        Ok(Box::new((checksum, checksum_algo, data_length)))
+        Ok(Box::new(block))
     }
 }
 

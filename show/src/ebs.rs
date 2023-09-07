@@ -148,15 +148,13 @@ impl Show for aws_sdk_ebs::operation::put_snapshot_block::PutSnapshotBlockOutput
     }
 }
 
-impl Show
-    for (
-        Option<String>,
-        Option<aws_sdk_ebs::types::ChecksumAlgorithm>,
-        Option<i32>,
-    )
-{
-    fn _fmt(&self) -> Box<dyn fmt::Display> {
-        todo!()
+impl Show for aws_sdk_ebs::operation::get_snapshot_block::GetSnapshotBlockOutput {
+    fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
+        Box::new(fmtools::fmt!(
+            { prefixed_item("DATA_LENGTH", self.data_length()) } "\t"
+            { prefixed_item("CKSUM_ALGO", self.checksum_algorithm() )} "\t"
+            { prefixed_item("CKSUM", self.checksum()) }
+        ))
     }
 
     fn text(&self) -> String {
