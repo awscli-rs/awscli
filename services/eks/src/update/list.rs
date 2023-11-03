@@ -1,5 +1,3 @@
-use tokio_stream::StreamExt;
-
 use super::*;
 
 /// Lists the Amazon EKS clusters in your Amazon Web Services account.
@@ -29,7 +27,7 @@ impl Execute for ListUpdates {
             .into_paginator()
             .items()
             .send()
-            .collect::<Result<Vec<_>, _>>()
+            .try_collect()
             .await?;
 
         Ok(Box::new(updates))

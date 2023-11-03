@@ -1,5 +1,3 @@
-use tokio_stream::StreamExt;
-
 use super::*;
 
 #[derive(Debug, Args)]
@@ -13,7 +11,7 @@ impl Execute for ListUsers {
             .into_paginator()
             .items()
             .send()
-            .collect::<Result<Vec<_>, _>>()
+            .try_collect()
             .await?;
         Ok(Box::new(users))
     }

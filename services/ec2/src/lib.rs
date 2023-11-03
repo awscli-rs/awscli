@@ -2,7 +2,6 @@ use async_trait::async_trait;
 use aws_sdk_ec2 as ec2;
 use clap::{Args, Subcommand};
 use ec2::types;
-// use tokio_stream::StreamExt;
 
 use config::Config;
 use error::RawsError;

@@ -1,5 +1,3 @@
-use tokio_stream::StreamExt;
-
 use super::*;
 
 /// Lists the available add-ons.
@@ -19,7 +17,7 @@ impl Execute for ListAddons {
             .into_paginator()
             .items()
             .send()
-            .collect::<Result<Vec<_>, _>>()
+            .try_collect()
             .await?;
 
         Ok(Box::new(addons))

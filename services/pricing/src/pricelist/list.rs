@@ -31,7 +31,7 @@ impl Execute for ListPriceLists {
             .into_paginator()
             .items()
             .send()
-            .collect::<Result<Vec<_>, _>>()
+            .try_collect()
             .await?;
 
         Ok(Box::new(price_lists))

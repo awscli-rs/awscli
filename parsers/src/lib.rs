@@ -1,3 +1,5 @@
+use aws_smithy_types::error::operation::BuildError;
+
 use itertools::Itertools;
 use serde_json as json;
 use thiserror::Error;

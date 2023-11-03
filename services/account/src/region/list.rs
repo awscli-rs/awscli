@@ -1,5 +1,3 @@
-use tokio_stream::StreamExt;
-
 use super::*;
 
 /// Lists all the Regions for a given account and their respective opt-in statuses.
@@ -24,7 +22,7 @@ impl Execute for ListRegions {
             // This paginator doesn't have `.items()` at least in 0.28
             //.items()
             .send()
-            .collect::<Result<Vec<_>, _>>()
+            .try_collect()
             .await?
             .into_iter()
             .filter_map(|output| output.regions)

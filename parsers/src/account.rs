@@ -20,11 +20,11 @@ const WEBSITE_URL: &str = "WebsiteUrl";
 // CompanyName=string,CountryCode=string,DistrictOrCounty=string,FullName=string,
 // PhoneNumber=string,PostalCode=string,StateOrRegion=string,WebsiteUrl=string
 
-pub fn contact_information(text: &str) -> Result<ContactInformation, InvalidContactInformation> {
+pub fn contact_information(text: &str) -> Result<ContactInformation, BuildError> {
     json::from_str::<json::Value>(text).map_or_else(|_| from_text(text), from_json)
 }
 
-fn from_json(value: json::Value) -> Result<ContactInformation, InvalidContactInformation> {
+fn from_json(value: json::Value) -> Result<ContactInformation, BuildError> {
     let address_line1 = get_string_item(&value, ADDRESS_LINE1);
     let address_line2 = get_string_item(&value, ADDRESS_LINE2);
     let address_line3 = get_string_item(&value, ADDRESS_LINE3);
@@ -38,7 +38,7 @@ fn from_json(value: json::Value) -> Result<ContactInformation, InvalidContactInf
     let state_or_region = get_string_item(&value, STATE_OR_REGION);
     let website_url = get_string_item(&value, WEBSITE_URL);
 
-    let contact_info = ContactInformation::builder()
+    ContactInformation::builder()
         .set_address_line1(address_line1)
         .set_address_line2(address_line2)
         .set_address_line3(address_line3)
@@ -51,26 +51,24 @@ fn from_json(value: json::Value) -> Result<ContactInformation, InvalidContactInf
         .set_postal_code(postal_code)
         .set_state_or_region(state_or_region)
         .set_website_url(website_url)
-        .build();
-
-    Ok(contact_info)
+        .build()
 }
 
 fn get_string_item(value: &json::Value, item: &str) -> Option<String> {
     value[item].as_str().map(ToString::to_string)
 }
 
-fn from_text(text: &str) -> Result<ContactInformation, InvalidContactInformation> {
+fn from_text(text: &str) -> Result<ContactInformation, BuildError> {
     text.split(',')
         .filter_map(|item| item.split_once('='))
         .try_fold(ContactInformation::builder(), builder_item)
-        .map(|builder| builder.build())
+        .and_then(|builder| builder.build())
 }
 
 fn builder_item(
     builder: ContactInformationBuilder,
     (key, value): (&str, &str),
-) -> Result<ContactInformationBuilder, InvalidContactInformation> {
+) -> Result<ContactInformationBuilder, BuildError> {
     match key {
         ADDRESS_LINE1 => Ok(builder.address_line1(value)),
         ADDRESS_LINE2 => Ok(builder.address_line2(value)),
@@ -84,18 +82,11 @@ fn builder_item(
         POSTAL_CODE => Ok(builder.postal_code(value)),
         STATE_OR_REGION => Ok(builder.state_or_region(value)),
         WEBSITE_URL => Ok(builder.website_url(value)),
-        other => Err(InvalidContactInformation::unknown(other)),
+        other => Err(unknown(other)),
     }
 }
 
-#[derive(Clone, Debug, PartialEq, Error)]
-pub enum InvalidContactInformation {
-    #[error("Must be one of {ADDRESS_LINE1}, {ADDRESS_LINE2}, {ADDRESS_LINE3}, {CITY}, {COMPANY_NAME}, {COUNTRY_CODE}, {DISTRICT_OR_COUNTY}, {FULL_NAME}, {PHONE_NUMBER}, {POSTAL_CODE}, {STATE_OR_REGION}, {WEBSITE_URL}")]
-    UnknownAttribute(String),
-}
-
-impl InvalidContactInformation {
-    fn unknown(other: &str) -> Self {
-        Self::UnknownAttribute(other.to_string())
-    }
+fn unknown(other: &str) -> BuildError {
+    let text = format!("Unknown attr '{other}': must be one of {ADDRESS_LINE1}, {ADDRESS_LINE2}, {ADDRESS_LINE3}, {CITY}, {COMPANY_NAME}, {COUNTRY_CODE}, {DISTRICT_OR_COUNTY}, {FULL_NAME}, {PHONE_NUMBER}, {POSTAL_CODE}, {STATE_OR_REGION}, {WEBSITE_URL}");
+    BuildError::other(text)
 }

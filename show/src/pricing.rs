@@ -3,7 +3,7 @@ use super::*;
 impl Show for aws_sdk_pricing::types::Service {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         Box::new(fmtools::fmt!(
-            { prefixed_item("SERVICES", self.service_code()) } "\n"
+            { prefixed_item0("SERVICES", self.service_code()) } "\n"
             { prefixed_items("ATTRIBUTENAMES", self.attribute_names()) }
 
         ))

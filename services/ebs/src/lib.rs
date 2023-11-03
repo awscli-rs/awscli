@@ -1,7 +1,6 @@
 use async_trait::async_trait;
 use aws_sdk_ebs as ebs;
 use clap::{Args, Subcommand};
-use tokio_stream::StreamExt;
 
 use config::Config;
 use error::RawsError;

@@ -2,21 +2,21 @@ use std::str;
 
 use super::*;
 
-pub fn parse_tags(text: &str) -> Result<Vec<TagSpecification>, InvalidTag> {
-    let (resources, tags) = text.split_once(',').ok_or(InvalidTag::MissingComma)?;
+pub fn parse_tags(text: &str) -> Result<Vec<TagSpecification>, BuildError> {
+    let (resources, tags) = text.split_once(',').ok_or_else(missing_comma)?;
 
     let tags = tags
         .strip_prefix("Tags=[{")
-        .ok_or(InvalidTag::MissingTag)?
+        .ok_or_else(missing_tag)?
         .strip_suffix("}]")
-        .ok_or(InvalidTag::MissingTag)?
+        .ok_or_else(missing_tag)?
         .split("},{")
         .map(tag)
         .collect::<Result<Vec<_>, _>>()?;
 
     let tags = resources
         .strip_prefix("ResourceType=")
-        .ok_or(InvalidTag::MissingResource)?
+        .ok_or_else(missing_resource)?
         .split('|')
         .map(ResourceType::from)
         .map(|r| {
@@ -30,35 +30,23 @@ pub fn parse_tags(text: &str) -> Result<Vec<TagSpecification>, InvalidTag> {
     Ok(tags)
 }
 
-// struct ResourceIterator {}
-fn tag(text: &str) -> Result<Tag, InvalidTag> {
-    crate::tag::parse_tag(text).map_err(InvalidTag::from)
+fn tag(text: &str) -> Result<Tag, BuildError> {
+    crate::tag::parse_tag(text)
 }
 
-#[derive(Debug, PartialEq, Error)]
-pub enum InvalidTag {
-    #[error("Tag specification should have comma-separated resource type and tags")]
-    MissingComma,
-    #[error("Tag should have 'ResourceType=xxx' element")]
-    MissingResource,
-    #[error("Tag should have'Tag=[{{...}}]' element")]
-    MissingTag,
-    #[error("Tag should have comma separated key and value ('Key=k,Value=v')")]
-    MissingKeyValueComma,
-    #[error("Tag should have 'Key=xxx' element")]
-    MissingKey,
-    #[error("Tag should have 'Value=xxx' element")]
-    MissingValue,
+fn missing_comma() -> BuildError {
+    BuildError::other("Tag specification should have comma-separated resource type and tags")
 }
 
-impl From<crate::tag::InvalidTag> for InvalidTag {
-    fn from(value: crate::tag::InvalidTag) -> Self {
-        match value {
-            tag::InvalidTag::MissingComma => Self::MissingKeyValueComma,
-            tag::InvalidTag::MissingKey => Self::MissingKey,
-            tag::InvalidTag::MissingValue => Self::MissingValue,
-        }
-    }
+fn missing_tag() -> BuildError {
+    BuildError::missing_field("Tag=", "Tag should have'Tag=[{{...}}]' element")
+}
+
+fn missing_resource() -> BuildError {
+    BuildError::missing_field(
+        "ResourceType=",
+        "Tag should have 'ResourceType=xxx' element",
+    )
 }
 
 #[cfg(test)]

@@ -27,7 +27,7 @@ impl Execute for ListChangedBlocks {
             .set_next_token(self.next_token)
             .into_paginator()
             .send()
-            .collect::<Result<Vec<_>, _>>()
+            .try_collect()
             .await?
             .into_iter()
             .filter_map(|item| item.changed_blocks)

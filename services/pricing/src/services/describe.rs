@@ -21,7 +21,7 @@ impl Execute for DescribeServices {
             .into_paginator()
             .items()
             .send()
-            .collect::<Result<Vec<_>, _>>()
+            .try_collect()
             .await?;
 
         Ok(Box::new(services))

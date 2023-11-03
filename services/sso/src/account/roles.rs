@@ -1,5 +1,3 @@
-use tokio_stream::StreamExt;
-
 use super::*;
 
 /// Lists all roles that are assigned to the user for a given AWS account.
@@ -23,7 +21,7 @@ impl Execute for ListAccountRoles {
             .into_paginator()
             .items()
             .send()
-            .collect::<Result<Vec<_>, _>>()
+            .try_collect()
             .await?;
 
         Ok(Box::new(account_roles))
