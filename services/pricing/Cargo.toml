@@ -14,7 +14,6 @@ async-trait.workspace = true
 aws-sdk-pricing.workspace = true
 aws-smithy-types.workspace = true
 clap.workspace = true
-tokio-stream.workspace = true
 thiserror.workspace = true
 
 config.workspace = true
