@@ -39,7 +39,7 @@ impl Show for aws_sdk_eks::types::Update {
             { prefixed_item("ID", self.id()) } "\n"
             { prefixed_item("STATUS", self.status()) } "\n"
             { prefixed_item("TYPE", self.r#type()) } "\n"
-            { prefixed_item("PARAMS", self.params()) }
+            { prefixed_items("PARAMS", self.params()) }
 
         ))
     }

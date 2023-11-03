@@ -145,16 +145,13 @@ impl Show for i64 {
     }
 }
 
-fn prefixed_items<'a, T, U>(prefix: &'static str, items: U) -> Box<dyn fmt::Display + 'a>
+fn prefixed_items<'a, T>(prefix: &'static str, items: &'a [T]) -> Box<dyn fmt::Display + 'a>
 where
     T: Show + 'a,
-    U: Into<Option<&'a [T]>>,
 {
     Box::new(fmtools::join(
         "\n",
         items
-            .into()
-            .unwrap_or_default()
             .iter()
             .map(move |item| fmtools::fmt!(move {prefix} "\t" { item._fmt() })),
     ))
