@@ -43,38 +43,4 @@ impl AwsError for iam::Error {
             _ => &EMPTY_ERROR_METADATA,
         }
     }
-
-    fn message(&self) -> Option<&str> {
-        match self {
-            Self::ConcurrentModificationException(e) => e.message(),
-            Self::CredentialReportExpiredException(e) => e.message(),
-            Self::CredentialReportNotPresentException(e) => e.message(),
-            Self::CredentialReportNotReadyException(e) => e.message(),
-            Self::DeleteConflictException(e) => e.message(),
-            Self::DuplicateCertificateException(e) => e.message(),
-            Self::DuplicateSshPublicKeyException(e) => e.message(),
-            Self::EntityAlreadyExistsException(e) => e.message(),
-            Self::EntityTemporarilyUnmodifiableException(e) => e.message(),
-            Self::InvalidAuthenticationCodeException(e) => e.message(),
-            Self::InvalidCertificateException(e) => e.message(),
-            Self::InvalidInputException(e) => e.message(),
-            Self::InvalidPublicKeyException(e) => e.message(),
-            Self::InvalidUserTypeException(e) => e.message(),
-            Self::KeyPairMismatchException(e) => e.message(),
-            Self::LimitExceededException(e) => e.message(),
-            Self::MalformedCertificateException(e) => e.message(),
-            Self::MalformedPolicyDocumentException(e) => e.message(),
-            Self::NoSuchEntityException(e) => e.message(),
-            Self::PasswordPolicyViolationException(e) => e.message(),
-            Self::PolicyEvaluationException(e) => e.message(),
-            Self::PolicyNotAttachableException(e) => e.message(),
-            Self::ReportGenerationLimitExceededException(e) => e.message(),
-            Self::ServiceFailureException(e) => e.message(),
-            Self::ServiceNotSupportedException(e) => e.message(),
-            Self::UnmodifiableEntityException(e) => e.message(),
-            Self::UnrecognizedPublicKeyEncodingException(e) => e.message(),
-            Self::Unhandled(e) => e.message(),
-            _ => None,
-        }
-    }
 }

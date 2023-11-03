@@ -24,19 +24,4 @@ impl AwsError for sts::Error {
             _ => &EMPTY_ERROR_METADATA,
         }
     }
-
-    fn message(&self) -> Option<&str> {
-        match self {
-            Self::ExpiredTokenException(e) => e.message(),
-            Self::IdpCommunicationErrorException(e) => e.message(),
-            Self::IdpRejectedClaimException(e) => e.message(),
-            Self::InvalidAuthorizationMessageException(e) => e.message(),
-            Self::InvalidIdentityTokenException(e) => e.message(),
-            Self::MalformedPolicyDocumentException(e) => e.message(),
-            Self::PackedPolicyTooLargeException(e) => e.message(),
-            Self::RegionDisabledException(e) => e.message(),
-            Self::Unhandled(e) => e.message(),
-            _ => None,
-        }
-    }
 }

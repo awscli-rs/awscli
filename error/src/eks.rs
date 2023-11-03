@@ -29,24 +29,4 @@ impl AwsError for eks::Error {
             _ => &EMPTY_ERROR_METADATA,
         }
     }
-
-    fn message(&self) -> Option<&str> {
-        match self {
-            Self::AccessDeniedException(e) => e.message(),
-            Self::BadRequestException(e) => e.message(),
-            Self::ClientException(e) => e.message(),
-            Self::InvalidParameterException(e) => e.message(),
-            Self::InvalidRequestException(e) => e.message(),
-            Self::NotFoundException(e) => e.message(),
-            Self::ResourceInUseException(e) => e.message(),
-            Self::ResourceLimitExceededException(e) => e.message(),
-            Self::ResourceNotFoundException(e) => e.message(),
-            Self::ResourcePropagationDelayException(e) => e.message(),
-            Self::ServerException(e) => e.message(),
-            Self::ServiceUnavailableException(e) => e.message(),
-            Self::UnsupportedAvailabilityZoneException(e) => e.message(),
-            Self::Unhandled(e) => e.message(),
-            _ => None,
-        }
-    }
 }

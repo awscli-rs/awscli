@@ -16,11 +16,4 @@ impl AwsError for ec2::Error {
             _ => &EMPTY_ERROR_METADATA,
         }
     }
-
-    fn message(&self) -> Option<&str> {
-        match self {
-            Self::Unhandled(e) => e.message(),
-            _ => None,
-        }
-    }
 }

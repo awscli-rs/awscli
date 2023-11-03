@@ -20,15 +20,4 @@ impl AwsError for sso::Error {
             _ => &EMPTY_ERROR_METADATA,
         }
     }
-
-    fn message(&self) -> Option<&str> {
-        match self {
-            Self::InvalidRequestException(e) => e.message(),
-            Self::ResourceNotFoundException(e) => e.message(),
-            Self::TooManyRequestsException(e) => e.message(),
-            Self::UnauthorizedException(e) => e.message(),
-            Self::Unhandled(e) => e.message(),
-            _ => None,
-        }
-    }
 }
