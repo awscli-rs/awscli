@@ -1,13 +1,12 @@
 use aws_sdk_ebs as ebs;
-use ebs::error::ProvideErrorMetadata;
 
 use super::*;
 
 impl AwsError for ebs::Error {
-    type DisplayErrorContext<'a> = ebs::error::DisplayErrorContext<&'a Self>;
+    type DisplayErrorContext<'a> = DisplayErrorContext<&'a Self>;
 
     fn error_context(&self) -> Self::DisplayErrorContext<'_> {
-        ebs::error::DisplayErrorContext(self)
+        DisplayErrorContext(self)
     }
 
     fn meta(&self) -> &ErrorMetadata {

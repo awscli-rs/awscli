@@ -1,13 +1,12 @@
 use aws_sdk_ec2 as ec2;
-use ec2::error::ProvideErrorMetadata;
 
 use super::*;
 
 impl AwsError for ec2::Error {
-    type DisplayErrorContext<'a> = ec2::error::DisplayErrorContext<&'a Self>;
+    type DisplayErrorContext<'a> = DisplayErrorContext<&'a Self>;
 
     fn error_context(&self) -> Self::DisplayErrorContext<'_> {
-        ec2::error::DisplayErrorContext(self)
+        DisplayErrorContext(self)
     }
 
     fn meta(&self) -> &ErrorMetadata {

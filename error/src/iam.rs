@@ -1,13 +1,12 @@
 use aws_sdk_iam as iam;
-use iam::error::ProvideErrorMetadata;
 
 use super::*;
 
 impl AwsError for iam::Error {
-    type DisplayErrorContext<'a> = iam::error::DisplayErrorContext<&'a Self>;
+    type DisplayErrorContext<'a> = DisplayErrorContext<&'a Self>;
 
     fn error_context(&self) -> Self::DisplayErrorContext<'_> {
-        iam::error::DisplayErrorContext(self)
+        DisplayErrorContext(self)
     }
 
     fn meta(&self) -> &ErrorMetadata {

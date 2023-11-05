@@ -1,14 +1,12 @@
 use aws_sdk_account as account;
 
-use account::error::ProvideErrorMetadata;
-
 use super::*;
 
 impl AwsError for account::Error {
-    type DisplayErrorContext<'a> = account::error::DisplayErrorContext<&'a Self>;
+    type DisplayErrorContext<'a> = DisplayErrorContext<&'a Self>;
 
     fn error_context(&self) -> Self::DisplayErrorContext<'_> {
-        account::error::DisplayErrorContext(self)
+        DisplayErrorContext(self)
     }
 
     fn meta(&self) -> &ErrorMetadata {

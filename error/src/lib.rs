@@ -1,3 +1,5 @@
+use aws_smithy_types::error::display::DisplayErrorContext;
+use aws_smithy_types::error::metadata::ProvideErrorMetadata;
 use aws_smithy_types::error::metadata::EMPTY_ERROR_METADATA;
 use aws_smithy_types::error::ErrorMetadata;
 use miette::Diagnostic;
@@ -50,3 +52,15 @@ impl<E: AwsError> Diagnostic for RawsError<E> {
         }
     }
 }
+
+// impl<T: ProvideErrorMetadata> AwsError for T {
+//     type DisplayErrorContext<'a> = DisplayErrorContext<&'a Self>;
+
+//     fn error_context(&self) -> Self::DisplayErrorContext<'_> {
+//         Self::DisplayErrorContext(self)
+//     }
+
+//     fn meta(&self) -> &ErrorMetadata {
+//         self.meta()
+//     }
+// }

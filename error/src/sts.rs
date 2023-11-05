@@ -1,13 +1,12 @@
 use aws_sdk_sts as sts;
-use sts::error::ProvideErrorMetadata;
 
 use super::*;
 
 impl AwsError for sts::Error {
-    type DisplayErrorContext<'a> = sts::error::DisplayErrorContext<&'a Self>;
+    type DisplayErrorContext<'a> = DisplayErrorContext<&'a Self>;
 
     fn error_context(&self) -> Self::DisplayErrorContext<'_> {
-        sts::error::DisplayErrorContext(self)
+        DisplayErrorContext(self)
     }
 
     fn meta(&self) -> &ErrorMetadata {

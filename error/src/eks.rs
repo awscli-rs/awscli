@@ -1,13 +1,12 @@
 use aws_sdk_eks as eks;
-use eks::error::ProvideErrorMetadata;
 
 use super::*;
 
 impl AwsError for eks::Error {
-    type DisplayErrorContext<'a> = eks::error::DisplayErrorContext<&'a Self>;
+    type DisplayErrorContext<'a> = DisplayErrorContext<&'a Self>;
 
     fn error_context(&self) -> Self::DisplayErrorContext<'_> {
-        eks::error::DisplayErrorContext(self)
+        DisplayErrorContext(self)
     }
 
     fn meta(&self) -> &ErrorMetadata {

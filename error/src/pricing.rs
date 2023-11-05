@@ -1,13 +1,12 @@
 use aws_sdk_pricing as pricing;
-use pricing::error::ProvideErrorMetadata;
 
 use super::*;
 
 impl AwsError for pricing::Error {
-    type DisplayErrorContext<'a> = pricing::error::DisplayErrorContext<&'a Self>;
+    type DisplayErrorContext<'a> = DisplayErrorContext<&'a Self>;
 
     fn error_context(&self) -> Self::DisplayErrorContext<'_> {
-        pricing::error::DisplayErrorContext(self)
+        DisplayErrorContext(self)
     }
 
     fn meta(&self) -> &ErrorMetadata {

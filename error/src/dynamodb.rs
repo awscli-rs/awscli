@@ -1,13 +1,12 @@
 use aws_sdk_dynamodb as dynamodb;
-use dynamodb::error::ProvideErrorMetadata;
 
 use super::*;
 
 impl AwsError for dynamodb::Error {
-    type DisplayErrorContext<'a> = dynamodb::error::DisplayErrorContext<&'a Self>;
+    type DisplayErrorContext<'a> = DisplayErrorContext<&'a Self>;
 
     fn error_context(&self) -> Self::DisplayErrorContext<'_> {
-        dynamodb::error::DisplayErrorContext(self)
+        DisplayErrorContext(self)
     }
 
     fn meta(&self) -> &ErrorMetadata {
