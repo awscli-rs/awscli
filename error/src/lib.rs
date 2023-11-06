@@ -12,6 +12,7 @@ mod ec2;
 mod eks;
 mod iam;
 mod pricing;
+mod s3;
 mod sso;
 mod sts;
 

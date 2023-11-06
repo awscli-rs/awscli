@@ -1,0 +1,25 @@
+[package]
+name = "s3"
+description = "RAWS s3 component"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+
+
+[dependencies]
+async-trait.workspace = true
+aws-sdk-s3.workspace = true
+aws-smithy-types.workspace = true
+clap.workspace = true
+thiserror.workspace = true
+
+config.workspace = true
+error.workspace = true
+parsers.workspace = true
+show.workspace = true
+
+
+[lints]
+workspace = true

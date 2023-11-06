@@ -13,6 +13,7 @@ members = [
     "services/eks",
     "services/iam",
     "services/pricing",
+    "services/s3",
     "services/sso",
     "services/sts",
 ]
@@ -42,6 +43,7 @@ aws-sdk-ec2 = "0.35"
 aws-sdk-eks = "0.35"
 aws-sdk-iam = "0.35"
 aws-sdk-pricing = "0.35"
+aws-sdk-s3 = "0.35"
 aws-sdk-sso = "0.35"
 aws-sdk-sts = "0.35"
 clap = { version = "4.2", features = ["derive", "env"] }
@@ -65,6 +67,7 @@ ec2 = { version = "0.0.0-alpha.9", path = "./services/ec2" }
 eks = { version = "0.0.0-alpha.9", path = "./services/eks" }
 iam = { version = "0.0.0-alpha.9", path = "./services/iam" }
 pricing = { version = "0.0.0-alpha.9", path = "./services/pricing" }
+s3 = { version = "0.0.0-alpha.9", path = "./services/s3" }
 sso = { version = "0.0.0-alpha.9", path = "./services/sso" }
 sts = { version = "0.0.0-alpha.9", path = "./services/sts" }
 

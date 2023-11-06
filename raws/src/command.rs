@@ -6,6 +6,7 @@ use ec2::Ec2;
 use eks::Eks;
 use iam::Iam;
 use pricing::Pricing;
+use s3::S3;
 use sso::Sso;
 use sts::Sts;
 
@@ -35,6 +36,9 @@ pub(crate) enum Command {
     Pricing(Pricing),
 
     #[command(subcommand)]
+    S3(S3),
+
+    #[command(subcommand)]
     Sso(Sso),
 
     #[command(subcommand)]
@@ -51,6 +55,7 @@ impl Command {
             Self::Eks(eks) => eks.dispatch(config).await?,
             Self::Iam(iam) => iam.dispatch(config).await?,
             Self::Pricing(pricing) => pricing.dispatch(config).await?,
+            Self::S3(s3) => s3.dispatch(config).await?,
             Self::Sso(sso) => sso.dispatch(config).await?,
             Self::Sts(sts) => sts.dispatch(config).await?,
         }

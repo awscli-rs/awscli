@@ -8,5 +8,6 @@ AWS Services support
 [-] eks
 [-] iam
 [X] pricing
+[ ] s3
 [-] sso
 [X] sts

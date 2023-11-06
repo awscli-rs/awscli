@@ -27,6 +27,7 @@ ec2.workspace = true
 eks.workspace = true
 iam.workspace = true
 pricing.workspace = true
+s3.workspace = true
 sso.workspace = true
 sts.workspace = true
 
