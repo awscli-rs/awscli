@@ -48,8 +48,21 @@ impl S3Client {
         Ok(objects)
     }
 
+    pub(crate) async fn create_bucket(&self, bucket: &str) -> S3Result<Option<String>> {
+        let location = self
+            .client
+            .create_bucket()
+            .bucket(bucket)
+            .send()
+            .await?
+            .location;
+
+        Ok(location)
+    }
+
     pub(crate) async fn delete_bucket(&self, bucket: &str) -> S3Result<()> {
         self.client.delete_bucket().bucket(bucket).send().await?;
+
         Ok(())
     }
 
@@ -58,6 +71,7 @@ impl S3Client {
         bucket: &str,
     ) -> S3Result<s3::operation::delete_objects::DeleteObjectsOutput> {
         let output = self.client.delete_objects().bucket(bucket).send().await?;
+
         Ok(output)
     }
 }

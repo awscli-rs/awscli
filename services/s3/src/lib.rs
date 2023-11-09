@@ -25,6 +25,7 @@ pub trait Execute {
 /// High-level S3 commands
 #[derive(Debug, Subcommand)]
 pub enum S3 {
+    Mb(bucket::Make),
     Rb(bucket::Remove),
     Ls(bucket::List),
 }
@@ -32,6 +33,7 @@ pub enum S3 {
 impl S3 {
     fn boxed(self) -> Box<dyn Execute> {
         match self {
+            Self::Mb(mb) => Box::new(mb),
             Self::Rb(rb) => Box::new(rb),
             Self::Ls(ls) => Box::new(ls),
         }
