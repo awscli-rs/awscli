@@ -1,4 +1,5 @@
 use aws_config::{ConfigLoader, SdkConfig};
+use aws_types::app_name::AppName;
 use aws_types::region::Region;
 
 pub use output::Output;
@@ -20,7 +21,9 @@ impl Config {
         output: Option<Output>,
     ) -> Self {
         let output = output.unwrap_or_default();
+        let app_name = AppName::new("raws").expect("valid app name");
         let shared_config = aws_config::from_env()
+            .app_name(app_name)
             .optionally_profile(profile)
             .optionally_region(region)
             .load()
