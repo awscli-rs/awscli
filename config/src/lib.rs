@@ -9,6 +9,7 @@ mod output;
 #[derive(Debug)]
 pub struct Config {
     debug: bool,
+    no_paginate: bool,
     output: Output,
     shared_config: SdkConfig,
 }
@@ -16,6 +17,8 @@ pub struct Config {
 impl Config {
     pub async fn new(
         debug: bool,
+        no_paginate: bool,
+        endpoint_url: Option<String>,
         profile: Option<String>,
         region: Option<String>,
         output: Option<Output>,
@@ -26,11 +29,13 @@ impl Config {
             .app_name(app_name)
             .optionally_profile(profile)
             .optionally_region(region)
+            .optionally_endpoint_url(endpoint_url)
             .load()
             .await;
 
         Self {
             debug,
+            no_paginate,
             output,
             shared_config,
         }
@@ -38,6 +43,10 @@ impl Config {
 
     pub fn config(&self) -> &SdkConfig {
         &self.shared_config
+    }
+
+    pub fn no_paginate(&self) -> bool {
+        self.no_paginate
     }
 
     pub fn show(&self, object: Box<dyn show::Show>) {
@@ -53,6 +62,7 @@ impl Config {
 trait Optionally {
     fn optionally_profile(self, profile: Option<String>) -> Self;
     fn optionally_region(self, region: Option<String>) -> Self;
+    fn optionally_endpoint_url(self, endpoint_url: Option<String>) -> Self;
 }
 
 impl Optionally for ConfigLoader {
@@ -67,6 +77,14 @@ impl Optionally for ConfigLoader {
     fn optionally_region(self, region: Option<String>) -> Self {
         if let Some(region) = region.map(Region::new) {
             self.region(region)
+        } else {
+            self
+        }
+    }
+
+    fn optionally_endpoint_url(self, endpoint_url: Option<String>) -> Self {
+        if let Some(endpoint_url) = endpoint_url {
+            self.endpoint_url(endpoint_url)
         } else {
             self
         }
