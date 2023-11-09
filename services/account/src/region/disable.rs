@@ -15,8 +15,8 @@ pub struct DisableRegion {
 
 #[async_trait]
 impl Execute for DisableRegion {
-    async fn execute(self: Box<Self>, client: Client) -> AccountResult {
-        let _output = client
+    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+        let _output = Self::client(config)
             .disable_region()
             .set_account_id(self.account_id)
             .region_name(self.region_name)

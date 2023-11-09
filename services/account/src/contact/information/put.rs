@@ -10,13 +10,13 @@ pub struct PutContactInformation {
 
     /// Contains the details of the primary contact information associated with an Amazon Web Services account.
     #[arg(long, value_parser = parsers::account::contact_information)]
-    contact_information: types::ContactInformation,
+    contact_information: account::types::ContactInformation,
 }
 
 #[async_trait]
 impl Execute for PutContactInformation {
-    async fn execute(self: Box<Self>, client: Client) -> AccountResult {
-        let contact = client
+    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+        let contact = Self::client(config)
             .get_alternate_contact()
             .set_account_id(self.account_id)
             .send()

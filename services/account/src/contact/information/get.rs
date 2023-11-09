@@ -11,8 +11,8 @@ pub struct GetContactInformation {
 
 #[async_trait]
 impl Execute for GetContactInformation {
-    async fn execute(self: Box<Self>, client: Client) -> AccountResult {
-        let contact = client
+    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+        let contact = Self::client(config)
             .get_contact_information()
             .set_account_id(self.account_id)
             .send()

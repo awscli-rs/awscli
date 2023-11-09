@@ -8,14 +8,14 @@ pub struct ListRegions {
     #[arg(long)]
     account_id: Option<String>,
 
-    #[arg(long, value_parser = clap::value_parser!(types::RegionOptStatus))]
-    region_opt_status_contains: Option<Vec<types::RegionOptStatus>>,
+    #[arg(long, value_parser = clap::value_parser!(account::types::RegionOptStatus))]
+    region_opt_status_contains: Option<Vec<account::types::RegionOptStatus>>,
 }
 
 #[async_trait]
 impl Execute for ListRegions {
-    async fn execute(self: Box<Self>, client: Client) -> AccountResult {
-        let regions = client
+    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+        let regions = Self::client(config)
             .list_regions()
             .set_region_opt_status_contains(self.region_opt_status_contains)
             .into_paginator()

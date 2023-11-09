@@ -1,6 +1,5 @@
 use async_trait::async_trait;
-use aws_sdk_account::types;
-use aws_sdk_account::Client;
+use aws_sdk_account as account;
 use clap::{Args, Subcommand};
 
 use config::Config;
@@ -13,8 +12,16 @@ type AccountResult<T = Box<dyn show::Show>> = std::result::Result<T, aws_sdk_acc
 
 #[async_trait]
 pub trait Execute {
-    async fn execute(self: Box<Self>, client: Client) -> AccountResult;
+    async fn execute(self: Box<Self>, config: &Config) -> AccountResult;
 }
+
+trait Client {
+    fn client(config: &Config) -> account::Client {
+        account::Client::new(config.config())
+    }
+}
+
+impl<T> Client for T where T: Execute {}
 
 /// Operations for Amazon Web Services Account Management
 #[derive(Debug, Subcommand)]
@@ -52,9 +59,8 @@ impl Account {
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<aws_sdk_account::Error>> {
-        let client = Client::new(config.config());
         self.boxed()
-            .execute(client)
+            .execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

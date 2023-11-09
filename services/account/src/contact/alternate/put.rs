@@ -9,8 +9,8 @@ pub struct PutAlternateContact {
     account_id: Option<String>,
 
     /// Specifies which alternate contact you want to retrieve.
-    #[arg(long, value_parser = clap::value_parser!(types::AlternateContactType))]
-    alternate_contact_type: types::AlternateContactType,
+    #[arg(long, value_parser = clap::value_parser!(account::types::AlternateContactType))]
+    alternate_contact_type: account::types::AlternateContactType,
 
     /// Specifies a name for the alternate contact.
     #[arg(long)]
@@ -31,8 +31,8 @@ pub struct PutAlternateContact {
 
 #[async_trait]
 impl Execute for PutAlternateContact {
-    async fn execute(self: Box<Self>, client: Client) -> AccountResult {
-        let _output = client
+    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+        let _output = Self::client(config)
             .put_alternate_contact()
             .set_account_id(self.account_id)
             .alternate_contact_type(self.alternate_contact_type)
