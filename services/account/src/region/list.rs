@@ -15,7 +15,8 @@ pub struct ListRegions {
 #[async_trait]
 impl Execute for ListRegions {
     async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
-        let regions = Self::client(config)
+        let regions = config
+            .client()
             .list_regions()
             .set_region_opt_status_contains(self.region_opt_status_contains)
             .into_paginator()

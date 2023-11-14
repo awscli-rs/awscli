@@ -12,7 +12,17 @@ type EbsResult<T = Box<dyn show::Show>> = std::result::Result<T, ebs::Error>;
 
 #[async_trait]
 pub trait Execute {
-    async fn execute(self: Box<Self>, client: ebs::Client) -> EbsResult;
+    async fn execute(self: Box<Self>, config: &Config) -> EbsResult;
+}
+
+trait ClientExt {
+    fn client(&self) -> ebs::Client;
+}
+
+impl ClientExt for Config {
+    fn client(&self) -> ebs::Client {
+        ebs::Client::new(self.config())
+    }
 }
 
 /// Amazon Elastic Block Store (Amazon EBS) direct API
@@ -40,9 +50,8 @@ impl Ebs {
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<ebs::Error>> {
-        let client = ebs::Client::new(config.config());
         self.boxed()
-            .execute(client)
+            .execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

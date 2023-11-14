@@ -20,8 +20,9 @@ pub struct GetSessionToken {
 
 #[async_trait]
 impl Execute for GetSessionToken {
-    async fn execute(self: Box<Self>, client: sts::Client) -> StsResult {
-        let credentials = client
+    async fn execute(self: Box<Self>, config: &Config) -> StsResult {
+        let credentials = config
+            .client()
             .get_session_token()
             .set_duration_seconds(self.duration_seconds)
             .set_serial_number(self.serial_number)

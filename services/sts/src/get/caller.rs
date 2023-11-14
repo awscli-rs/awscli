@@ -7,8 +7,8 @@ pub struct GetCallerIdentity;
 
 #[async_trait]
 impl Execute for GetCallerIdentity {
-    async fn execute(self: Box<Self>, client: sts::Client) -> StsResult {
-        let identity = client.get_caller_identity().send().await?;
+    async fn execute(self: Box<Self>, config: &Config) -> StsResult {
+        let identity = config.client().get_caller_identity().send().await?;
         Ok(Box::new(identity))
     }
 }

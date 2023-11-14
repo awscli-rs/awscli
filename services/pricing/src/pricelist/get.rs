@@ -13,8 +13,9 @@ pub struct GetPriceListFileUrl {
 
 #[async_trait]
 impl Execute for GetPriceListFileUrl {
-    async fn execute(self: Box<Self>, client: pricing::Client) -> PricingResult {
-        let url = client
+    async fn execute(self: Box<Self>, config: &Config) -> PricingResult {
+        let url = config
+            .client()
             .get_price_list_file_url()
             .price_list_arn(self.price_list_arn)
             .file_format(self.file_format)

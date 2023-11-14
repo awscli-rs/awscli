@@ -10,8 +10,9 @@ pub struct DeleteCluster {
 
 #[async_trait]
 impl Execute for DeleteCluster {
-    async fn execute(self: Box<Self>, client: eks::Client) -> EksResult {
-        let cluster = client
+    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+        let cluster = config
+            .client()
             .delete_cluster()
             .name(self.name)
             .send()

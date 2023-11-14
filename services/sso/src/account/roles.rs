@@ -13,8 +13,9 @@ pub struct ListAccountRoles {
 
 #[async_trait]
 impl Execute for ListAccountRoles {
-    async fn execute(self: Box<Self>, client: sso::Client) -> SsoResult {
-        let account_roles = client
+    async fn execute(self: Box<Self>, config: &Config) -> SsoResult {
+        let account_roles = config
+            .client()
             .list_account_roles()
             .access_token(self.access_token)
             .account_id(self.account_id)

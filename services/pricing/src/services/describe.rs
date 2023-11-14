@@ -13,8 +13,9 @@ pub struct DescribeServices {
 
 #[async_trait]
 impl Execute for DescribeServices {
-    async fn execute(self: Box<Self>, client: pricing::Client) -> PricingResult {
-        let services = client
+    async fn execute(self: Box<Self>, config: &Config) -> PricingResult {
+        let services = config
+            .client()
             .describe_services()
             .set_service_code(self.service_code)
             .set_format_version(self.format_version)

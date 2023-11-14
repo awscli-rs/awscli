@@ -15,8 +15,9 @@ pub struct DescribeVpcs {
 
 #[async_trait]
 impl Execute for DescribeVpcs {
-    async fn execute(self: Box<Self>, client: ec2::Client) -> Ec2Result {
-        let vpcs = client
+    async fn execute(self: Box<Self>, config: &Config) -> Ec2Result {
+        let vpcs = config
+            .client()
             .describe_vpcs()
             .set_vpc_ids(self.vpc_ids)
             .set_dry_run(self.dry_run)

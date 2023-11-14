@@ -15,8 +15,9 @@ pub struct DeleteVpc {
 
 #[async_trait]
 impl Execute for DeleteVpc {
-    async fn execute(self: Box<Self>, client: ec2::Client) -> Ec2Result {
-        client
+    async fn execute(self: Box<Self>, config: &Config) -> Ec2Result {
+        config
+            .client()
             .delete_vpc()
             .vpc_id(self.vpc_id)
             .set_dry_run(self.dry_run)

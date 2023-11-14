@@ -5,8 +5,9 @@ pub struct ListUsers {}
 
 #[async_trait]
 impl Execute for ListUsers {
-    async fn execute(self: Box<Self>, client: iam::Client) -> IamResult {
-        let users = client
+    async fn execute(self: Box<Self>, config: &Config) -> IamResult {
+        let users = config
+            .client()
             .list_users()
             .into_paginator()
             .items()

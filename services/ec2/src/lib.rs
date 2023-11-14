@@ -12,7 +12,17 @@ type Ec2Result<T = Box<dyn show::Show>> = std::result::Result<T, ec2::Error>;
 
 #[async_trait]
 pub trait Execute {
-    async fn execute(self: Box<Self>, client: ec2::Client) -> Ec2Result;
+    async fn execute(self: Box<Self>, config: &Config) -> Ec2Result;
+}
+
+trait ClientExt {
+    fn client(&self) -> ec2::Client;
+}
+
+impl ClientExt for Config {
+    fn client(&self) -> ec2::Client {
+        ec2::Client::new(self.config())
+    }
 }
 
 /// Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable
@@ -35,9 +45,8 @@ impl Ec2 {
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<ec2::Error>> {
-        let client = ec2::Client::new(config.config());
         self.boxed()
-            .execute(client)
+            .execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

@@ -21,8 +21,9 @@ pub struct ListPriceLists {
 
 #[async_trait]
 impl Execute for ListPriceLists {
-    async fn execute(self: Box<Self>, client: pricing::Client) -> PricingResult {
-        let price_lists = client
+    async fn execute(self: Box<Self>, config: &Config) -> PricingResult {
+        let price_lists = config
+            .client()
             .list_price_lists()
             .service_code(self.service_code)
             .effective_date(self.effective_date)

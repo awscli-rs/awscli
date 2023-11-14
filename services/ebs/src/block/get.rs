@@ -24,8 +24,9 @@ pub struct GetSnapshotBlock {
 
 #[async_trait]
 impl Execute for GetSnapshotBlock {
-    async fn execute(self: Box<Self>, client: ebs::Client) -> EbsResult {
-        let mut block = client
+    async fn execute(self: Box<Self>, config: &Config) -> EbsResult {
+        let mut block = config
+            .client()
             .get_snapshot_block()
             .snapshot_id(self.snapshot_id)
             .block_index(self.block_index)

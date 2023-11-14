@@ -13,8 +13,9 @@ pub struct DeleteUser {
 
 #[async_trait]
 impl Execute for DeleteUser {
-    async fn execute(self: Box<Self>, client: iam::Client) -> IamResult {
-        client
+    async fn execute(self: Box<Self>, config: &Config) -> IamResult {
+        config
+            .client()
             .delete_user()
             .user_name(self.user_name)
             .send()

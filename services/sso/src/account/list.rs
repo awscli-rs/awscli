@@ -10,8 +10,9 @@ pub struct ListAccounts {
 
 #[async_trait]
 impl Execute for ListAccounts {
-    async fn execute(self: Box<Self>, client: sso::Client) -> SsoResult {
-        let list_accounts = client
+    async fn execute(self: Box<Self>, config: &Config) -> SsoResult {
+        let list_accounts = config
+            .client()
             .list_accounts()
             .access_token(self.access_token)
             .send()

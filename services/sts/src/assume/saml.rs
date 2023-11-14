@@ -32,8 +32,9 @@ pub struct AssumeRoleWithSaml {
 
 #[async_trait]
 impl Execute for AssumeRoleWithSaml {
-    async fn execute(self: Box<Self>, client: sts::Client) -> StsResult {
-        let credentials = client
+    async fn execute(self: Box<Self>, config: &Config) -> StsResult {
+        let credentials = config
+            .client()
             .assume_role_with_saml()
             .role_arn(self.role_arn)
             .principal_arn(self.principal_arn)

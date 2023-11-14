@@ -6,8 +6,9 @@ pub struct ListClusters;
 
 #[async_trait]
 impl Execute for ListClusters {
-    async fn execute(self: Box<Self>, client: eks::Client) -> EksResult {
-        let cluster = client
+    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+        let cluster = config
+            .client()
             .list_clusters()
             .into_paginator()
             .items()

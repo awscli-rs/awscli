@@ -8,8 +8,8 @@ pub struct List {
 
 #[async_trait]
 impl Execute for List {
-    async fn execute(self: Box<Self>, client: s3::Client) -> S3Result {
-        let client = S3Client::from(client);
+    async fn execute(self: Box<Self>, config: &Config) -> S3Result {
+        let client = S3Client::with_config(config);
         if let Some(bucket) = maybe_bucket_name(self.s3_uri.as_deref()) {
             let objects = client.list_all_objects(bucket).await?;
             Ok(Box::new(objects))

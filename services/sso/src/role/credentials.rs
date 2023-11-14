@@ -16,8 +16,9 @@ pub struct GetRoleCredentials {
 
 #[async_trait]
 impl Execute for GetRoleCredentials {
-    async fn execute(self: Box<Self>, client: sso::Client) -> SsoResult {
-        let role_credentials = client
+    async fn execute(self: Box<Self>, config: &Config) -> SsoResult {
+        let role_credentials = config
+            .client()
             .get_role_credentials()
             .role_name(self.role_name)
             .access_token(self.access_token)

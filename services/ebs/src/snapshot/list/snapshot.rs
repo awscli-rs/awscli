@@ -14,8 +14,9 @@ pub struct ListSnapshotBlocks {
 
 #[async_trait]
 impl Execute for ListSnapshotBlocks {
-    async fn execute(self: Box<Self>, client: ebs::Client) -> EbsResult {
-        let blocks = client
+    async fn execute(self: Box<Self>, config: &Config) -> EbsResult {
+        let blocks = config
+            .client()
             .list_snapshot_blocks()
             .snapshot_id(self.snapshot_id)
             .set_next_token(self.next_token)

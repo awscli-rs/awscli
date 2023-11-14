@@ -12,7 +12,17 @@ type SsoResult<T = Box<dyn show::Show>> = std::result::Result<T, sso::Error>;
 
 #[async_trait]
 pub trait Execute {
-    async fn execute(self: Box<Self>, client: sso::Client) -> SsoResult;
+    async fn execute(self: Box<Self>, config: &Config) -> SsoResult;
+}
+
+trait ClientExt {
+    fn client(&self) -> sso::Client;
+}
+
+impl ClientExt for Config {
+    fn client(&self) -> sso::Client {
+        sso::Client::new(self.config())
+    }
 }
 
 /// AWS IAM Identity Center (successor to AWS Single Sign-On)
@@ -37,9 +47,8 @@ impl Sso {
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<sso::Error>> {
-        let client = sso::Client::new(config.config());
         self.boxed()
-            .execute(client)
+            .execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

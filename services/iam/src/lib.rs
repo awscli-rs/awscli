@@ -11,7 +11,17 @@ type IamResult<T = Box<dyn show::Show>> = std::result::Result<T, iam::Error>;
 
 #[async_trait]
 pub trait Execute {
-    async fn execute(self: Box<Self>, client: iam::Client) -> IamResult;
+    async fn execute(self: Box<Self>, config: &Config) -> IamResult;
+}
+
+trait ClientExt {
+    fn client(&self) -> iam::Client;
+}
+
+impl ClientExt for Config {
+    fn client(&self) -> iam::Client {
+        iam::Client::new(self.config())
+    }
 }
 
 /// Identity and Access Management (IAM)
@@ -34,9 +44,8 @@ impl Iam {
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<iam::Error>> {
-        let client = iam::Client::new(config.config());
         self.boxed()
-            .execute(client)
+            .execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

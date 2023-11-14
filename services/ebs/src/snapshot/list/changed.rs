@@ -19,8 +19,9 @@ pub struct ListChangedBlocks {
 
 #[async_trait]
 impl Execute for ListChangedBlocks {
-    async fn execute(self: Box<Self>, client: ebs::Client) -> EbsResult {
-        let changed_blocks = client
+    async fn execute(self: Box<Self>, config: &Config) -> EbsResult {
+        let changed_blocks = config
+            .client()
             .list_changed_blocks()
             .first_snapshot_id(self.first_snapshot_id)
             .second_snapshot_id(self.second_snapshot_id)

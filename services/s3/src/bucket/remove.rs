@@ -16,13 +16,14 @@ pub struct Remove {
 
 #[async_trait]
 impl Execute for Remove {
-    async fn execute(self: Box<Self>, client: s3::Client) -> S3Result {
-        let client = S3Client::from(client);
+    async fn execute(self: Box<Self>, config: &Config) -> S3Result {
+        let client = S3Client::with_config(config);
         let bucket = bucket_name(&self.s3_uri);
 
         if self.force {
             client.remove_unversioned_objects(bucket).await?;
         }
+
         client.delete_bucket(bucket).await?;
 
         Ok(Box::new(()))

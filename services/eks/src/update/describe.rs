@@ -22,8 +22,9 @@ pub struct DescribeUpdate {
 
 #[async_trait]
 impl Execute for DescribeUpdate {
-    async fn execute(self: Box<Self>, client: eks::Client) -> EksResult {
-        let update = client
+    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+        let update = config
+            .client()
             .describe_update()
             .name(self.name)
             .update_id(self.update_id)

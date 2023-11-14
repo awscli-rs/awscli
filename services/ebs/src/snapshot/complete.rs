@@ -14,8 +14,9 @@ pub struct CompleteSnapshot {
 
 #[async_trait]
 impl Execute for CompleteSnapshot {
-    async fn execute(self: Box<Self>, client: ebs::Client) -> EbsResult {
-        let status = client
+    async fn execute(self: Box<Self>, config: &Config) -> EbsResult {
+        let status = config
+            .client()
             .complete_snapshot()
             .snapshot_id(self.snapshot_id)
             .changed_blocks_count(self.changed_block_count)

@@ -10,8 +10,9 @@ pub struct ListAddons {
 
 #[async_trait]
 impl Execute for ListAddons {
-    async fn execute(self: Box<Self>, client: eks::Client) -> EksResult {
-        let addons = client
+    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+        let addons = config
+            .client()
             .list_addons()
             .cluster_name(self.cluster_name)
             .into_paginator()

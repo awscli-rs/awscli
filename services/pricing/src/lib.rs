@@ -12,7 +12,17 @@ type PricingResult<T = Box<dyn show::Show>> = std::result::Result<T, pricing::Er
 
 #[async_trait]
 pub trait Execute {
-    async fn execute(self: Box<Self>, client: pricing::Client) -> PricingResult;
+    async fn execute(self: Box<Self>, config: &Config) -> PricingResult;
+}
+
+trait ClientExt {
+    fn client(&self) -> pricing::Client;
+}
+
+impl ClientExt for Config {
+    fn client(&self) -> pricing::Client {
+        pricing::Client::new(self.config())
+    }
 }
 
 /// AWS Pricing Information
@@ -37,9 +47,8 @@ impl Pricing {
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<pricing::Error>> {
-        let client = pricing::Client::new(config.config());
         self.boxed()
-            .execute(client)
+            .execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

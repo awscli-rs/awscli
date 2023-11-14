@@ -16,8 +16,9 @@ pub struct CreateTable {
 
 #[async_trait]
 impl Execute for CreateTable {
-    async fn execute(self: Box<Self>, client: Client) -> DynamoResult {
-        let table = client
+    async fn execute(self: Box<Self>, config: &Config) -> DynamoResult {
+        let table = config
+            .client()
             .create_table()
             .table_name(self.table_name)
             .send()

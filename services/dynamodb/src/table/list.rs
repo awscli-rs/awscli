@@ -5,8 +5,9 @@ pub struct ListTables {}
 
 #[async_trait]
 impl Execute for ListTables {
-    async fn execute(self: Box<Self>, client: Client) -> DynamoResult {
-        let tables = client
+    async fn execute(self: Box<Self>, config: &Config) -> DynamoResult {
+        let tables = config
+            .client()
             .list_tables()
             .into_paginator()
             .items()

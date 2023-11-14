@@ -18,8 +18,9 @@ pub struct ListUpdates {
 
 #[async_trait]
 impl Execute for ListUpdates {
-    async fn execute(self: Box<Self>, client: eks::Client) -> EksResult {
-        let updates = client
+    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+        let updates = config
+            .client()
             .list_updates()
             .name(self.name)
             .set_nodegroup_name(self.nodegroup_name)

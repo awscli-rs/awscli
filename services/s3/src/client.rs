@@ -8,6 +8,11 @@ pub(crate) struct S3Client {
 }
 
 impl S3Client {
+    pub(crate) fn with_config(config: &Config) -> Self {
+        let client = config.client();
+        Self { client }
+    }
+
     pub(crate) async fn list_buckets(&self) -> S3Result<Vec<s3::types::Bucket>> {
         let buckets = self
             .client
@@ -73,11 +78,5 @@ impl S3Client {
         let output = self.client.delete_objects().bucket(bucket).send().await?;
 
         Ok(output)
-    }
-}
-
-impl From<s3::Client> for S3Client {
-    fn from(client: s3::Client) -> Self {
-        Self { client }
     }
 }

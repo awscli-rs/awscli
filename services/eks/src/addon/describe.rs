@@ -14,8 +14,9 @@ pub struct DescribeAddon {
 
 #[async_trait]
 impl Execute for DescribeAddon {
-    async fn execute(self: Box<Self>, client: eks::Client) -> EksResult {
-        let addon = client
+    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+        let addon = config
+            .client()
             .describe_addon()
             .cluster_name(self.cluster_name)
             .addon_name(self.addon_name)

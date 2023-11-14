@@ -12,7 +12,17 @@ type StsResult<T = Box<dyn show::Show>> = std::result::Result<T, sts::Error>;
 
 #[async_trait]
 pub trait Execute {
-    async fn execute(self: Box<Self>, client: sts::Client) -> StsResult;
+    async fn execute(self: Box<Self>, config: &Config) -> StsResult;
+}
+
+trait ClientExt {
+    fn client(&self) -> sts::Client;
+}
+
+impl ClientExt for Config {
+    fn client(&self) -> sts::Client {
+        sts::Client::new(self.config())
+    }
 }
 
 /// Security Token Service (STS) operations
@@ -43,9 +53,8 @@ impl Sts {
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<sts::Error>> {
-        let client = sts::Client::new(config.config());
         self.boxed()
-            .execute(client)
+            .execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

@@ -16,8 +16,9 @@ pub struct GetProducts {
 
 #[async_trait]
 impl Execute for GetProducts {
-    async fn execute(self: Box<Self>, client: pricing::Client) -> PricingResult {
-        let values = client
+    async fn execute(self: Box<Self>, config: &Config) -> PricingResult {
+        let values = config
+            .client()
             .get_products()
             .service_code(self.service_code)
             .set_filters(None)

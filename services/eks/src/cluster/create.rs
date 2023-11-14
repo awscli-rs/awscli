@@ -22,8 +22,9 @@ pub struct CreateCluster {
 
 #[async_trait]
 impl Execute for CreateCluster {
-    async fn execute(self: Box<Self>, client: eks::Client) -> EksResult {
-        let cluster = client
+    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+        let cluster = config
+            .client()
             .create_cluster()
             .name(self.name)
             .role_arn(self.role_arn)

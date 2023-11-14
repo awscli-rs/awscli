@@ -19,7 +19,17 @@ const S3_PREFIX: &str = "s3://";
 
 #[async_trait]
 pub trait Execute {
-    async fn execute(self: Box<Self>, client: s3::Client) -> S3Result;
+    async fn execute(self: Box<Self>, config: &Config) -> S3Result;
+}
+
+trait ClientExt {
+    fn client(&self) -> s3::Client;
+}
+
+impl ClientExt for Config {
+    fn client(&self) -> s3::Client {
+        s3::Client::new(self.config())
+    }
 }
 
 /// High-level S3 commands
@@ -40,9 +50,8 @@ impl S3 {
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<s3::Error>> {
-        let client = s3::Client::new(config.config());
         self.boxed()
-            .execute(client)
+            .execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

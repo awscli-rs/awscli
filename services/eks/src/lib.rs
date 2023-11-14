@@ -13,7 +13,17 @@ type EksResult<T = Box<dyn show::Show>> = std::result::Result<T, eks::Error>;
 
 #[async_trait]
 pub trait Execute {
-    async fn execute(self: Box<Self>, client: eks::Client) -> EksResult;
+    async fn execute(self: Box<Self>, config: &Config) -> EksResult;
+}
+
+trait ClientExt {
+    fn client(&self) -> eks::Client;
+}
+
+impl ClientExt for Config {
+    fn client(&self) -> eks::Client {
+        eks::Client::new(self.config())
+    }
 }
 
 /// Amazon Elastic Kubernetes Service (Amazon EKS)
@@ -44,9 +54,8 @@ impl Eks {
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<eks::Error>> {
-        let client = eks::Client::new(config.config());
         self.boxed()
-            .execute(client)
+            .execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

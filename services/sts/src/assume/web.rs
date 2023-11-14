@@ -38,8 +38,9 @@ pub struct AssumeRoleWithWebIdentity {
 
 #[async_trait]
 impl Execute for AssumeRoleWithWebIdentity {
-    async fn execute(self: Box<Self>, client: sts::Client) -> StsResult {
-        let credentials = client
+    async fn execute(self: Box<Self>, config: &Config) -> StsResult {
+        let credentials = config
+            .client()
             .assume_role_with_web_identity()
             .role_arn(self.role_arn)
             .role_session_name(self.role_session_name)

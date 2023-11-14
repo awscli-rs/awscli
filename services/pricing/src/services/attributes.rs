@@ -13,8 +13,9 @@ pub struct GetAttributeValues {
 
 #[async_trait]
 impl Execute for GetAttributeValues {
-    async fn execute(self: Box<Self>, client: pricing::Client) -> PricingResult {
-        let values = client
+    async fn execute(self: Box<Self>, config: &Config) -> PricingResult {
+        let values = config
+            .client()
             .get_attribute_values()
             .service_code(self.service_code)
             .attribute_name(self.attribute_name)

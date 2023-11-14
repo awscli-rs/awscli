@@ -7,8 +7,8 @@ pub struct Logout;
 
 #[async_trait]
 impl Execute for Logout {
-    async fn execute(self: Box<Self>, client: sso::Client) -> SsoResult {
-        client.logout().send().await?;
+    async fn execute(self: Box<Self>, config: &Config) -> SsoResult {
+        config.client().logout().send().await?;
         Ok(Box::new(()))
     }
 }

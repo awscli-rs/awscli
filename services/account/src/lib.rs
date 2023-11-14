@@ -15,13 +15,15 @@ pub trait Execute {
     async fn execute(self: Box<Self>, config: &Config) -> AccountResult;
 }
 
-trait Client {
-    fn client(config: &Config) -> account::Client {
-        account::Client::new(config.config())
-    }
+trait ClientExt {
+    fn client(&self) -> account::Client;
 }
 
-impl<T> Client for T where T: Execute {}
+impl ClientExt for Config {
+    fn client(&self) -> account::Client {
+        account::Client::new(self.config())
+    }
+}
 
 /// Operations for Amazon Web Services Account Management
 #[derive(Debug, Subcommand)]

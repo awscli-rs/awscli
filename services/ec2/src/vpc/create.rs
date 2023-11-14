@@ -68,8 +68,9 @@ pub struct CreateVpc {
 
 #[async_trait]
 impl Execute for CreateVpc {
-    async fn execute(self: Box<Self>, client: ec2::Client) -> Ec2Result {
-        let vpc = client
+    async fn execute(self: Box<Self>, config: &Config) -> Ec2Result {
+        let vpc = config
+            .client()
             .create_vpc()
             .set_cidr_block(self.cidr_block)
             .set_amazon_provided_ipv6_cidr_block(self.amazon_provided_ipv6_cidr_block)

@@ -1,6 +1,6 @@
 use async_trait::async_trait;
+use aws_sdk_dynamodb as dynamodb;
 use aws_sdk_dynamodb::types;
-use aws_sdk_dynamodb::Client;
 use clap::{Args, Subcommand};
 
 use config::Config;
@@ -12,7 +12,17 @@ type DynamoResult<T = Box<dyn show::Show>> = std::result::Result<T, aws_sdk_dyna
 
 #[async_trait]
 pub trait Execute {
-    async fn execute(self: Box<Self>, client: Client) -> DynamoResult;
+    async fn execute(self: Box<Self>, config: &Config) -> DynamoResult;
+}
+
+trait ClientExt {
+    fn client(&self) -> dynamodb::Client;
+}
+
+impl ClientExt for Config {
+    fn client(&self) -> dynamodb::Client {
+        dynamodb::Client::new(self.config())
+    }
 }
 
 /// Amazon DynamoDB is a fully managed NoSQL database service
@@ -58,9 +68,8 @@ impl DynamoDb {
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<aws_sdk_dynamodb::Error>> {
-        let client = Client::new(config.config());
         self.boxed()
-            .execute(client)
+            .execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

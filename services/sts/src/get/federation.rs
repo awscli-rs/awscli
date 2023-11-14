@@ -28,8 +28,9 @@ pub struct GetFederationToken {
 
 #[async_trait]
 impl Execute for GetFederationToken {
-    async fn execute(self: Box<Self>, client: sts::Client) -> StsResult {
-        let credentials = client
+    async fn execute(self: Box<Self>, config: &Config) -> StsResult {
+        let credentials = config
+            .client()
             .get_federation_token()
             .name(self.name)
             .set_policy(self.policy)

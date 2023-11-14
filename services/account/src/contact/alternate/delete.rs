@@ -16,7 +16,8 @@ pub struct DeleteAlternateContact {
 #[async_trait]
 impl Execute for DeleteAlternateContact {
     async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
-        let _output = Self::client(config)
+        let _output = config
+            .client()
             .delete_alternate_contact()
             .set_account_id(self.account_id)
             .alternate_contact_type(self.alternate_contact_type)

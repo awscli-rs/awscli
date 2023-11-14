@@ -9,8 +9,8 @@ pub struct Make {
 
 #[async_trait]
 impl Execute for Make {
-    async fn execute(self: Box<Self>, client: s3::Client) -> S3Result {
-        let client = S3Client::from(client);
+    async fn execute(self: Box<Self>, config: &Config) -> S3Result {
+        let client = S3Client::with_config(config);
         let bucket = bucket_name(&self.s3_uri);
         let location = client.create_bucket(bucket).await?;
 

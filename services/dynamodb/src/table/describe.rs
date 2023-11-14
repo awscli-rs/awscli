@@ -9,8 +9,9 @@ pub struct DescribeTable {
 
 #[async_trait]
 impl Execute for DescribeTable {
-    async fn execute(self: Box<Self>, client: Client) -> DynamoResult {
-        let table = client
+    async fn execute(self: Box<Self>, config: &Config) -> DynamoResult {
+        let table = config
+            .client()
             .describe_table()
             .table_name(self.table_name)
             .send()
