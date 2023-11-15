@@ -20,7 +20,7 @@ members = [
 
 
 [workspace.package]
-version = "0.0.0-alpha.9"
+version = "0.0.0-alpha.10"
 authors = ["Cyril Plisko <cyril.plisko@mountall.com>"]
 edition = "2021"
 license = "Apache-2.0"
@@ -55,21 +55,21 @@ time = { version = "0.3", features = ["local-offset", "serde-well-known"] }
 tokio = { version = "1.29", features = ["full"] }
 thiserror = "1.0"
 
-config = { version = "0.0.0-alpha.9", path = "./config" }
-error = { version = "0.0.0-alpha.9", path = "./error" }
-parsers = { version = "0.0.0-alpha.9", path = "./parsers" }
-show = { version = "0.0.0-alpha.9", path = "./show" }
+config = { version = "0.0.0-alpha.10", path = "./config" }
+error = { version = "0.0.0-alpha.10", path = "./error" }
+parsers = { version = "0.0.0-alpha.10", path = "./parsers" }
+show = { version = "0.0.0-alpha.10", path = "./show" }
 
-account = { version = "0.0.0-alpha.9", path = "./services/account" }
-dynamodb = { version = "0.0.0-alpha.9", path = "./services/dynamodb" }
-ebs = { version = "0.0.0-alpha.9", path = "./services/ebs" }
-ec2 = { version = "0.0.0-alpha.9", path = "./services/ec2" }
-eks = { version = "0.0.0-alpha.9", path = "./services/eks" }
-iam = { version = "0.0.0-alpha.9", path = "./services/iam" }
-pricing = { version = "0.0.0-alpha.9", path = "./services/pricing" }
-s3 = { version = "0.0.0-alpha.9", path = "./services/s3" }
-sso = { version = "0.0.0-alpha.9", path = "./services/sso" }
-sts = { version = "0.0.0-alpha.9", path = "./services/sts" }
+account = { version = "0.0.0-alpha.10", path = "./services/account" }
+dynamodb = { version = "0.0.0-alpha.10", path = "./services/dynamodb" }
+ebs = { version = "0.0.0-alpha.10", path = "./services/ebs" }
+ec2 = { version = "0.0.0-alpha.10", path = "./services/ec2" }
+eks = { version = "0.0.0-alpha.10", path = "./services/eks" }
+iam = { version = "0.0.0-alpha.10", path = "./services/iam" }
+pricing = { version = "0.0.0-alpha.10", path = "./services/pricing" }
+s3 = { version = "0.0.0-alpha.10", path = "./services/s3" }
+sso = { version = "0.0.0-alpha.10", path = "./services/sso" }
+sts = { version = "0.0.0-alpha.10", path = "./services/sts" }
 
 
 [workspace.lints.clippy]
