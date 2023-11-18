@@ -44,10 +44,7 @@ fn attr_type(text: &str) -> Result<ScalarAttributeType, BuildError> {
         Err(invalid_attribute_name("AttributeType"))?;
     }
 
-    match r#type.into() {
-        ScalarAttributeType::Unknown(_) => Err(invalid_attribute_type(r#type)),
-        other => Ok(other),
-    }
+    ScalarAttributeType::try_parse(r#type).map_err(BuildError::other)
 }
 
 fn key_type(text: &str) -> Result<KeyType, BuildError> {
@@ -56,10 +53,7 @@ fn key_type(text: &str) -> Result<KeyType, BuildError> {
         Err(malformed(text))?;
     }
 
-    match r#type.into() {
-        KeyType::Unknown(_) => Err(invalid_attribute_type(r#type)),
-        other => Ok(other),
-    }
+    KeyType::try_parse(r#type).map_err(BuildError::other)
 }
 
 fn split_pair(text: &str, delimiter: char) -> Result<(&str, &str), BuildError> {
@@ -72,8 +66,4 @@ fn malformed(text: &str) -> BuildError {
 
 fn invalid_attribute_name(name: &str) -> BuildError {
     BuildError::other(format!("Invalid Attribute Name: {name})"))
-}
-
-fn invalid_attribute_type(r#type: &str) -> BuildError {
-    BuildError::other(format!("Invalid Attribute Type: {type}"))
 }

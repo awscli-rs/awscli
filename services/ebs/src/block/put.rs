@@ -1,4 +1,3 @@
-use std::error::Error as StdError;
 use std::path::PathBuf;
 
 use super::*;
@@ -28,7 +27,7 @@ impl Execute for PutSnapshotBlock {
     async fn execute(self: Box<Self>, config: &Config) -> EbsResult {
         let block_data = ebs::primitives::ByteStream::from_path(self.block_data)
             .await
-            .map_err(unhandled)?;
+            .map_err(ebs::error::BuildError::other)?;
 
         let block = config
             .client()
@@ -40,11 +39,4 @@ impl Execute for PutSnapshotBlock {
 
         Ok(Box::new(block))
     }
-}
-
-fn unhandled(source: impl Into<Box<dyn StdError + Send + Sync + 'static>>) -> ebs::Error {
-    let unhandled = aws_smithy_types::error::Unhandled::builder()
-        .source(source)
-        .build();
-    ebs::Error::Unhandled(unhandled)
 }

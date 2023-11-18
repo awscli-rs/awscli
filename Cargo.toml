@@ -28,24 +28,24 @@ repository = "https://github.com/awscli-rs/awscli"
 
 
 [workspace.dependencies]
-aws-smithy-types = { version = "0.57", features = [
+aws-smithy-types = { version = "0.101", features = [
     "serde-serialize",
     "serde-deserialize",
 ] }
-aws-smithy-types-convert = { version = "0.57", features = ["convert-time"] }
+aws-smithy-types-convert = { version = "0.59", features = ["convert-time"] }
 async-trait = "0.1"
-aws-config = "0.57"
-aws-types = "0.57"
-aws-sdk-account = "0.36"
-aws-sdk-dynamodb = "0.36"
-aws-sdk-ebs = "0.36"
-aws-sdk-ec2 = "0.36"
-aws-sdk-eks = "0.36"
-aws-sdk-iam = "0.36"
-aws-sdk-pricing = "0.36"
-aws-sdk-s3 = "0.36"
-aws-sdk-sso = "0.36"
-aws-sdk-sts = "0.36"
+aws-config = "0.101"
+aws-types = "0.101"
+aws-sdk-account = "0.38"
+aws-sdk-dynamodb = "0.38"
+aws-sdk-ebs = "0.38"
+aws-sdk-ec2 = "0.38"
+aws-sdk-eks = "0.38"
+aws-sdk-iam = "0.38"
+aws-sdk-pricing = "0.38"
+aws-sdk-s3 = "0.38"
+aws-sdk-sso = "0.38"
+aws-sdk-sts = "0.38"
 clap = { version = "4.2", features = ["derive", "env"] }
 fmtools = "0.1"
 miette = { version = "5.7", features = ["fancy"] }

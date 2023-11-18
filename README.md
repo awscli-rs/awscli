@@ -14,5 +14,4 @@
   1. add "description = RAWS xxx component"
   2. add dependencies
   3. add lints
-5. in error crate: impl AwsError for xxx::Error
-6. in show crate: impl Show for xxx::types::Xxx
+5. in show crate: impl Show for xxx::types::Xxx

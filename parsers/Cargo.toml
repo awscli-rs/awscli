@@ -10,7 +10,7 @@ repository.workspace = true
 
 
 [dependencies]
-itertools = "0.11"
+itertools = "0.12"
 
 aws-sdk-account.workspace = true
 aws-sdk-dynamodb.workspace = true

@@ -1,4 +1,3 @@
-use std::error::Error as StdError;
 use std::mem;
 use std::path::PathBuf;
 
@@ -38,19 +37,12 @@ impl Execute for GetSnapshotBlock {
             .collect()
             .await
             .map(|bytes| bytes.into_bytes())
-            .map_err(unhandled)?;
+            .map_err(ebs::error::BuildError::other)?;
 
         tokio::fs::write(self.outfile, contents)
             .await
-            .map_err(unhandled)?;
+            .map_err(ebs::error::BuildError::other)?;
 
         Ok(Box::new(block))
     }
-}
-
-fn unhandled(source: impl Into<Box<dyn StdError + Send + Sync + 'static>>) -> ebs::Error {
-    let unhandled = aws_smithy_types::error::Unhandled::builder()
-        .source(source)
-        .build();
-    ebs::Error::Unhandled(unhandled)
 }
