@@ -1,16 +1,16 @@
 alias b := build
 build:
-    cargo build --workspace -Zlints
+    cargo build --workspace
 alias t := test
 test:
-    cargo test --workspace -Zlints
+    cargo test --workspace
 raws *ARGS:
     cargo run -Zlints {{ARGS}}
 aws *ARGS:
     aws {{ARGS}}
 alias c:=clippy
 clippy:
-    cargo clippy --workspace --all-targets -Zlints
+    cargo clippy --workspace --all-targets
 clean:
     cargo clean
 update:
