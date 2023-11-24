@@ -3,20 +3,6 @@
 version = 3
 
 [[package]]
-name = "account"
-version = "0.0.0-alpha.13"
-dependencies = [
- "async-trait",
- "aws-sdk-account",
- "clap",
- "config",
- "error",
- "parsers",
- "show",
- "thiserror",
-]
-
-[[package]]
 name = "addr2line"
 version = "0.21.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -804,17 +790,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "acbf1af155f9b9ef647e42cdc158db4b64a1b61f743629225fde6f3e0be2a7c7"
 
 [[package]]
-name = "config"
-version = "0.0.0-alpha.13"
-dependencies = [
- "aws-config",
- "aws-types",
- "clap",
- "fmtools",
- "show",
-]
-
-[[package]]
 name = "const-oid"
 version = "0.9.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -927,49 +902,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "dynamodb"
-version = "0.0.0-alpha.13"
-dependencies = [
- "async-trait",
- "aws-sdk-dynamodb",
- "clap",
- "config",
- "error",
- "parsers",
- "show",
- "thiserror",
-]
-
-[[package]]
-name = "ebs"
-version = "0.0.0-alpha.13"
-dependencies = [
- "async-trait",
- "aws-sdk-ebs",
- "aws-smithy-types",
- "clap",
- "config",
- "error",
- "parsers",
- "show",
- "tokio",
-]
-
-[[package]]
-name = "ec2"
-version = "0.0.0-alpha.13"
-dependencies = [
- "async-trait",
- "aws-sdk-ec2",
- "clap",
- "config",
- "error",
- "parsers",
- "show",
- "tokio",
-]
-
-[[package]]
 name = "ecdsa"
 version = "0.14.8"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -986,20 +918,6 @@ name = "either"
 version = "1.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a26ae43d7bcc3b814de94796a5e736d4029efb0ee900c12e2d54c993ad1a1e07"
-
-[[package]]
-name = "eks"
-version = "0.0.0-alpha.13"
-dependencies = [
- "async-trait",
- "aws-sdk-eks",
- "clap",
- "config",
- "error",
- "parsers",
- "show",
- "thiserror",
-]
 
 [[package]]
 name = "elliptic-curve"
@@ -1035,25 +953,6 @@ checksum = "f258a7194e7f7c2a7837a8913aeab7fd8c383457034fa20ce4dd3dcb813e8eb8"
 dependencies = [
  "libc",
  "windows-sys",
-]
-
-[[package]]
-name = "error"
-version = "0.0.0-alpha.13"
-dependencies = [
- "aws-sdk-account",
- "aws-sdk-dynamodb",
- "aws-sdk-ebs",
- "aws-sdk-ec2",
- "aws-sdk-eks",
- "aws-sdk-iam",
- "aws-sdk-pricing",
- "aws-sdk-s3",
- "aws-sdk-sso",
- "aws-sdk-sts",
- "aws-smithy-types",
- "miette",
- "thiserror",
 ]
 
 [[package]]
@@ -1294,19 +1193,6 @@ dependencies = [
  "rustls-native-certs",
  "tokio",
  "tokio-rustls",
-]
-
-[[package]]
-name = "iam"
-version = "0.0.0-alpha.13"
-dependencies = [
- "async-trait",
- "aws-sdk-iam",
- "clap",
- "config",
- "error",
- "show",
- "thiserror",
 ]
 
 [[package]]
@@ -1594,25 +1480,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "parsers"
-version = "0.0.0-alpha.13"
-dependencies = [
- "aws-sdk-account",
- "aws-sdk-dynamodb",
- "aws-sdk-ebs",
- "aws-sdk-ec2",
- "aws-sdk-eks",
- "aws-sdk-sts",
- "aws-smithy-types",
- "aws-smithy-types-convert",
- "clap",
- "itertools",
- "serde_json",
- "thiserror",
- "time",
-]
-
-[[package]]
 name = "percent-encoding"
 version = "2.3.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1647,21 +1514,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "439ee305def115ba05938db6eb1644ff94165c5ab5e9420d1c1bcedbba909391"
 
 [[package]]
-name = "pricing"
-version = "0.0.0-alpha.13"
-dependencies = [
- "async-trait",
- "aws-sdk-pricing",
- "aws-smithy-types",
- "clap",
- "config",
- "error",
- "parsers",
- "show",
- "thiserror",
-]
-
-[[package]]
 name = "proc-macro2"
 version = "1.0.69"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1692,22 +1544,234 @@ dependencies = [
 name = "raws"
 version = "0.0.0-alpha.13"
 dependencies = [
- "account",
  "clap",
- "config",
- "dynamodb",
- "ebs",
- "ec2",
- "eks",
- "iam",
  "miette",
- "pricing",
- "s3",
- "sso",
- "sts",
+ "raws-account",
+ "raws-config",
+ "raws-dynamodb",
+ "raws-ebs",
+ "raws-ec2",
+ "raws-eks",
+ "raws-iam",
+ "raws-pricing",
+ "raws-s3",
+ "raws-sso",
+ "raws-sts",
  "tokio",
  "tracing",
  "tracing-subscriber",
+]
+
+[[package]]
+name = "raws-account"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "async-trait",
+ "aws-sdk-account",
+ "clap",
+ "raws-config",
+ "raws-error",
+ "raws-parsers",
+ "raws-show",
+ "thiserror",
+]
+
+[[package]]
+name = "raws-config"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "aws-config",
+ "aws-types",
+ "clap",
+ "fmtools",
+ "raws-show",
+]
+
+[[package]]
+name = "raws-dynamodb"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "async-trait",
+ "aws-sdk-dynamodb",
+ "clap",
+ "raws-config",
+ "raws-error",
+ "raws-parsers",
+ "raws-show",
+ "thiserror",
+]
+
+[[package]]
+name = "raws-ebs"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "async-trait",
+ "aws-sdk-ebs",
+ "aws-smithy-types",
+ "clap",
+ "raws-config",
+ "raws-error",
+ "raws-parsers",
+ "raws-show",
+ "tokio",
+]
+
+[[package]]
+name = "raws-ec2"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "async-trait",
+ "aws-sdk-ec2",
+ "clap",
+ "raws-config",
+ "raws-error",
+ "raws-parsers",
+ "raws-show",
+ "tokio",
+]
+
+[[package]]
+name = "raws-eks"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "async-trait",
+ "aws-sdk-eks",
+ "clap",
+ "raws-config",
+ "raws-error",
+ "raws-parsers",
+ "raws-show",
+ "thiserror",
+]
+
+[[package]]
+name = "raws-error"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "aws-sdk-account",
+ "aws-sdk-dynamodb",
+ "aws-sdk-ebs",
+ "aws-sdk-ec2",
+ "aws-sdk-eks",
+ "aws-sdk-iam",
+ "aws-sdk-pricing",
+ "aws-sdk-s3",
+ "aws-sdk-sso",
+ "aws-sdk-sts",
+ "aws-smithy-types",
+ "miette",
+ "thiserror",
+]
+
+[[package]]
+name = "raws-iam"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "async-trait",
+ "aws-sdk-iam",
+ "clap",
+ "raws-config",
+ "raws-error",
+ "raws-show",
+ "thiserror",
+]
+
+[[package]]
+name = "raws-parsers"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "aws-sdk-account",
+ "aws-sdk-dynamodb",
+ "aws-sdk-ebs",
+ "aws-sdk-ec2",
+ "aws-sdk-eks",
+ "aws-sdk-sts",
+ "aws-smithy-types",
+ "aws-smithy-types-convert",
+ "clap",
+ "itertools",
+ "serde_json",
+ "thiserror",
+ "time",
+]
+
+[[package]]
+name = "raws-pricing"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "async-trait",
+ "aws-sdk-pricing",
+ "aws-smithy-types",
+ "clap",
+ "raws-config",
+ "raws-error",
+ "raws-parsers",
+ "raws-show",
+ "thiserror",
+]
+
+[[package]]
+name = "raws-s3"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "async-trait",
+ "aws-sdk-s3",
+ "aws-smithy-types",
+ "clap",
+ "raws-config",
+ "raws-error",
+ "raws-parsers",
+ "raws-show",
+ "thiserror",
+]
+
+[[package]]
+name = "raws-show"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "aws-sdk-account",
+ "aws-sdk-dynamodb",
+ "aws-sdk-ebs",
+ "aws-sdk-ec2",
+ "aws-sdk-eks",
+ "aws-sdk-iam",
+ "aws-sdk-pricing",
+ "aws-sdk-s3",
+ "aws-sdk-sso",
+ "aws-sdk-sts",
+ "aws-smithy-types",
+ "aws-smithy-types-convert",
+ "fmtools",
+ "serde",
+ "serde_json",
+ "time",
+]
+
+[[package]]
+name = "raws-sso"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "async-trait",
+ "aws-sdk-sso",
+ "clap",
+ "raws-config",
+ "raws-error",
+ "raws-show",
+ "thiserror",
+]
+
+[[package]]
+name = "raws-sts"
+version = "0.0.0-alpha.13"
+dependencies = [
+ "async-trait",
+ "aws-sdk-sts",
+ "clap",
+ "raws-config",
+ "raws-error",
+ "raws-parsers",
+ "raws-show",
+ "thiserror",
 ]
 
 [[package]]
@@ -1866,21 +1930,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1ad4cc8da4ef723ed60bced201181d83791ad433213d8c24efffda1eec85d741"
 
 [[package]]
-name = "s3"
-version = "0.0.0-alpha.13"
-dependencies = [
- "async-trait",
- "aws-sdk-s3",
- "aws-smithy-types",
- "clap",
- "config",
- "error",
- "parsers",
- "show",
- "thiserror",
-]
-
-[[package]]
 name = "schannel"
 version = "0.1.22"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2011,28 +2060,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "show"
-version = "0.0.0-alpha.13"
-dependencies = [
- "aws-sdk-account",
- "aws-sdk-dynamodb",
- "aws-sdk-ebs",
- "aws-sdk-ec2",
- "aws-sdk-eks",
- "aws-sdk-iam",
- "aws-sdk-pricing",
- "aws-sdk-s3",
- "aws-sdk-sso",
- "aws-sdk-sts",
- "aws-smithy-types",
- "aws-smithy-types-convert",
- "fmtools",
- "serde",
- "serde_json",
- "time",
-]
-
-[[package]]
 name = "signal-hook-registry"
 version = "1.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2109,37 +2136,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "sso"
-version = "0.0.0-alpha.13"
-dependencies = [
- "async-trait",
- "aws-sdk-sso",
- "clap",
- "config",
- "error",
- "show",
- "thiserror",
-]
-
-[[package]]
 name = "strsim"
 version = "0.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "73473c0e59e6d5812c5dfe2a064a6444949f089e20eec9a2e5506596494e4623"
-
-[[package]]
-name = "sts"
-version = "0.0.0-alpha.13"
-dependencies = [
- "async-trait",
- "aws-sdk-sts",
- "clap",
- "config",
- "error",
- "parsers",
- "show",
- "thiserror",
-]
 
 [[package]]
 name = "subtle"

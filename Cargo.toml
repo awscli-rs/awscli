@@ -48,6 +48,7 @@ aws-sdk-sso = "1.1"
 aws-sdk-sts = "1.1"
 clap = { version = "4.2", features = ["derive", "env"] }
 fmtools = "0.1"
+itertools = "0.12"
 miette = { version = "5.7", features = ["fancy"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
@@ -55,21 +56,21 @@ time = { version = "0.3", features = ["local-offset", "serde-well-known"] }
 tokio = { version = "1.29", features = ["full"] }
 thiserror = "1.0"
 
-config = { version = "0.0.0-alpha.13", path = "./config" }
-error = { version = "0.0.0-alpha.13", path = "./error" }
-parsers = { version = "0.0.0-alpha.13", path = "./parsers" }
-show = { version = "0.0.0-alpha.13", path = "./show" }
+config = { version = "0.0.0-alpha.13", path = "./config", package = "raws-config" }
+error = { version = "0.0.0-alpha.13", path = "./error", package = "raws-error" }
+parsers = { version = "0.0.0-alpha.13", path = "./parsers", package = "raws-parsers" }
+show = { version = "0.0.0-alpha.13", path = "./show", package = "raws-show" }
 
-account = { version = "0.0.0-alpha.13", path = "./services/account" }
-dynamodb = { version = "0.0.0-alpha.13", path = "./services/dynamodb" }
-ebs = { version = "0.0.0-alpha.13", path = "./services/ebs" }
-ec2 = { version = "0.0.0-alpha.13", path = "./services/ec2" }
-eks = { version = "0.0.0-alpha.13", path = "./services/eks" }
-iam = { version = "0.0.0-alpha.13", path = "./services/iam" }
-pricing = { version = "0.0.0-alpha.13", path = "./services/pricing" }
-s3 = { version = "0.0.0-alpha.13", path = "./services/s3" }
-sso = { version = "0.0.0-alpha.13", path = "./services/sso" }
-sts = { version = "0.0.0-alpha.13", path = "./services/sts" }
+account = { version = "0.0.0-alpha.13", path = "./services/account", package = "raws-account" }
+dynamodb = { version = "0.0.0-alpha.13", path = "./services/dynamodb", package = "raws-dynamodb" }
+ebs = { version = "0.0.0-alpha.13", path = "./services/ebs", package = "raws-ebs" }
+ec2 = { version = "0.0.0-alpha.13", path = "./services/ec2", package = "raws-ec2" }
+eks = { version = "0.0.0-alpha.13", path = "./services/eks", package = "raws-eks" }
+iam = { version = "0.0.0-alpha.13", path = "./services/iam", package = "raws-iam" }
+pricing = { version = "0.0.0-alpha.13", path = "./services/pricing", package = "raws-pricing" }
+s3 = { version = "0.0.0-alpha.13", path = "./services/s3", package = "raws-s3" }
+sso = { version = "0.0.0-alpha.13", path = "./services/sso", package = "raws-sso" }
+sts = { version = "0.0.0-alpha.13", path = "./services/sts", package = "raws-sts" }
 
 
 [workspace.lints.clippy]

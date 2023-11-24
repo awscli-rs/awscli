@@ -1,5 +1,5 @@
 [package]
-name = "ebs"
+name = "raws-ebs"
 description = "RAWS EBS component"
 
 version.workspace = true

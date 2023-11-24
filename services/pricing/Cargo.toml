@@ -1,5 +1,5 @@
 [package]
-name = "pricing"
+name = "raws-pricing"
 description = "RAWS pricing component"
 
 version.workspace = true

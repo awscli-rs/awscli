@@ -1,5 +1,5 @@
 [package]
-name = "dynamodb"
+name = "raws-dynamodb"
 description = "RAWS DynamoDB component"
 
 authors.workspace = true

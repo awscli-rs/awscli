@@ -1,5 +1,5 @@
 [package]
-name = "iam"
+name = "raws-iam"
 description = "RAWS IAM component"
 
 authors.workspace = true

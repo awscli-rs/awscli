@@ -1,5 +1,5 @@
 [package]
-name = "sts"
+name = "raws-sts"
 description = "RAWS STS component"
 
 authors.workspace = true

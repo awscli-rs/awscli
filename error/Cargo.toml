@@ -1,5 +1,5 @@
 [package]
-name = "error"
+name = "raws-error"
 description = "RAWS common error type"
 
 authors.workspace = true

@@ -1,5 +1,5 @@
 [package]
-name = "parsers"
+name = "raws-parsers"
 description = "RAWS parsers"
 
 version.workspace = true
@@ -10,8 +10,6 @@ repository.workspace = true
 
 
 [dependencies]
-itertools = "0.12"
-
 aws-sdk-account.workspace = true
 aws-sdk-dynamodb.workspace = true
 aws-sdk-ebs.workspace = true
@@ -21,6 +19,7 @@ aws-sdk-sts.workspace = true
 aws-smithy-types.workspace = true
 aws-smithy-types-convert.workspace = true
 clap.workspace = true
+itertools.workspace = true
 serde_json.workspace = true
 time.workspace = true
 thiserror.workspace = true

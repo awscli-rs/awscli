@@ -1,5 +1,5 @@
 [package]
-name = "ec2"
+name = "raws-ec2"
 description = "RAWS EC2 component"
 
 version.workspace = true

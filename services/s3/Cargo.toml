@@ -1,5 +1,5 @@
 [package]
-name = "s3"
+name = "raws-s3"
 description = "RAWS s3 component"
 version.workspace = true
 authors.workspace = true

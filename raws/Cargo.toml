@@ -1,6 +1,6 @@
 [package]
 name = "raws"
-description = "AWS CLI"
+description = "RAWS - AWS CLI in Rust"
 
 authors.workspace = true
 version.workspace = true

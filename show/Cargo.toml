@@ -1,5 +1,5 @@
 [package]
-name = "show"
+name = "raws-show"
 description = "RAWS show component"
 
 authors.workspace = true

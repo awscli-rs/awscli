@@ -1,5 +1,5 @@
 [package]
-name = "eks"
+name = "raws-eks"
 description = "RAWS EKS component"
 
 authors.workspace = true
