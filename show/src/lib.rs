@@ -1,3 +1,4 @@
+use std::collections::HashMap;
 use std::fmt;
 
 use serde::Serialize;
@@ -143,6 +144,16 @@ impl Show for i32 {
 impl Show for i64 {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         Box::new(self)
+    }
+}
+
+impl<K: Show, V: Show> Show for HashMap<K, V> {
+    fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
+        Box::new(fmtools::join(
+            "\n",
+            self.iter()
+                .map(|(key, value)| fmtools::fmt!( {key._fmt():32} "\t" {value._fmt()})),
+        ))
     }
 }
 

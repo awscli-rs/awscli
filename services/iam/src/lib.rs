@@ -5,6 +5,7 @@ use clap::{Args, Subcommand};
 use config::Config;
 use error::RawsError;
 
+mod account;
 mod user;
 
 type IamResult<T = Box<dyn show::Show>> = std::result::Result<T, iam::Error>;
@@ -31,6 +32,7 @@ pub enum Iam {
     DeleteUser(user::DeleteUser),
     GetUser(user::GetUser),
     ListUsers(user::ListUsers),
+    GetAccountSummary(account::GetAccountSummary),
 }
 
 impl Iam {
@@ -40,6 +42,7 @@ impl Iam {
             Self::DeleteUser(delete_user) => Box::new(delete_user),
             Self::GetUser(get_user) => Box::new(get_user),
             Self::ListUsers(list_users) => Box::new(list_users),
+            Self::GetAccountSummary(account_summary) => Box::new(account_summary),
         }
     }
 
