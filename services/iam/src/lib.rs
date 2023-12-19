@@ -33,6 +33,7 @@ pub enum Iam {
     GetUser(user::GetUser),
     ListUsers(user::ListUsers),
     GetAccountSummary(account::GetAccountSummary),
+    GetAccountAuthorizationDetails(account::GetAccountAuthorizationDetails),
 }
 
 impl Iam {
@@ -43,6 +44,7 @@ impl Iam {
             Self::GetUser(get_user) => Box::new(get_user),
             Self::ListUsers(list_users) => Box::new(list_users),
             Self::GetAccountSummary(account_summary) => Box::new(account_summary),
+            Self::GetAccountAuthorizationDetails(authz_details) => Box::new(authz_details),
         }
     }
 

@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use std::fmt;
 
+use rfc3986::Rfc3986;
 use serde::Serialize;
 use serde_json as json;
 
@@ -11,6 +12,7 @@ mod ec2;
 mod eks;
 mod iam;
 mod pricing;
+mod rfc3986;
 mod s3;
 mod smithy;
 mod sso;
@@ -18,6 +20,10 @@ mod sts;
 
 pub trait Show: fmt::Debug {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_>;
+
+    fn _fmt_compact(&self) -> Box<dyn fmt::Display + '_> {
+        self._fmt()
+    }
 
     fn text(&self) -> String {
         self._fmt().to_string()
@@ -83,6 +89,10 @@ impl<T: Show> Show for Vec<T> {
 impl<T: Show> Show for &[T] {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
         Box::new(fmtools::join("\n", self.iter().map(|item| item._fmt())))
+    }
+
+    fn _fmt_compact(&self) -> Box<dyn fmt::Display + '_> {
+        Box::new(fmtools::join(",", self.iter().map(|item| item._fmt())))
     }
 
     fn debug(&self) -> String {
