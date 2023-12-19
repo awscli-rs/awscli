@@ -35,6 +35,7 @@ pub enum Iam {
     GetAccountSummary(account::GetAccountSummary),
     GetAccountAuthorizationDetails(account::GetAccountAuthorizationDetails),
     CreateAccountAlias(account::CreateAccountAlias),
+    DeleteAccountAlias(account::DeleteAccountAlias),
     ListAccountAliases(account::ListAccountAliases),
 }
 
@@ -48,6 +49,7 @@ impl Iam {
             Self::GetAccountSummary(account_summary) => Box::new(account_summary),
             Self::GetAccountAuthorizationDetails(authz_details) => Box::new(authz_details),
             Self::CreateAccountAlias(create_alias) => Box::new(create_alias),
+            Self::DeleteAccountAlias(delete_alias) => Box::new(delete_alias),
             Self::ListAccountAliases(list_aliases) => Box::new(list_aliases),
         }
     }
