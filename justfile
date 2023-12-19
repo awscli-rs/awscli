@@ -5,7 +5,7 @@ alias t := test
 test:
     cargo test --workspace
 raws *ARGS:
-    cargo run -Zlints {{ARGS}}
+    cargo run {{ARGS}}
 aws *ARGS:
     aws {{ARGS}}
 alias c:=clippy
