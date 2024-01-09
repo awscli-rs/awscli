@@ -1576,7 +1576,6 @@ dependencies = [
 name = "raws-account"
 version = "0.0.2"
 dependencies = [
- "async-trait",
  "aws-sdk-account",
  "clap",
  "raws-config",
@@ -1591,6 +1590,7 @@ name = "raws-config"
 version = "0.0.2"
 dependencies = [
  "aws-config",
+ "aws-sdk-account",
  "aws-types",
  "clap",
  "fmtools",

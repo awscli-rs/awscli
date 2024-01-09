@@ -13,6 +13,7 @@ readme.workspace = true
 [dependencies]
 aws-config.workspace = true
 aws-types.workspace = true
+aws-sdk-account.workspace = true
 
 clap.workspace = true
 fmtools.workspace = true

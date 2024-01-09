@@ -13,11 +13,10 @@ pub struct EnableRegion {
     region_name: String,
 }
 
-#[async_trait]
-impl Execute for EnableRegion {
-    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+impl EnableRegion {
+    pub(crate) async fn execute(self, config: &Config) -> AccountResult {
         let _output = config
-            .client()
+            .account()
             .enable_region()
             .set_account_id(self.account_id)
             .region_name(self.region_name)

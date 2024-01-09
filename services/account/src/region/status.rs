@@ -13,11 +13,10 @@ pub struct GetRegionOptStatus {
     region_name: String,
 }
 
-#[async_trait]
-impl Execute for GetRegionOptStatus {
-    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+impl GetRegionOptStatus {
+    pub(crate) async fn execute(self, config: &Config) -> AccountResult {
         let status = config
-            .client()
+            .account()
             .get_region_opt_status()
             .set_account_id(self.account_id)
             .region_name(self.region_name)

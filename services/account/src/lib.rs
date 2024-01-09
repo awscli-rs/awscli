@@ -1,4 +1,3 @@
-use async_trait::async_trait;
 use aws_sdk_account as account;
 use clap::{Args, Subcommand};
 
@@ -8,22 +7,7 @@ use error::RawsError;
 mod contact;
 mod region;
 
-type AccountResult<T = Box<dyn show::Show>> = std::result::Result<T, aws_sdk_account::Error>;
-
-#[async_trait]
-pub trait Execute {
-    async fn execute(self: Box<Self>, config: &Config) -> AccountResult;
-}
-
-trait ClientExt {
-    fn client(&self) -> account::Client;
-}
-
-impl ClientExt for Config {
-    fn client(&self) -> account::Client {
-        account::Client::new(self.config())
-    }
-}
+type AccountResult<T = Box<dyn show::Show>> = std::result::Result<T, account::Error>;
 
 /// Operations for Amazon Web Services Account Management
 #[derive(Debug, Subcommand)]
@@ -40,29 +24,32 @@ pub enum Account {
 }
 
 impl Account {
-    fn boxed(self) -> Box<dyn Execute> {
+    async fn execute(self, config: &Config) -> AccountResult {
         match self {
-            Self::EnableRegion(enable_region) => Box::new(enable_region),
-            Self::DisableRegion(disable_region) => Box::new(disable_region),
-            Self::ListRegions(list_regions) => Box::new(list_regions),
-            Self::GetRegionOptStatus(status) => Box::new(status),
-            Self::GetAlternateContact(get_alternate_contact) => Box::new(get_alternate_contact),
-            Self::DeleteAlternateContact(delete_alternate_contact) => {
-                Box::new(delete_alternate_contact)
+            Self::EnableRegion(enable_region) => enable_region.execute(config).await,
+            Self::DisableRegion(disable_region) => disable_region.execute(config).await,
+            Self::ListRegions(list_regions) => list_regions.execute(config).await,
+            Self::GetRegionOptStatus(status) => status.execute(config).await,
+            Self::GetAlternateContact(get_alternate_contact) => {
+                get_alternate_contact.execute(config).await
             }
-            Self::PutAlternateContact(put_alternate_contact) => Box::new(put_alternate_contact),
+            Self::DeleteAlternateContact(delete_alternate_contact) => {
+                delete_alternate_contact.execute(config).await
+            }
+            Self::PutAlternateContact(put_alternate_contact) => {
+                put_alternate_contact.execute(config).await
+            }
             Self::GetContactInformation(get_contact_information) => {
-                Box::new(get_contact_information)
+                get_contact_information.execute(config).await
             }
             Self::PutContactInformation(put_contact_information) => {
-                Box::new(put_contact_information)
+                put_contact_information.execute(config).await
             }
         }
     }
 
-    pub async fn dispatch(self, config: Config) -> Result<(), RawsError<aws_sdk_account::Error>> {
-        self.boxed()
-            .execute(&config)
+    pub async fn dispatch(self, config: Config) -> Result<(), RawsError<account::Error>> {
+        self.execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

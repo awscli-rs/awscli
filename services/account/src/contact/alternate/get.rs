@@ -13,11 +13,10 @@ pub struct GetAlternateContact {
     alternate_contact_type: account::types::AlternateContactType,
 }
 
-#[async_trait]
-impl Execute for GetAlternateContact {
-    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+impl GetAlternateContact {
+    pub(crate) async fn execute(self, config: &Config) -> AccountResult {
         let contact = config
-            .client()
+            .account()
             .get_alternate_contact()
             .set_account_id(self.account_id)
             .alternate_contact_type(self.alternate_contact_type)

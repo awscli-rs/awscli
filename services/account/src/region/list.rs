@@ -12,11 +12,10 @@ pub struct ListRegions {
     region_opt_status_contains: Option<Vec<account::types::RegionOptStatus>>,
 }
 
-#[async_trait]
-impl Execute for ListRegions {
-    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+impl ListRegions {
+    pub(crate) async fn execute(self, config: &Config) -> AccountResult {
         let regions = config
-            .client()
+            .account()
             .list_regions()
             .set_region_opt_status_contains(self.region_opt_status_contains)
             .into_paginator()

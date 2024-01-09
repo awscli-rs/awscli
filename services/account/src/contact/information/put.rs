@@ -13,11 +13,10 @@ pub struct PutContactInformation {
     contact_information: account::types::ContactInformation,
 }
 
-#[async_trait]
-impl Execute for PutContactInformation {
-    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+impl PutContactInformation {
+    pub(crate) async fn execute(self, config: &Config) -> AccountResult {
         let contact = config
-            .client()
+            .account()
             .get_alternate_contact()
             .set_account_id(self.account_id)
             .send()

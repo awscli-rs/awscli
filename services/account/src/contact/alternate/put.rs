@@ -29,11 +29,10 @@ pub struct PutAlternateContact {
     phone_number: String,
 }
 
-#[async_trait]
-impl Execute for PutAlternateContact {
-    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+impl PutAlternateContact {
+    pub(crate) async fn execute(self, config: &Config) -> AccountResult {
         let _output = config
-            .client()
+            .account()
             .put_alternate_contact()
             .set_account_id(self.account_id)
             .alternate_contact_type(self.alternate_contact_type)

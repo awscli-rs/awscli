@@ -9,11 +9,10 @@ pub struct GetContactInformation {
     account_id: Option<String>,
 }
 
-#[async_trait]
-impl Execute for GetContactInformation {
-    async fn execute(self: Box<Self>, config: &Config) -> AccountResult {
+impl GetContactInformation {
+    pub(crate) async fn execute(self, config: &Config) -> AccountResult {
         let contact = config
-            .client()
+            .account()
             .get_contact_information()
             .set_account_id(self.account_id)
             .send()

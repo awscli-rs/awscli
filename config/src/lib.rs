@@ -2,6 +2,8 @@ use aws_config::{BehaviorVersion, ConfigLoader, SdkConfig};
 use aws_types::app_name::AppName;
 use aws_types::region::Region;
 
+use aws_sdk_account as account;
+
 pub use output::Output;
 
 mod output;
@@ -56,6 +58,10 @@ impl Config {
             self.output.output(object)
         };
         fmtools::println!({ text });
+    }
+
+    pub fn account(&self) -> account::Client {
+        account::Client::new(self.config())
     }
 }
 
