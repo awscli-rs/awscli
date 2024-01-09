@@ -1592,6 +1592,7 @@ dependencies = [
  "aws-config",
  "aws-sdk-account",
  "aws-sdk-dynamodb",
+ "aws-sdk-ebs",
  "aws-types",
  "clap",
  "fmtools",
@@ -1615,7 +1616,6 @@ dependencies = [
 name = "raws-ebs"
 version = "0.0.2"
 dependencies = [
- "async-trait",
  "aws-sdk-ebs",
  "aws-smithy-types",
  "clap",

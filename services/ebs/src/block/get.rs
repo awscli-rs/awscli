@@ -21,11 +21,10 @@ pub struct GetSnapshotBlock {
     outfile: PathBuf,
 }
 
-#[async_trait]
-impl Execute for GetSnapshotBlock {
-    async fn execute(self: Box<Self>, config: &Config) -> EbsResult {
+impl GetSnapshotBlock {
+    pub(crate) async fn execute(self, config: &Config) -> EbsResult {
         let mut block = config
-            .client()
+            .ebs()
             .get_snapshot_block()
             .snapshot_id(self.snapshot_id)
             .block_index(self.block_index)

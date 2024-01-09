@@ -29,11 +29,10 @@ pub struct StartSnapshot {
     timeout: Option<i32>,
 }
 
-#[async_trait]
-impl Execute for StartSnapshot {
-    async fn execute(self: Box<Self>, config: &Config) -> EbsResult {
+impl StartSnapshot {
+    pub(crate) async fn execute(self, config: &Config) -> EbsResult {
         let output = config
-            .client()
+            .ebs()
             .start_snapshot()
             .volume_size(self.volume_size)
             .set_parent_snapshot_id(self.parent_snapshot_id)

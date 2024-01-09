@@ -22,15 +22,14 @@ pub struct PutSnapshotBlock {
     progress: Option<i32>,
 }
 
-#[async_trait]
-impl Execute for PutSnapshotBlock {
-    async fn execute(self: Box<Self>, config: &Config) -> EbsResult {
+impl PutSnapshotBlock {
+    pub(crate) async fn execute(self, config: &Config) -> EbsResult {
         let block_data = ebs::primitives::ByteStream::from_path(self.block_data)
             .await
             .map_err(ebs::error::BuildError::other)?;
 
         let block = config
-            .client()
+            .ebs()
             .put_snapshot_block()
             .snapshot_id(self.snapshot_id)
             .block_data(block_data)

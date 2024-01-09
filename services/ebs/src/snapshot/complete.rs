@@ -12,11 +12,10 @@ pub struct CompleteSnapshot {
     changed_block_count: i32,
 }
 
-#[async_trait]
-impl Execute for CompleteSnapshot {
-    async fn execute(self: Box<Self>, config: &Config) -> EbsResult {
+impl CompleteSnapshot {
+    pub(crate) async fn execute(self, config: &Config) -> EbsResult {
         let status = config
-            .client()
+            .ebs()
             .complete_snapshot()
             .snapshot_id(self.snapshot_id)
             .changed_blocks_count(self.changed_block_count)

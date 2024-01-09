@@ -12,11 +12,10 @@ pub struct ListSnapshotBlocks {
     next_token: Option<String>,
 }
 
-#[async_trait]
-impl Execute for ListSnapshotBlocks {
-    async fn execute(self: Box<Self>, config: &Config) -> EbsResult {
+impl ListSnapshotBlocks {
+    pub(crate) async fn execute(self, config: &Config) -> EbsResult {
         let blocks = config
-            .client()
+            .ebs()
             .list_snapshot_blocks()
             .snapshot_id(self.snapshot_id)
             .set_next_token(self.next_token)

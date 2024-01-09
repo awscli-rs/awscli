@@ -15,6 +15,7 @@ aws-config.workspace = true
 aws-types.workspace = true
 aws-sdk-account.workspace = true
 aws-sdk-dynamodb.workspace = true
+aws-sdk-ebs.workspace = true
 
 clap.workspace = true
 fmtools.workspace = true
