@@ -19,6 +19,7 @@ aws-sdk-ebs.workspace = true
 aws-sdk-ec2.workspace = true
 aws-sdk-eks.workspace = true
 aws-sdk-iam.workspace = true
+aws-sdk-pricing.workspace = true
 
 clap.workspace = true
 fmtools.workspace = true

@@ -19,11 +19,10 @@ pub struct ListPriceLists {
     currency_code: String,
 }
 
-#[async_trait]
-impl Execute for ListPriceLists {
-    async fn execute(self: Box<Self>, config: &Config) -> PricingResult {
+impl ListPriceLists {
+    pub(crate) async fn execute(self, config: &Config) -> PricingResult {
         let price_lists = config
-            .client()
+            .pricing()
             .list_price_lists()
             .service_code(self.service_code)
             .effective_date(self.effective_date)

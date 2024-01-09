@@ -11,11 +11,10 @@ pub struct GetPriceListFileUrl {
     file_format: String,
 }
 
-#[async_trait]
-impl Execute for GetPriceListFileUrl {
-    async fn execute(self: Box<Self>, config: &Config) -> PricingResult {
+impl GetPriceListFileUrl {
+    pub(crate) async fn execute(self, config: &Config) -> PricingResult {
         let url = config
-            .client()
+            .pricing()
             .get_price_list_file_url()
             .price_list_arn(self.price_list_arn)
             .file_format(self.file_format)

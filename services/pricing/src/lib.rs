@@ -1,4 +1,3 @@
-use async_trait::async_trait;
 use aws_sdk_pricing as pricing;
 use clap::{Args, Subcommand};
 
@@ -9,21 +8,6 @@ mod pricelist;
 mod services;
 
 type PricingResult<T = Box<dyn show::Show>> = std::result::Result<T, pricing::Error>;
-
-#[async_trait]
-pub trait Execute {
-    async fn execute(self: Box<Self>, config: &Config) -> PricingResult;
-}
-
-trait ClientExt {
-    fn client(&self) -> pricing::Client;
-}
-
-impl ClientExt for Config {
-    fn client(&self) -> pricing::Client {
-        pricing::Client::new(self.config())
-    }
-}
 
 /// AWS Pricing Information
 #[derive(Debug, Subcommand)]
@@ -36,19 +20,22 @@ pub enum Pricing {
 }
 
 impl Pricing {
-    fn boxed(self) -> Box<dyn Execute> {
+    async fn execute(self, config: &Config) -> PricingResult {
         match self {
-            Self::DescribeServices(describe_services) => Box::new(describe_services),
-            Self::GetAttributeValues(get_attribute_values) => Box::new(get_attribute_values),
-            Self::GetProducts(get_products) => Box::new(get_products),
-            Self::GetPriceListFileUrl(get_price_list_file_url) => Box::new(get_price_list_file_url),
-            Self::ListPriceLists(list_price_lists) => Box::new(list_price_lists),
+            Self::DescribeServices(describe_services) => describe_services.execute(config).await,
+            Self::GetAttributeValues(get_attribute_values) => {
+                get_attribute_values.execute(config).await
+            }
+            Self::GetProducts(get_products) => get_products.execute(config).await,
+            Self::GetPriceListFileUrl(get_price_list_file_url) => {
+                get_price_list_file_url.execute(config).await
+            }
+            Self::ListPriceLists(list_price_lists) => list_price_lists.execute(config).await,
         }
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<pricing::Error>> {
-        self.boxed()
-            .execute(&config)
+        self.execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

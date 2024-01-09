@@ -11,11 +11,10 @@ pub struct GetAttributeValues {
     attribute_name: String,
 }
 
-#[async_trait]
-impl Execute for GetAttributeValues {
-    async fn execute(self: Box<Self>, config: &Config) -> PricingResult {
+impl GetAttributeValues {
+    pub(crate) async fn execute(self, config: &Config) -> PricingResult {
         let values = config
-            .client()
+            .pricing()
             .get_attribute_values()
             .service_code(self.service_code)
             .attribute_name(self.attribute_name)

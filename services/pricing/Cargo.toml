@@ -11,11 +11,9 @@ readme.workspace = true
 
 
 [dependencies]
-async-trait.workspace = true
 aws-sdk-pricing.workspace = true
 aws-smithy-types.workspace = true
 clap.workspace = true
-thiserror.workspace = true
 
 config.workspace = true
 error.workspace = true

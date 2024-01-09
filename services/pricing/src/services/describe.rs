@@ -11,11 +11,10 @@ pub struct DescribeServices {
     format_version: Option<String>,
 }
 
-#[async_trait]
-impl Execute for DescribeServices {
-    async fn execute(self: Box<Self>, config: &Config) -> PricingResult {
+impl DescribeServices {
+    pub(crate) async fn execute(self, config: &Config) -> PricingResult {
         let services = config
-            .client()
+            .pricing()
             .describe_services()
             .set_service_code(self.service_code)
             .set_format_version(self.format_version)

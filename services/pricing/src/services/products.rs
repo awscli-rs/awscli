@@ -14,11 +14,10 @@ pub struct GetProducts {
     format_version: Option<String>,
 }
 
-#[async_trait]
-impl Execute for GetProducts {
-    async fn execute(self: Box<Self>, config: &Config) -> PricingResult {
+impl GetProducts {
+    pub(crate) async fn execute(self, config: &Config) -> PricingResult {
         let values = config
-            .client()
+            .pricing()
             .get_products()
             .service_code(self.service_code)
             .set_filters(None)
