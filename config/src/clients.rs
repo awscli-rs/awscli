@@ -5,6 +5,7 @@ use aws_sdk_ec2 as ec2;
 use aws_sdk_eks as eks;
 use aws_sdk_iam as iam;
 use aws_sdk_pricing as pricing;
+use aws_sdk_s3 as s3;
 
 use super::*;
 
@@ -35,5 +36,9 @@ impl Config {
 
     pub fn pricing(&self) -> pricing::Client {
         pricing::Client::new(self.config())
+    }
+
+    pub fn s3(&self) -> s3::Client {
+        s3::Client::new(self.config())
     }
 }

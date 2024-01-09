@@ -9,7 +9,7 @@ pub(crate) struct S3Client {
 
 impl S3Client {
     pub(crate) fn with_config(config: &Config) -> Self {
-        let client = config.client();
+        let client = config.s3();
         Self { client }
     }
 

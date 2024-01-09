@@ -1,4 +1,3 @@
-use async_trait::async_trait;
 use aws_sdk_s3 as s3;
 use clap::{Args, Subcommand};
 
@@ -17,21 +16,6 @@ type S3Result<T = Box<dyn show::Show>> = std::result::Result<T, s3::Error>;
 
 const S3_PREFIX: &str = "s3://";
 
-#[async_trait]
-pub trait Execute {
-    async fn execute(self: Box<Self>, config: &Config) -> S3Result;
-}
-
-trait ClientExt {
-    fn client(&self) -> s3::Client;
-}
-
-impl ClientExt for Config {
-    fn client(&self) -> s3::Client {
-        s3::Client::new(self.config())
-    }
-}
-
 /// High-level S3 commands
 #[derive(Debug, Subcommand)]
 pub enum S3 {
@@ -41,17 +25,16 @@ pub enum S3 {
 }
 
 impl S3 {
-    fn boxed(self) -> Box<dyn Execute> {
+    async fn execute(self, config: &Config) -> S3Result {
         match self {
-            Self::Mb(mb) => Box::new(mb),
-            Self::Rb(rb) => Box::new(rb),
-            Self::Ls(ls) => Box::new(ls),
+            Self::Mb(mb) => mb.execute(config).await,
+            Self::Rb(rb) => rb.execute(config).await,
+            Self::Ls(ls) => ls.execute(config).await,
         }
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<s3::Error>> {
-        self.boxed()
-            .execute(&config)
+        self.execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

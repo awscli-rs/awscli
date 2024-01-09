@@ -6,9 +6,8 @@ pub struct List {
     s3_uri: Option<String>,
 }
 
-#[async_trait]
-impl Execute for List {
-    async fn execute(self: Box<Self>, config: &Config) -> S3Result {
+impl List {
+    pub(crate) async fn execute(self, config: &Config) -> S3Result {
         let client = S3Client::with_config(config);
         if let Some(bucket) = maybe_bucket_name(self.s3_uri.as_deref()) {
             let objects = client.list_all_objects(bucket).await?;

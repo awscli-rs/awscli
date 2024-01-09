@@ -1597,6 +1597,7 @@ dependencies = [
  "aws-sdk-eks",
  "aws-sdk-iam",
  "aws-sdk-pricing",
+ "aws-sdk-s3",
  "aws-types",
  "clap",
  "fmtools",
@@ -1712,7 +1713,6 @@ dependencies = [
 name = "raws-s3"
 version = "0.0.2"
 dependencies = [
- "async-trait",
  "aws-sdk-s3",
  "aws-smithy-types",
  "clap",
@@ -1720,7 +1720,6 @@ dependencies = [
  "raws-error",
  "raws-parsers",
  "raws-show",
- "thiserror",
 ]
 
 [[package]]
