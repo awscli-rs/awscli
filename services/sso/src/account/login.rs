@@ -11,10 +11,9 @@ pub struct Login {
     sso_session: Option<String>,
 }
 
-#[async_trait]
-impl Execute for Login {
-    async fn execute(self: Box<Self>, config: &Config) -> SsoResult {
-        let _credentials = config.client().config().identity_cache().unwrap();
+impl Login {
+    pub(crate) async fn execute(self, config: &Config) -> SsoResult {
+        let _credentials = config.sso().config().identity_cache().unwrap();
 
         todo!(r#""sso login" functionality is not implemented yet"#)
     }

@@ -14,11 +14,10 @@ pub struct GetRoleCredentials {
     account_id: String,
 }
 
-#[async_trait]
-impl Execute for GetRoleCredentials {
-    async fn execute(self: Box<Self>, config: &Config) -> SsoResult {
+impl GetRoleCredentials {
+    pub(crate) async fn execute(self, config: &Config) -> SsoResult {
         let role_credentials = config
-            .client()
+            .sso()
             .get_role_credentials()
             .role_name(self.role_name)
             .access_token(self.access_token)

@@ -1,4 +1,3 @@
-use async_trait::async_trait;
 use aws_sdk_sso as sso;
 use clap::{Args, Subcommand};
 
@@ -9,21 +8,6 @@ mod account;
 mod role;
 
 type SsoResult<T = Box<dyn show::Show>> = std::result::Result<T, sso::Error>;
-
-#[async_trait]
-pub trait Execute {
-    async fn execute(self: Box<Self>, config: &Config) -> SsoResult;
-}
-
-trait ClientExt {
-    fn client(&self) -> sso::Client;
-}
-
-impl ClientExt for Config {
-    fn client(&self) -> sso::Client {
-        sso::Client::new(self.config())
-    }
-}
 
 /// AWS IAM Identity Center (successor to AWS Single Sign-On)
 #[derive(Debug, Subcommand)]
@@ -36,19 +20,20 @@ pub enum Sso {
 }
 
 impl Sso {
-    fn boxed(self) -> Box<dyn Execute> {
+    async fn execute(self, config: &Config) -> SsoResult {
         match self {
-            Self::ListAccounts(list_accounts) => Box::new(list_accounts),
-            Self::ListAccountRoles(list_account_roles) => Box::new(list_account_roles),
-            Self::GetRoleCredentials(get_role_credentials) => Box::new(get_role_credentials),
-            Self::Login(login) => Box::new(login),
-            Self::Logout(logout) => Box::new(logout),
+            Self::ListAccounts(list_accounts) => list_accounts.execute(config).await,
+            Self::ListAccountRoles(list_account_roles) => list_account_roles.execute(config).await,
+            Self::GetRoleCredentials(get_role_credentials) => {
+                get_role_credentials.execute(config).await
+            }
+            Self::Login(login) => login.execute(config).await,
+            Self::Logout(logout) => logout.execute(config).await,
         }
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<sso::Error>> {
-        self.boxed()
-            .execute(&config)
+        self.execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

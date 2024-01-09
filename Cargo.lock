@@ -1598,6 +1598,7 @@ dependencies = [
  "aws-sdk-iam",
  "aws-sdk-pricing",
  "aws-sdk-s3",
+ "aws-sdk-sso",
  "aws-types",
  "clap",
  "fmtools",
@@ -1749,13 +1750,11 @@ dependencies = [
 name = "raws-sso"
 version = "0.0.2"
 dependencies = [
- "async-trait",
  "aws-sdk-sso",
  "clap",
  "raws-config",
  "raws-error",
  "raws-show",
- "thiserror",
 ]
 
 [[package]]

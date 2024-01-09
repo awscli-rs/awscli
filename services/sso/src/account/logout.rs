@@ -5,10 +5,9 @@ use super::*;
 #[derive(Debug, Args)]
 pub struct Logout;
 
-#[async_trait]
-impl Execute for Logout {
-    async fn execute(self: Box<Self>, config: &Config) -> SsoResult {
-        config.client().logout().send().await?;
+impl Logout {
+    pub(crate) async fn execute(self, config: &Config) -> SsoResult {
+        config.sso().logout().send().await?;
         Ok(Box::new(()))
     }
 }

@@ -6,6 +6,7 @@ use aws_sdk_eks as eks;
 use aws_sdk_iam as iam;
 use aws_sdk_pricing as pricing;
 use aws_sdk_s3 as s3;
+use aws_sdk_sso as sso;
 
 use super::*;
 
@@ -40,5 +41,9 @@ impl Config {
 
     pub fn s3(&self) -> s3::Client {
         s3::Client::new(self.config())
+    }
+
+    pub fn sso(&self) -> sso::Client {
+        sso::Client::new(self.config())
     }
 }
