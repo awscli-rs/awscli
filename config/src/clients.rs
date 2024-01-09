@@ -2,6 +2,7 @@ use aws_sdk_account as account;
 use aws_sdk_dynamodb as dynamodb;
 use aws_sdk_ebs as ebs;
 use aws_sdk_ec2 as ec2;
+use aws_sdk_eks as eks;
 
 use super::*;
 
@@ -20,5 +21,9 @@ impl Config {
 
     pub fn ec2(&self) -> ec2::Client {
         ec2::Client::new(self.config())
+    }
+
+    pub fn eks(&self) -> eks::Client {
+        eks::Client::new(self.config())
     }
 }

@@ -8,11 +8,10 @@ pub struct DescribeCluster {
     name: String,
 }
 
-#[async_trait]
-impl Execute for DescribeCluster {
-    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+impl DescribeCluster {
+    pub(crate) async fn execute(self, config: &Config) -> EksResult {
         let cluster = config
-            .client()
+            .eks()
             .describe_cluster()
             .name(self.name)
             .send()

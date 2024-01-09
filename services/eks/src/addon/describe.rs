@@ -12,11 +12,10 @@ pub struct DescribeAddon {
     addon_name: String,
 }
 
-#[async_trait]
-impl Execute for DescribeAddon {
-    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+impl DescribeAddon {
+    pub(crate) async fn execute(self, config: &Config) -> EksResult {
         let addon = config
-            .client()
+            .eks()
             .describe_addon()
             .cluster_name(self.cluster_name)
             .addon_name(self.addon_name)

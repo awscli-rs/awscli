@@ -20,11 +20,10 @@ pub struct DescribeUpdate {
     addon_name: Option<String>,
 }
 
-#[async_trait]
-impl Execute for DescribeUpdate {
-    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+impl DescribeUpdate {
+    pub(crate) async fn execute(self, config: &Config) -> EksResult {
         let update = config
-            .client()
+            .eks()
             .describe_update()
             .name(self.name)
             .update_id(self.update_id)

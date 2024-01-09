@@ -20,11 +20,10 @@ pub struct CreateCluster {
     resources_vpc_config: VpcConfigRequest,
 }
 
-#[async_trait]
-impl Execute for CreateCluster {
-    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+impl CreateCluster {
+    pub(crate) async fn execute(self, config: &Config) -> EksResult {
         let cluster = config
-            .client()
+            .eks()
             .create_cluster()
             .name(self.name)
             .role_arn(self.role_arn)

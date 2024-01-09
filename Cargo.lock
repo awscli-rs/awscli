@@ -1594,6 +1594,7 @@ dependencies = [
  "aws-sdk-dynamodb",
  "aws-sdk-ebs",
  "aws-sdk-ec2",
+ "aws-sdk-eks",
  "aws-types",
  "clap",
  "fmtools",
@@ -1644,14 +1645,12 @@ dependencies = [
 name = "raws-eks"
 version = "0.0.2"
 dependencies = [
- "async-trait",
  "aws-sdk-eks",
  "clap",
  "raws-config",
  "raws-error",
  "raws-parsers",
  "raws-show",
- "thiserror",
 ]
 
 [[package]]

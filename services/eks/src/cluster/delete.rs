@@ -8,11 +8,10 @@ pub struct DeleteCluster {
     name: String,
 }
 
-#[async_trait]
-impl Execute for DeleteCluster {
-    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+impl DeleteCluster {
+    pub(crate) async fn execute(self, config: &Config) -> EksResult {
         let cluster = config
-            .client()
+            .eks()
             .delete_cluster()
             .name(self.name)
             .send()

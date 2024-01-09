@@ -4,11 +4,10 @@ use super::*;
 #[derive(Debug, Args)]
 pub struct ListClusters;
 
-#[async_trait]
-impl Execute for ListClusters {
-    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+impl ListClusters {
+    pub(crate) async fn execute(self, config: &Config) -> EksResult {
         let cluster = config
-            .client()
+            .eks()
             .list_clusters()
             .into_paginator()
             .items()

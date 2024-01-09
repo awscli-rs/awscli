@@ -16,11 +16,10 @@ pub struct ListUpdates {
     addon_name: Option<String>,
 }
 
-#[async_trait]
-impl Execute for ListUpdates {
-    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+impl ListUpdates {
+    pub(crate) async fn execute(self, config: &Config) -> EksResult {
         let updates = config
-            .client()
+            .eks()
             .list_updates()
             .name(self.name)
             .set_nodegroup_name(self.nodegroup_name)

@@ -11,10 +11,8 @@ readme.workspace = true
 
 
 [dependencies]
-async-trait.workspace = true
 aws-sdk-eks.workspace = true
 clap.workspace = true
-thiserror.workspace = true
 
 config.workspace = true
 error.workspace = true

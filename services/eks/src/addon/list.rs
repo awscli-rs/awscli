@@ -8,11 +8,10 @@ pub struct ListAddons {
     cluster_name: String,
 }
 
-#[async_trait]
-impl Execute for ListAddons {
-    async fn execute(self: Box<Self>, config: &Config) -> EksResult {
+impl ListAddons {
+    pub(crate) async fn execute(self, config: &Config) -> EksResult {
         let addons = config
-            .client()
+            .eks()
             .list_addons()
             .cluster_name(self.cluster_name)
             .into_paginator()
