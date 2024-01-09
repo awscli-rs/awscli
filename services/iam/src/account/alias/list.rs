@@ -5,11 +5,10 @@ use super::*;
 #[derive(Debug, Args)]
 pub struct ListAccountAliases;
 
-#[async_trait]
-impl Execute for ListAccountAliases {
-    async fn execute(self: Box<Self>, config: &Config) -> IamResult {
+impl ListAccountAliases {
+    pub(crate) async fn execute(self, config: &Config) -> IamResult {
         let aliases = config
-            .client()
+            .iam()
             .list_account_aliases()
             .into_paginator()
             .items()

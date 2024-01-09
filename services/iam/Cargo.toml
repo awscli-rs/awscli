@@ -11,11 +11,9 @@ readme.workspace = true
 
 
 [dependencies]
-async-trait.workspace = true
 aws-sdk-iam.workspace = true
 clap.workspace = true
 itertools.workspace = true
-thiserror.workspace = true
 
 config.workspace = true
 error.workspace = true

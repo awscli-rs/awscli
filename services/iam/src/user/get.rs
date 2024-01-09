@@ -7,11 +7,10 @@ pub struct GetUser {
     user_name: String,
 }
 
-#[async_trait]
-impl Execute for GetUser {
-    async fn execute(self: Box<Self>, config: &Config) -> IamResult {
+impl GetUser {
+    pub(crate) async fn execute(self, config: &Config) -> IamResult {
         let user = config
-            .client()
+            .iam()
             .get_user()
             .user_name(self.user_name)
             .send()

@@ -1,4 +1,3 @@
-use async_trait::async_trait;
 use aws_sdk_iam as iam;
 use clap::{Args, Subcommand};
 
@@ -9,21 +8,6 @@ mod account;
 mod user;
 
 type IamResult<T = Box<dyn show::Show>> = std::result::Result<T, iam::Error>;
-
-#[async_trait]
-pub trait Execute {
-    async fn execute(self: Box<Self>, config: &Config) -> IamResult;
-}
-
-trait ClientExt {
-    fn client(&self) -> iam::Client;
-}
-
-impl ClientExt for Config {
-    fn client(&self) -> iam::Client {
-        iam::Client::new(self.config())
-    }
-}
 
 /// Identity and Access Management (IAM)
 #[derive(Debug, Subcommand)]
@@ -40,23 +24,24 @@ pub enum Iam {
 }
 
 impl Iam {
-    fn boxed(self) -> Box<dyn Execute> {
+    async fn execute(self, config: &Config) -> IamResult {
         match self {
-            Self::CreateUser(create_user) => Box::new(create_user),
-            Self::DeleteUser(delete_user) => Box::new(delete_user),
-            Self::GetUser(get_user) => Box::new(get_user),
-            Self::ListUsers(list_users) => Box::new(list_users),
-            Self::GetAccountSummary(account_summary) => Box::new(account_summary),
-            Self::GetAccountAuthorizationDetails(authz_details) => Box::new(authz_details),
-            Self::CreateAccountAlias(create_alias) => Box::new(create_alias),
-            Self::DeleteAccountAlias(delete_alias) => Box::new(delete_alias),
-            Self::ListAccountAliases(list_aliases) => Box::new(list_aliases),
+            Self::CreateUser(create_user) => create_user.execute(config).await,
+            Self::DeleteUser(delete_user) => delete_user.execute(config).await,
+            Self::GetUser(get_user) => get_user.execute(config).await,
+            Self::ListUsers(list_users) => list_users.execute(config).await,
+            Self::GetAccountSummary(account_summary) => account_summary.execute(config).await,
+            Self::GetAccountAuthorizationDetails(authz_details) => {
+                authz_details.execute(config).await
+            }
+            Self::CreateAccountAlias(create_alias) => create_alias.execute(config).await,
+            Self::DeleteAccountAlias(delete_alias) => delete_alias.execute(config).await,
+            Self::ListAccountAliases(list_aliases) => list_aliases.execute(config).await,
         }
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<iam::Error>> {
-        self.boxed()
-            .execute(&config)
+        self.execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())

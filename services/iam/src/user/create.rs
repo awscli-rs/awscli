@@ -7,11 +7,10 @@ pub struct CreateUser {
     user_name: String,
 }
 
-#[async_trait]
-impl Execute for CreateUser {
-    async fn execute(self: Box<Self>, config: &Config) -> IamResult {
+impl CreateUser {
+    pub(crate) async fn execute(self, config: &Config) -> IamResult {
         let user = config
-            .client()
+            .iam()
             .create_user()
             .user_name(self.user_name)
             .send()

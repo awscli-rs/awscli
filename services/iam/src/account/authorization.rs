@@ -11,11 +11,10 @@ pub struct GetAccountAuthorizationDetails {
     filter: Option<Vec<iam::types::EntityType>>,
 }
 
-#[async_trait]
-impl Execute for GetAccountAuthorizationDetails {
-    async fn execute(self: Box<Self>, config: &Config) -> IamResult {
+impl GetAccountAuthorizationDetails {
+    pub(crate) async fn execute(self, config: &Config) -> IamResult {
         let items = config
-            .client()
+            .iam()
             .get_account_authorization_details()
             .set_filter(self.filter)
             .into_paginator()

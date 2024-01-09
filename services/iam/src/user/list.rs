@@ -3,11 +3,10 @@ use super::*;
 #[derive(Debug, Args)]
 pub struct ListUsers {}
 
-#[async_trait]
-impl Execute for ListUsers {
-    async fn execute(self: Box<Self>, config: &Config) -> IamResult {
+impl ListUsers {
+    pub(crate) async fn execute(self, config: &Config) -> IamResult {
         let users = config
-            .client()
+            .iam()
             .list_users()
             .into_paginator()
             .items()

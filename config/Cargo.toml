@@ -18,6 +18,7 @@ aws-sdk-dynamodb.workspace = true
 aws-sdk-ebs.workspace = true
 aws-sdk-ec2.workspace = true
 aws-sdk-eks.workspace = true
+aws-sdk-iam.workspace = true
 
 clap.workspace = true
 fmtools.workspace = true

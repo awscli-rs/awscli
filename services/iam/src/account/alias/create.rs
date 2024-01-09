@@ -8,11 +8,10 @@ pub struct CreateAccountAlias {
     account_alias: String,
 }
 
-#[async_trait]
-impl Execute for CreateAccountAlias {
-    async fn execute(self: Box<Self>, config: &Config) -> IamResult {
+impl CreateAccountAlias {
+    pub(crate) async fn execute(self, config: &Config) -> IamResult {
         config
-            .client()
+            .iam()
             .create_account_alias()
             .account_alias(self.account_alias)
             .send()

@@ -3,6 +3,7 @@ use aws_sdk_dynamodb as dynamodb;
 use aws_sdk_ebs as ebs;
 use aws_sdk_ec2 as ec2;
 use aws_sdk_eks as eks;
+use aws_sdk_iam as iam;
 
 use super::*;
 
@@ -25,5 +26,9 @@ impl Config {
 
     pub fn eks(&self) -> eks::Client {
         eks::Client::new(self.config())
+    }
+
+    pub fn iam(&self) -> iam::Client {
+        iam::Client::new(self.config())
     }
 }

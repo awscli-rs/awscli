@@ -4,11 +4,10 @@ use super::*;
 #[derive(Debug, Args)]
 pub struct GetAccountSummary;
 
-#[async_trait]
-impl Execute for GetAccountSummary {
-    async fn execute(self: Box<Self>, config: &Config) -> IamResult {
+impl GetAccountSummary {
+    pub(crate) async fn execute(self, config: &Config) -> IamResult {
         let summary = config
-            .client()
+            .iam()
             .get_account_summary()
             .send()
             .await?

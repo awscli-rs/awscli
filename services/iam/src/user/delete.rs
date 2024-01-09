@@ -11,11 +11,10 @@ pub struct DeleteUser {
     user_name: String,
 }
 
-#[async_trait]
-impl Execute for DeleteUser {
-    async fn execute(self: Box<Self>, config: &Config) -> IamResult {
+impl DeleteUser {
+    pub(crate) async fn execute(self, config: &Config) -> IamResult {
         config
-            .client()
+            .iam()
             .delete_user()
             .user_name(self.user_name)
             .send()
