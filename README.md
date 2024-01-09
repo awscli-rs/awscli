@@ -16,5 +16,6 @@ This crate is a part of RAWS project - AWS CLI wriiten in Rust using AWS SDK for
   1. add "description = RAWS xxx component"
   2. add dependencies
   3. add lints
-5. in show crate: impl Show for xxx::types::xxx
-6. if needed add specialized parsers in parsers crate
+5. In config crate: add Config::xxx() to produce a client object
+6. in show crate: impl Show for xxx::types::xxx
+7. if needed add specialized parsers in parsers crate
