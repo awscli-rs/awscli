@@ -13,11 +13,10 @@ pub struct DeleteVpc {
     dry_run: Option<bool>,
 }
 
-#[async_trait]
-impl Execute for DeleteVpc {
-    async fn execute(self: Box<Self>, config: &Config) -> Ec2Result {
+impl DeleteVpc {
+    pub(crate) async fn execute(self, config: &Config) -> Ec2Result {
         config
-            .client()
+            .ec2()
             .delete_vpc()
             .vpc_id(self.vpc_id)
             .set_dry_run(self.dry_run)

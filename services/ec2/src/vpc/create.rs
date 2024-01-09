@@ -66,11 +66,10 @@ pub struct CreateVpc {
     cli_input_json: Option<String>,
 }
 
-#[async_trait]
-impl Execute for CreateVpc {
-    async fn execute(self: Box<Self>, config: &Config) -> Ec2Result {
+impl CreateVpc {
+    pub(crate) async fn execute(self, config: &Config) -> Ec2Result {
         let vpc = config
-            .client()
+            .ec2()
             .create_vpc()
             .set_cidr_block(self.cidr_block)
             .set_amazon_provided_ipv6_cidr_block(self.amazon_provided_ipv6_cidr_block)

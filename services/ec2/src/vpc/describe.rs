@@ -13,11 +13,10 @@ pub struct DescribeVpcs {
     dry_run: Option<bool>,
 }
 
-#[async_trait]
-impl Execute for DescribeVpcs {
-    async fn execute(self: Box<Self>, config: &Config) -> Ec2Result {
+impl DescribeVpcs {
+    pub(crate) async fn execute(self, config: &Config) -> Ec2Result {
         let vpcs = config
-            .client()
+            .ec2()
             .describe_vpcs()
             .set_vpc_ids(self.vpc_ids)
             .set_dry_run(self.dry_run)
