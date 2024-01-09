@@ -3,11 +3,10 @@ use super::*;
 #[derive(Debug, Args)]
 pub struct ListTables {}
 
-#[async_trait]
-impl Execute for ListTables {
-    async fn execute(self: Box<Self>, config: &Config) -> DynamoResult {
+impl ListTables {
+    pub(crate) async fn execute(self, config: &Config) -> DynamoResult {
         let tables = config
-            .client()
+            .dynamodb()
             .list_tables()
             .into_paginator()
             .items()

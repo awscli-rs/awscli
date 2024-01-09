@@ -14,11 +14,10 @@ pub struct CreateTable {
     key_schema: Vec<KeySchemaElement>,
 }
 
-#[async_trait]
-impl Execute for CreateTable {
-    async fn execute(self: Box<Self>, config: &Config) -> DynamoResult {
+impl CreateTable {
+    pub(crate) async fn execute(self, config: &Config) -> DynamoResult {
         let table = config
-            .client()
+            .dynamodb()
             .create_table()
             .table_name(self.table_name)
             .send()

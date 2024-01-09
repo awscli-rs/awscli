@@ -1591,6 +1591,7 @@ version = "0.0.2"
 dependencies = [
  "aws-config",
  "aws-sdk-account",
+ "aws-sdk-dynamodb",
  "aws-types",
  "clap",
  "fmtools",
@@ -1601,7 +1602,6 @@ dependencies = [
 name = "raws-dynamodb"
 version = "0.0.2"
 dependencies = [
- "async-trait",
  "aws-sdk-dynamodb",
  "clap",
  "raws-config",

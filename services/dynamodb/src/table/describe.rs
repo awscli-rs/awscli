@@ -7,11 +7,10 @@ pub struct DescribeTable {
     table_name: String,
 }
 
-#[async_trait]
-impl Execute for DescribeTable {
-    async fn execute(self: Box<Self>, config: &Config) -> DynamoResult {
+impl DescribeTable {
+    pub(crate) async fn execute(self, config: &Config) -> DynamoResult {
         let table = config
-            .client()
+            .dynamodb()
             .describe_table()
             .table_name(self.table_name)
             .send()

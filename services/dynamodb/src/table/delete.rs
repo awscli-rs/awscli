@@ -7,11 +7,10 @@ pub struct DeleteTable {
     table_name: String,
 }
 
-#[async_trait]
-impl Execute for DeleteTable {
-    async fn execute(self: Box<Self>, config: &Config) -> DynamoResult {
+impl DeleteTable {
+    pub(crate) async fn execute(self, config: &Config) -> DynamoResult {
         let table = config
-            .client()
+            .dynamodb()
             .delete_table()
             .table_name(self.table_name)
             .send()

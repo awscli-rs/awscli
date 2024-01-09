@@ -1,4 +1,3 @@
-use async_trait::async_trait;
 use aws_sdk_dynamodb as dynamodb;
 use aws_sdk_dynamodb::types;
 use clap::{Args, Subcommand};
@@ -8,22 +7,7 @@ use error::RawsError;
 
 mod table;
 
-type DynamoResult<T = Box<dyn show::Show>> = std::result::Result<T, aws_sdk_dynamodb::Error>;
-
-#[async_trait]
-pub trait Execute {
-    async fn execute(self: Box<Self>, config: &Config) -> DynamoResult;
-}
-
-trait ClientExt {
-    fn client(&self) -> dynamodb::Client;
-}
-
-impl ClientExt for Config {
-    fn client(&self) -> dynamodb::Client {
-        dynamodb::Client::new(self.config())
-    }
-}
+type DynamoResult<T = Box<dyn show::Show>> = std::result::Result<T, dynamodb::Error>;
 
 /// Amazon DynamoDB is a fully managed NoSQL database service
 ///
@@ -58,18 +42,17 @@ pub enum DynamoDb {
 }
 
 impl DynamoDb {
-    fn boxed(self) -> Box<dyn Execute> {
+    async fn execute(self, config: &Config) -> DynamoResult {
         match self {
-            Self::CreateTable(create_table) => Box::new(create_table),
-            Self::DeleteTable(delete_table) => Box::new(delete_table),
-            Self::DescribeTable(describe_table) => Box::new(describe_table),
-            Self::ListTables(list_tables) => Box::new(list_tables),
+            Self::CreateTable(create_table) => create_table.execute(config).await,
+            Self::DeleteTable(delete_table) => delete_table.execute(config).await,
+            Self::DescribeTable(describe_table) => describe_table.execute(config).await,
+            Self::ListTables(list_tables) => list_tables.execute(config).await,
         }
     }
 
-    pub async fn dispatch(self, config: Config) -> Result<(), RawsError<aws_sdk_dynamodb::Error>> {
-        self.boxed()
-            .execute(&config)
+    pub async fn dispatch(self, config: Config) -> Result<(), RawsError<dynamodb::Error>> {
+        self.execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())
