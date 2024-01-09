@@ -7,6 +7,7 @@ use aws_sdk_iam as iam;
 use aws_sdk_pricing as pricing;
 use aws_sdk_s3 as s3;
 use aws_sdk_sso as sso;
+use aws_sdk_sts as sts;
 
 use super::*;
 
@@ -45,5 +46,9 @@ impl Config {
 
     pub fn sso(&self) -> sso::Client {
         sso::Client::new(self.config())
+    }
+
+    pub fn sts(&self) -> sts::Client {
+        sts::Client::new(self.config())
     }
 }

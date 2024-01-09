@@ -26,11 +26,10 @@ pub struct GetFederationToken {
     tags: Option<Vec<sts::types::Tag>>,
 }
 
-#[async_trait]
-impl Execute for GetFederationToken {
-    async fn execute(self: Box<Self>, config: &Config) -> StsResult {
+impl GetFederationToken {
+    pub(crate) async fn execute(self, config: &Config) -> StsResult {
         let credentials = config
-            .client()
+            .sts()
             .get_federation_token()
             .name(self.name)
             .set_policy(self.policy)

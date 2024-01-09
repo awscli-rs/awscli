@@ -5,10 +5,9 @@ use super::*;
 #[derive(Debug, Args)]
 pub struct GetCallerIdentity;
 
-#[async_trait]
-impl Execute for GetCallerIdentity {
-    async fn execute(self: Box<Self>, config: &Config) -> StsResult {
-        let identity = config.client().get_caller_identity().send().await?;
+impl GetCallerIdentity {
+    pub(crate) async fn execute(self, config: &Config) -> StsResult {
+        let identity = config.sts().get_caller_identity().send().await?;
         Ok(Box::new(identity))
     }
 }

@@ -12,11 +12,10 @@ pub struct AssumeRole {
     role_session_name: String,
 }
 
-#[async_trait]
-impl Execute for AssumeRole {
-    async fn execute(self: Box<Self>, config: &Config) -> StsResult {
+impl AssumeRole {
+    pub(crate) async fn execute(self, config: &Config) -> StsResult {
         let credentials = config
-            .client()
+            .sts()
             .assume_role()
             .role_arn(self.role_arn)
             .role_session_name(self.role_session_name)

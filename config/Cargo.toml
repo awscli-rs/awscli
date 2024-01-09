@@ -22,6 +22,7 @@ aws-sdk-iam.workspace = true
 aws-sdk-pricing.workspace = true
 aws-sdk-s3.workspace = true
 aws-sdk-sso.workspace = true
+aws-sdk-sts.workspace = true
 
 clap.workspace = true
 fmtools.workspace = true

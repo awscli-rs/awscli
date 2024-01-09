@@ -29,7 +29,6 @@ readme = "README.md"
 
 
 [workspace.dependencies]
-async-trait = "0.1"
 aws-smithy-types = { version = "1.0", features = [
     "serde-serialize",
     "serde-deserialize",

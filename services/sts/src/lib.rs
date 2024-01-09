@@ -1,4 +1,3 @@
-use async_trait::async_trait;
 use aws_sdk_sts as sts;
 use clap::{Args, Subcommand};
 
@@ -9,21 +8,6 @@ mod assume;
 mod get;
 
 type StsResult<T = Box<dyn show::Show>> = std::result::Result<T, sts::Error>;
-
-#[async_trait]
-pub trait Execute {
-    async fn execute(self: Box<Self>, config: &Config) -> StsResult;
-}
-
-trait ClientExt {
-    fn client(&self) -> sts::Client;
-}
-
-impl ClientExt for Config {
-    fn client(&self) -> sts::Client {
-        sts::Client::new(self.config())
-    }
-}
 
 /// Security Token Service (STS) operations
 #[derive(Debug, Subcommand)]
@@ -38,23 +22,30 @@ pub enum Sts {
 }
 
 impl Sts {
-    fn boxed(self) -> Box<dyn Execute> {
+    async fn execute(self, config: &Config) -> StsResult {
         match self {
-            Self::AssumeRole(assume_role) => Box::new(assume_role),
-            Self::AssumeRoleWithSaml(assume_role_with_saml) => Box::new(assume_role_with_saml),
-            Self::AssumeRoleWithWebIdentity(assume_role_with_web_identity) => {
-                Box::new(assume_role_with_web_identity)
+            Self::AssumeRole(assume_role) => assume_role.execute(config).await,
+            Self::AssumeRoleWithSaml(assume_role_with_saml) => {
+                assume_role_with_saml.execute(config).await
             }
-            Self::GetAccessKeyInfo(get_access_key_info) => Box::new(get_access_key_info),
-            Self::GetCallerIdentity(get_caller_identity) => Box::new(get_caller_identity),
-            Self::GetFederationToken(get_federation_token) => Box::new(get_federation_token),
-            Self::GetSessionToken(get_session_token) => Box::new(get_session_token),
+            Self::AssumeRoleWithWebIdentity(assume_role_with_web_identity) => {
+                assume_role_with_web_identity.execute(config).await
+            }
+            Self::GetAccessKeyInfo(get_access_key_info) => {
+                get_access_key_info.execute(config).await
+            }
+            Self::GetCallerIdentity(get_caller_identity) => {
+                get_caller_identity.execute(config).await
+            }
+            Self::GetFederationToken(get_federation_token) => {
+                get_federation_token.execute(config).await
+            }
+            Self::GetSessionToken(get_session_token) => get_session_token.execute(config).await,
         }
     }
 
     pub async fn dispatch(self, config: Config) -> Result<(), RawsError<sts::Error>> {
-        self.boxed()
-            .execute(&config)
+        self.execute(&config)
             .await
             .map(|output| config.show(output))?;
         Ok(())
