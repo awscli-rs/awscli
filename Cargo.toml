@@ -29,13 +29,12 @@ readme = "README.md"
 
 
 [workspace.dependencies]
-aws-smithy-types = { version = "1.0", features = [
+aws-smithy-types = { version = "1.1", features = [
     "serde-serialize",
     "serde-deserialize",
 ] }
-aws-smithy-types-convert = { version = "0.60", features = ["convert-time"] }
-aws-config = "1.0"
-aws-types = "1.0"
+aws-config = "1.1"
+aws-types = "1.1"
 aws-sdk-account = "1.1"
 aws-sdk-dynamodb = "1.1"
 aws-sdk-ebs = "1.1"
@@ -46,6 +45,7 @@ aws-sdk-pricing = "1.1"
 aws-sdk-s3 = "1.1"
 aws-sdk-sso = "1.1"
 aws-sdk-sts = "1.1"
+
 clap = { version = "4.2", features = ["derive", "env"] }
 fmtools = "0.1"
 itertools = "0.12"

@@ -18,11 +18,9 @@ aws-sdk-ec2.workspace = true
 aws-sdk-eks.workspace = true
 aws-sdk-sts.workspace = true
 aws-smithy-types.workspace = true
-aws-smithy-types-convert.workspace = true
 clap.workspace = true
 itertools.workspace = true
 serde_json.workspace = true
-time.workspace = true
 thiserror.workspace = true
 
 
