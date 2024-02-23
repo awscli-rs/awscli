@@ -22,7 +22,7 @@ impl Show for aws_sdk_ebs::types::ChangedBlock {
 
 impl Show for aws_sdk_ebs::types::Status {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }
 
@@ -36,7 +36,7 @@ impl Show for aws_sdk_ebs::types::Tag {
 
 impl Show for aws_sdk_ebs::types::ChecksumAlgorithm {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }
 

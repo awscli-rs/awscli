@@ -52,12 +52,12 @@ impl Show for aws_sdk_account::types::ContactInformation {
 
 impl Show for aws_sdk_account::types::RegionOptStatus {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }
 
 impl Show for aws_sdk_account::types::AlternateContactType {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }

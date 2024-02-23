@@ -11,13 +11,13 @@ impl Show for aws_sdk_eks::types::Cluster {
 
 impl Show for aws_sdk_eks::types::UpdateStatus {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }
 
 impl Show for aws_sdk_eks::types::UpdateType {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }
 
@@ -29,7 +29,7 @@ impl Show for aws_sdk_eks::types::UpdateParam {
 
 impl Show for aws_sdk_eks::types::UpdateParamType {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }
 
@@ -58,6 +58,6 @@ impl Show for aws_sdk_eks::types::Addon {
 
 impl Show for aws_sdk_eks::types::AddonStatus {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }

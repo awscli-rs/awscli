@@ -10,7 +10,7 @@ impl Show for aws_sdk_iam::types::User {
 
 impl Show for aws_sdk_iam::types::SummaryKeyType {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }
 
@@ -40,7 +40,7 @@ impl Show for aws_sdk_iam::types::AttachedPermissionsBoundary {
 
 impl Show for aws_sdk_iam::types::PermissionsBoundaryAttachmentType {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }
 

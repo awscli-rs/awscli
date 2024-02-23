@@ -24,13 +24,13 @@ impl Show for ec2::types::Vpc {
 
 impl Show for ec2::types::VpcState {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }
 
 impl Show for ec2::types::Tenancy {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }
 
@@ -71,6 +71,6 @@ impl Show for ec2::types::VpcCidrBlockState {
 
 impl Show for ec2::types::VpcCidrBlockStateCode {
     fn _fmt(&self) -> Box<dyn fmt::Display + '_> {
-        Box::new(self.as_str())
+        Box::new(self)
     }
 }
