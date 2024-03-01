@@ -1497,7 +1497,7 @@ dependencies = [
 
 [[package]]
 name = "raws"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "clap",
  "miette",
@@ -1519,7 +1519,7 @@ dependencies = [
 
 [[package]]
 name = "raws-account"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-account",
  "clap",
@@ -1532,7 +1532,7 @@ dependencies = [
 
 [[package]]
 name = "raws-config"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-config",
  "aws-sdk-account",
@@ -1553,7 +1553,7 @@ dependencies = [
 
 [[package]]
 name = "raws-dynamodb"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-dynamodb",
  "clap",
@@ -1566,7 +1566,7 @@ dependencies = [
 
 [[package]]
 name = "raws-ebs"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-ebs",
  "aws-smithy-types",
@@ -1580,7 +1580,7 @@ dependencies = [
 
 [[package]]
 name = "raws-ec2"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-ec2",
  "clap",
@@ -1593,7 +1593,7 @@ dependencies = [
 
 [[package]]
 name = "raws-eks"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-eks",
  "clap",
@@ -1605,7 +1605,7 @@ dependencies = [
 
 [[package]]
 name = "raws-error"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-smithy-types",
  "miette",
@@ -1614,7 +1614,7 @@ dependencies = [
 
 [[package]]
 name = "raws-iam"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-iam",
  "clap",
@@ -1626,7 +1626,7 @@ dependencies = [
 
 [[package]]
 name = "raws-parsers"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-account",
  "aws-sdk-dynamodb",
@@ -1643,7 +1643,7 @@ dependencies = [
 
 [[package]]
 name = "raws-pricing"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-pricing",
  "aws-smithy-types",
@@ -1656,7 +1656,7 @@ dependencies = [
 
 [[package]]
 name = "raws-s3"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-s3",
  "aws-smithy-types",
@@ -1669,7 +1669,7 @@ dependencies = [
 
 [[package]]
 name = "raws-show"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-account",
  "aws-sdk-dynamodb",
@@ -1690,7 +1690,7 @@ dependencies = [
 
 [[package]]
 name = "raws-sso"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-sso",
  "clap",
@@ -1701,7 +1701,7 @@ dependencies = [
 
 [[package]]
 name = "raws-sts"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "aws-sdk-sts",
  "clap",
