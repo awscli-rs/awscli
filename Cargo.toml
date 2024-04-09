@@ -78,6 +78,7 @@ sts = { version = "0.0.3", path = "./services/sts", package = "raws-sts" }
 use_self = "warn"
 map_flatten = "warn"
 map_unwrap_or = "warn"
+large_futures = "warn"
 
 
 [workspace.lints.rust]
