@@ -7,7 +7,7 @@ use error::RawsError;
 mod account;
 mod user;
 
-type IamResult<T = Box<dyn show::Show>> = std::result::Result<T, iam::Error>;
+type IamResult<T = Box<dyn show::Show>> = Result<T, iam::Error>;
 
 /// Identity and Access Management (IAM)
 #[derive(Debug, Subcommand)]

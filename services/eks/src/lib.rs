@@ -8,7 +8,7 @@ mod addon;
 mod cluster;
 mod update;
 
-type EksResult<T = Box<dyn show::Show>> = std::result::Result<T, eks::Error>;
+type EksResult<T = Box<dyn show::Show>> = Result<T, eks::Error>;
 
 /// Amazon Elastic Kubernetes Service (Amazon EKS)
 #[derive(Debug, Subcommand)]

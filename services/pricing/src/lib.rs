@@ -7,7 +7,7 @@ use error::RawsError;
 mod pricelist;
 mod services;
 
-type PricingResult<T = Box<dyn show::Show>> = std::result::Result<T, pricing::Error>;
+type PricingResult<T = Box<dyn show::Show>> = Result<T, pricing::Error>;
 
 /// AWS Pricing Information
 #[derive(Debug, Subcommand)]

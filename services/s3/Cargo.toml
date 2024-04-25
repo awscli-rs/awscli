@@ -11,12 +11,10 @@ readme.workspace = true
 
 [dependencies]
 aws-sdk-s3.workspace = true
-aws-smithy-types.workspace = true
 clap.workspace = true
 
 config.workspace = true
 error.workspace = true
-parsers.workspace = true
 show.workspace = true
 
 

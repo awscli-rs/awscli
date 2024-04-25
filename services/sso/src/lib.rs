@@ -7,7 +7,7 @@ use error::RawsError;
 mod account;
 mod role;
 
-type SsoResult<T = Box<dyn show::Show>> = std::result::Result<T, sso::Error>;
+type SsoResult<T = Box<dyn show::Show>> = Result<T, sso::Error>;
 
 /// AWS IAM Identity Center (successor to AWS Single Sign-On)
 #[derive(Debug, Subcommand)]

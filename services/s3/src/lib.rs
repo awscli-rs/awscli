@@ -12,7 +12,7 @@ mod bucket;
 mod client;
 mod ext;
 
-type S3Result<T = Box<dyn show::Show>> = std::result::Result<T, s3::Error>;
+type S3Result<T = Box<dyn show::Show>> = Result<T, s3::Error>;
 
 const S3_PREFIX: &str = "s3://";
 

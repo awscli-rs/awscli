@@ -7,7 +7,7 @@ use error::RawsError;
 mod block;
 mod snapshot;
 
-type EbsResult<T = Box<dyn show::Show>> = std::result::Result<T, ebs::Error>;
+type EbsResult<T = Box<dyn show::Show>> = Result<T, ebs::Error>;
 
 /// Amazon Elastic Block Store (Amazon EBS) direct API
 ///

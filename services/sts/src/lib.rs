@@ -7,7 +7,7 @@ use error::RawsError;
 mod assume;
 mod get;
 
-type StsResult<T = Box<dyn show::Show>> = std::result::Result<T, sts::Error>;
+type StsResult<T = Box<dyn show::Show>> = Result<T, sts::Error>;
 
 /// Security Token Service (STS) operations
 #[derive(Debug, Subcommand)]

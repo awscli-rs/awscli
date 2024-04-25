@@ -7,7 +7,7 @@ use error::RawsError;
 mod contact;
 mod region;
 
-type AccountResult<T = Box<dyn show::Show>> = std::result::Result<T, account::Error>;
+type AccountResult<T = Box<dyn show::Show>> = Result<T, account::Error>;
 
 /// Operations for Amazon Web Services Account Management
 #[derive(Debug, Subcommand)]

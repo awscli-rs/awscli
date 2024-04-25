@@ -7,7 +7,7 @@ use error::RawsError;
 
 mod vpc;
 
-type Ec2Result<T = Box<dyn show::Show>> = std::result::Result<T, ec2::Error>;
+type Ec2Result<T = Box<dyn show::Show>> = Result<T, ec2::Error>;
 
 /// Amazon Elastic Compute Cloud (Amazon EC2) provides secure and resizable
 /// computing capacity in the Amazon Web Services Cloud.

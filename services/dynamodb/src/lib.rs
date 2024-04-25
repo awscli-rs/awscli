@@ -7,7 +7,7 @@ use error::RawsError;
 
 mod table;
 
-type DynamoResult<T = Box<dyn show::Show>> = std::result::Result<T, dynamodb::Error>;
+type DynamoResult<T = Box<dyn show::Show>> = Result<T, dynamodb::Error>;
 
 /// Amazon DynamoDB is a fully managed NoSQL database service
 ///

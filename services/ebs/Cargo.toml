@@ -12,7 +12,6 @@ readme.workspace = true
 
 [dependencies]
 aws-sdk-ebs.workspace = true
-aws-smithy-types.workspace = true
 clap.workspace = true
 tokio.workspace = true
 
