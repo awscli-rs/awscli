@@ -31,7 +31,7 @@ pub fn parse_tags(text: &str) -> Result<Vec<TagSpecification>, BuildError> {
 }
 
 fn tag(text: &str) -> Result<Tag, BuildError> {
-    crate::tag::parse_tag(text)
+    tag::parse_tag(text)
 }
 
 fn missing_comma() -> BuildError {

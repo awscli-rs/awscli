@@ -59,7 +59,7 @@ pub struct CreateVpc {
 
     /// The tags to assign to the VPC.
     #[arg(long, value_parser = parsers::ec2::vpc::parse_tags, num_args = 1..)]
-    tag_specifications: Option<Vec<ec2::types::TagSpecification>>,
+    tag_specifications: Option<Vec<types::TagSpecification>>,
 
     /// Reads arguments from the JSON string provided.
     #[arg(long)]
